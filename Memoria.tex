@@ -1,0 +1,67 @@
+\documentclass[a4paper]{memoir}
+% pre'ambulo
+
+\usepackage[latin1]{inputenc}
+\usepackage[spanish,activeacute]{babel}
+\usepackage{amsmath}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+
+\newtheorem{ejem}{Ejemplo}[chapter]
+\newtheorem{defi}{Definición}[chapter]
+
+
+\renewcommand{\baselinestretch}{1.5}
+
+\title{Valoración de empresas utilizando computación con palabras}
+\author{Manuel López Pérez}
+
+\begin{document}
+
+\spanishdecimal{.}
+\def\tablename{Tabla}
+\setlength{\parskip}{1.5ex plus 0.5ex minus 0.2ex}
+
+% cuerpo del documento
+
+\maketitle
+\newpage
+\newpage
+Aqui va la primera página formato UMA
+\newpage
+\tableofcontents
+
+\part{Introducción}
+
+\input{Capitulo1}
+
+\part {Conceptos previos}
+
+\input{Capitulo2}
+\input{Capitulo3}
+\input{Capitulo4}
+\input{Capitulo5}
+
+\part{Diseño e implementación}
+\input{IntroDum}
+\input{Analisis}
+\chapter{Implementación de los modelos con mayoría}
+\chapter{Implementación de la interfaz web}
+
+\part{Estudio de resultados}
+\chapter{Comparativa de modelos}
+\chapter{Conclusiones}
+
+\appendix
+\chapter{Manual de Instalación}
+\chapter{Manual de usuario}
+
+\bibliographystyle{plain}
+\bibliography{Bibliografia}
+
+\end{document}
+

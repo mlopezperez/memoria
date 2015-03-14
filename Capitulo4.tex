@@ -1,0 +1,226 @@
+\chapter{Agregación de información lingüísitica}
+\section{Introducción}
+Hasta ahora hemos visto la importancia de la información lingüística en el proceso de valoración de empresas, así como el modelo de 2-tuplas que nos permite expresar formalmente dicha información. En el presente capítulo veremos cómo tener en cuenta dicha información lingüística, obteniendo un valor representativo que podamos usar en los calculos para la valoración de empresas.
+
+Introduciremos dos métodos para este fin. Primero introduciremos el operador de mayoría lingüística $LAMA$, que será el principal objeto de estudio de este trabajo al aplicarlo al proceso de valoración de empresas. Después introduciremos el método de \emph{los expertones}, cuyo impacto en la valoración de empresas ya ha sido estudiado en trabajos anteriores, como por ejemplo los llevados a cabo por Cristina Mendaña Cuervo y otros\cite{TuplasMenda}, y que usaremos en el presente trabajo con fines comparativos.
+
+\section{Agregación mediante mayoría lingüística}
+
+Veremos a continuación cómo funcionan las funciones de agregación de información lingüística. Introduciremos en primer lugar el concepto de mayoría lingüística para luego presentar el operador de agregación $LAMA$, y su extensión $LAMA^{e}$, que permite trabajar con información lingüística representada usando el modelo de 2-tuplas.
+
+\subsection{El concepto de Mayoría lingüística}
+
+Tradicionalmente el concepto de mayoría ha estado muy ligado a la idea del grupo mayoritario o a la idea de la mitad más uno. Todo esto dio lugar a las denominadas \emph{dictaduras de la mayoría}, donde se hacía lo que indicada el grupo más numeroso sin tener en cuenta a los grupos minoritarios. En contra de estás actitudes surgieron nuevas formas o  métodos  de decisión que intentaban solucionar estos problemas, y con ellas las herramientas necesarias para llevarlas a cabo, pero cual ha sido la sorpresa que al analizar dichos métodos se ha podido comprobar que las dictaduras de la mayorías han dado lugar a las dictaduras de las minorías, donde las opiniones minoritarias son más influyentes que las opiniones mayoritarias.
+
+Este problema se muestra en el siguiente ejemplo: sean los siguientes elementos: $\left\{0.7, 0.7, 0.7, 0.7, 0.5, 0.4, 0.1, 0.1, 0.1\right\}$. Si se analiza este ejemplo se puede apreciar que el $55\%$ de los elementos es mayor que 0.4, siendo el valor 0.7 el 44\% del total. Debido a este resultado, se puede suponer que un valor que fuese representativo del grupo, debería ser mayor a 0.5 e inferior a 0.7. Sin embargo, si se obtiene un valor de representación para dichos valores haciendo uso de los operadores tradicionales más utilizados como son la media aritmética y media geométrica, se obtendrían los valores 0.444 y 0.331 respectivamente, valores que aun siendo correctos desde un punto de vista matemático, semánticamente no reflejan la opinión mayoritaria y si el valor de la minoría. 
+
+Otro ejemplo que muestra el problema anterior es el siguiente: Supongamos un pueblo donde residen 1001 personas, las cuales tienen los siguientes ingresos mensuales: 1.000 personas tienen unos ingresos de 1000 euros, mientras que 1 persona tiene unos ingresos de 1000.000.000 euros. Si se calculan los ingresos medios, y nuevamente se utiliza la media aritmética resulta que dicho pueblo muestra que sus habitantes tienen unos ingresos medios mensuales de 1.000.000 de euros aproximadamente. Nuevamente aun siendo correcto este valor desde un punto de vista matemático, sin embargo desde un punto de vista semántico y de información social dicho valor dista mucho de dar una información que sea representativa de la mayoría de la población. 
+
+Con objeto de paliar los problemas anteriores, ha surgido un nuevo concepto denominado Mayoría, que trata de obtener un valor de opinión que sea representativo de la mayoría pero sin olvidar a las minorías. 
+
+La diferencia entre los procesos clásicos y los nuevos procesos denominados de mayoría, se basa en la forma en que son considerados los elementos a la hora de obtener un valor de representación. Como muestra la figura \ref{fig:Procesos1}, en los procesos clásicos los elementos son considerados de manera aislada, y sobre estos elementos se opera para obtener un valor para el grupo. Sin embargo, en los procesos de mayoría los elementos no son considerados de manera individual si no que forman grupos de elementos, en base a una función de distancia entre ellos, que comparten una misma opinión y que se enfrentan unos con otros para obtener un valor común. 
+
+El enfrentamiento entre elementos de distintos grupos se lleva a cabo tomando un elemento de cada uno de los grupos, con los cuales se opera para obtener un nuevo valor que sea representante de los mismos. La operación se puede llevar a cabo mediante operadores tradicionales. Los elementos que han sido considerados son eliminados de los grupos iniciales, pasando a formar un nuevo grupo con valor igual al calculado y cardinalidad el número de elementos que han sido considerados. Este proceso continua hasta que queda un solo grupo de elementos. Aquellos grupos que en un momento dado han enfrentado a todos sus representantes, dejan de participar en el proceso y por lo tanto de influir a partir de ese momento en el valor final. 
+
+\begin{figure}
+	\centering
+		\includegraphics[scale=0.6]{Imagenes/Procesos1.eps}
+	\caption{Procesos de Mayoría y Procesos Clásicos.}
+	\label{fig:Procesos1}
+\end{figure}
+
+Actualmente el concepto anterior que ha sido definido como Mayoría, ha dado lugar al concepto de Mayoría Fuzzy. La Mayoría Fuzzy se modela a través del uso de cuantificadores lingüísticos, tales como ``al menos el 80\%'', ``muchos'', ``algunos'', etcétera, definiéndose formalmente como un subconjunto borroso dentro de un dominio numérico, que trata de delimitar el número de elementos de cada uno de los grupos. 
+
+La semántica de un subconjunto borroso se describe a través del uso de una función de pertenencia la cual describe la compatibilidad de un valor absoluto o porcentual con respecto al concepto expresado por el cuantificador lingüístico. De esta forma, el cuantificador lingüístico se puede ver como un concepto borroso que se refiere a la cantidad de elementos a considerar en el conjunto de referencia. En la ecuación \ref{eq:muchos} vemos la definición matemática del cuantificador lingüístico muchos, y en la figura \ref{fig:GraficaMuchos} su representación gráfica.
+
+\begin{align}
+\mu_{muchos}(x) = 
+\begin{cases}	
+	1 & x \geq 0.9 \\
+	2x-0.8 &	0.4 \leq x <0.9	\\
+	0	&	x \leq 0.4 	
+\end{cases}
+\label{eq:muchos}
+\end{align}
+
+\begin{figure}[ht]
+	\centering
+		\includegraphics[scale=0.4]{Imagenes/GraficaMuchos.eps}
+	\label{fig:GraficaMuchos}
+	\caption{Cuantificador ``muchos''}
+\end{figure}
+
+La aplicación del cuantificador se puede llevar a cabo atendiendo a aspectos sociales, dando lugar a la cuantificación individual o en grupo.
+
+La  cuantificación individual consiste en indicar el grado con que cada miembro del conjunto de valores representa el concepto de mayoría. Para ello, esta estrategia aplica la semántica del cuantificador directamente sobre el peso individual de cada elemento de la agregación, donde el peso ha sido previamente calculado con un operador de agregación. La figura \ref{fig:CuantificadorIndividual} muestra un ejemplo de aplicación de la cuantificación individual sobre un conjunto de valores a agregar. Los valores por encima de la línea no son considerados en la agregación.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[scale=0.6]{Imagenes/CuantificadorIndividual.eps}
+	\label{fig:CuantificadorIndividual}
+	\caption{Representación gráfica del corte del cuantificador con la semántica de cuantificación individual}
+\end{figure}
+
+Pero desde un punto de vista social existen problemas de toma de decisión en grupo donde se debe cumplir la premisa, que todos los grupos de opiniones estén representados por al menos un representante. Como muestra la figura \ref{fig:CuantificadorIndividual} esta premisa no siempre se cumple con la cuantificación individual ya que existen grupos de opinión que son eliminados del proceso de decisión. Para solucionar este problema se propone la cuantificación en grupo, la cual siempre garantiza dicha premisa. La figura \ref{fig:CuantificadorGrupo} muestra un ejemplo de aplicación de la cuantificación en grupo sobre un conjunto de valores a agregar. Los valores por encima de la línea no son considerados en la agregación.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[scale=0.6]{Imagenes/CuantificadorGrupo.eps}
+		\label{fig:CuantificadorGrupo}
+		\caption{Representación gráfica del corte del cuantificador con la semántica de cuantificación en grupo}
+\end{figure}
+
+La aplicación de los procesos de mayoría fuzzy permite dar mayor representatividad a los resultados en los procesos de decisión, permitiendo modelar conceptos como muchos, pocos, algunos, etc. En la figura \ref{img:Dominios} se muestra el dominio de los procesos clásicos, los procesos de mayoría  y los procesos de mayoría fuzzy. Para ello se ha considerado un ejemplo con 7 valores que han sido representados mediante elipses. 
+\begin{figure}[ht]
+	\centering
+			\includegraphics{Imagenes/Dominios.eps}
+		\label{img:Dominios}
+	\caption{Dominio de los procesos de decisión tradicionales, de mayoría, y de mayoría \emph{fuzzy}}
+\end{figure}
+
+\subsection{Operadores de mayoría lingüísticos aditivos. El operador $LAMA$}
+
+Diferentes operadores de mayoría han sido definidos en la literatura. Así, para representar el concepto de mayoría en entornos aditivos, destaca el operador $MA-OWA$, o para mayoría cuantificada operadores como $IOWA$ y el $QMA-OWA$. A continuación se va a presentar de manera formal el operador $LAMA$, que será utilizado posteriormente en un breve ejemplo de valoración de empresas. 
+
+El operador $LAMA$, acrónimo de \emph{Linguistic Aggregation of Majority Additive} o \emph{Agregación linguistica de mayoría aditiva} es presentado en el artículo \emph{LAMA: A linguistic aggregation of Majority Additive Operator}\cite{PelaezLAMA} de J.I. Peláez y J.M. Doña, y es un operador de mayoría para entornos lingüísticos con un espacio de etiquetas S, que se define como una media aritmética de medias aritméticas, de forma que el resultado final es una media aritmética ponderada.
+
+\begin{defi}
+\label{def:lama}
+Sean las etiquetas $p_{1}, p_{2}, \ldots, p_{n} \in  P$ tales que $t > 0$ y sea $\delta_{1},\delta_{2},\ldots,\delta_{n} \in N$ las frecuencias o cardinalidad de las etiquetas, donde $\delta_{i}\leq\delta_{i+1}$ para todo $1\leq i \leq n-1 $. El operador $LAMA$ es la etiqueta $p_{m}$ dada por:
+\begin{gather*}
+p_{m} = LAMA((p_{1},\delta_{1}),(p_{2},\delta_{2}),\ldots,(p_{n},\delta_{n}))	\\
+= p_{1} \otimes \lambda_{1} \oplus p_{2} \otimes \lambda_{2} \oplus \ldots \oplus p_{n} \otimes \lambda_{n}
+\end{gather*}
+donde
+	\begin{align*}
+	\lambda_{i} = 
+		\begin{cases}
+		\frac{1}{d_{1}}																																									&	\text{si } i=1	\\
+		\frac{1}{d_{1}} \cdot \frac{1-n^{\delta_{2}}}{1-n}																							&	\text{si }	i=2	\\
+		\lambda_{i-1} + \frac{1}{d_{i-1}} \cdot \frac{1-(n-i+2)^{\delta_{i} - \delta_{i-1}}}{1-(n-i+2)}	& \text{si } i > 2	\\
+		\end{cases}	
+	\end{align*}
+con
+	\begin{align*}
+	d_{i} = 
+		\begin{cases}
+			1																																					&	\text{si } i=1, n=1	\\
+			n^{\delta_{2}}																														&	\text{si } i=1, n=2 \\
+			n^{\delta_{2}} \cdot \prod^{n-2}_{j=1}{(n-j)^{\delta_{j+1}-\delta_{j+1}}}	& \text{si } i=1, n>2 \\
+			\prod^{n-2}_{j=i-1}{(n-j)^{\delta_{j+1}-\delta_{j+1}}}										& \text{si } i>1
+		\end{cases}
+	\end{align*}
+y donde $\oplus$ es la suma de etiquetas y $\otimes$ es el producto de una etiqueta por un real positivo.
+\end{defi}
+
+\subsection{El operador $LAMA$ utilizando representación con 2-tuplas}
+Podemos definir el operador $LAMA^{e}$ como una extensión del operador $LAMA$ para operar con información lingüística representada mediante el modelo de 2-tuplas expuesto.
+
+\begin{defi}
+\label{lamae}
+Sean $(p_{1}, \alpha_{1}),\ (p_{2},\alpha_{2}),\ldots,\ (p_{n}, \alpha_{n})$ las 2-tuplas a ser agregadas, y sean$ \delta_{1},\ \delta_{2},\ldots\ \delta_{n} \in N$ la frecuencia o cardinalidad de dichas 2-tuplas, donde $\delta_{i} \leq \delta_{i+1}$ para todo $1 \leq i \leq n-1$. El operador $LAMA^{e}$ es la 2-tupla $(p_{m},\alpha_{m})$ dada por:
+\begin{gather*}
+LAMA^{e}((p_{1}, \alpha_{1}),\ (p_{2},\alpha_{2}),\ldots,\ (p_{n}, \alpha_{n})) = \Delta(\Delta^{-1}(p_{1},\alpha{1})\cdot\lambda_{1} \\
++ \Delta^{-1}(p_{2},\alpha_{2})\cdot\lambda_{2} + \ldots + \lambda^{-1}(p_{n},\alpha_{n})\cdot\lambda_{n})
+\end{gather*}
+donde el valor de cada $\lambda_{i}$ se calcula, como se expuso en el punto anterior para el operador $LAMA$ genérico, a partir de las cardinalidades de cada 2-tupla.	
+\end{defi}
+El valor de la cardinalidad de cada 2-tupla puede calcularse usando dos metodologías diferentes:
+\begin{enumerate}
+    \item Usando como cardinalidad el número de 2-tuplas que representan la misma información
+	\item Usando como cardinalidad el número de 2-tuplas que representan información similar. 
+\end{enumerate}
+\begin{defi}
+\label{comparacion2tupla}
+Sean $(p_{i},\alpha_{1})$ y $(p_{j},\alpha_{2})$ dos 2-tuplas, cada una representando una cantidad de información, entonces, si $i=j$, entonces:
+\begin{itemize}
+	\item Si $\alpha_{1} = \alpha_{2}$, entonces ambas tuplas representan la misma información
+	\item En otro caso, las tuplas representan información similar, donde:
+	\begin{itemize}
+		\item Si $\alpha_{1} < \alpha_{2}$, entonces $(p_{i},\alpha_{1})$ es menor que $(p_{j},\alpha_{2})$
+		\item Si $\alpha_{1} > \alpha_{2}$, entonces $(p_{i},\alpha_{1})$ es mayor que $(p_{j},\alpha_{2})$
+	\end{itemize}
+\end{itemize}   
+\end{defi}
+
+\section{Método de los expertones}
+
+Definidos por Kaufmann\cite{expertonesKaufmann}, el método de los expertones permite agregar la opinión de varios expertos a partir de valoraciones dadas por ellos, llevando una estadística de todos los valores posibles, que dependerá de la escala usada. Esta estadística se somete a un proceso de estandarización de acuerdo con el número de opiniones disponible. Concretamente, la función complementaria de probabilidad acumulada es lo que llamamos expertón. 
+
+Aplicado al modelo de 2-tuplas, lo que haremos será recoger las opiniones de los distintos expertos, normalizadas a un único conjunto de etiquetas, y a partir de la frecuencia absoluta de cada etiqueta, calcularemos su funcion de probabilidad acumulada complementaria.
+
+\begin{ejem}
+Consideremos el intervalo $[0'04, 0'05]$ de posibles tipos de interes inicial para la valoración de una empresa.
+
+Para alcanzar un consenso sobre la validez de dicha información, se pide a diez expertos que den su opinion, usando distintos conjuntos de etiquetas semánticas. Tomando como conjunto de referencia el conjunto $S_{9}$, obtenemos las siguientes opiniones:
+\begin{table}[ht]
+	\centering
+		\begin{tabular}{c c}
+			\toprule
+			Experto	&	$[0'04, 0'05]$	\\	
+			\midrule
+			$e_{1}$	&	$(S_{6}^{9},0) - (S_{8}^{9}, 0)$	\\	
+			$e_{2}$	&	$(S_{5}^{9},0'33) - (S_{7}^{9}, -0'33)$	\\	
+			$e_{3}$	&	$(S_{6}^{9},0)$	\\	
+			$e_{4}$	&	$(S_{5}^{9},0)$	\\	
+			$e_{5}$	&	$(S_{6}^{9},0) - (S_{8}^{9}, 0)$	\\	
+			$e_{6}$	&	$(S_{8}^{9},0)$	\\	
+			$e_{7}$	&	$(S_{8}^{9},0)$	\\	
+			$e_{8}$	&	$(S_{5}^{9},0) - (S_{7}^{9}, 0)$	\\	
+			$e_{9}$	&	$(S_{8}^{9},0)$	\\	
+			$e_{10}$	&	$(S_{0}^{9},0) - (S_{1}^{9}, 0)$	\\
+			\bottomrule			
+		\end{tabular}
+	\caption{Opinion de los expertos}
+	\label{tab:OpinionExpertones}
+\end{table}
+
+Observamos las frecuencias de cada 2-tupla. Además, para estandarizar los valores, dividimos por 10, que es el número de opiniones disponibles, obteniendo así la siguiente tabla:
+
+\begin{table}[ht]
+		\centering
+		\begin{tabular} {c | c c | c c}
+			\toprule
+			\multicolumn{1}{c}{2-tupla} & \multicolumn{2}{c}{$[0'04, 0'05]$} & $p(0'4)$	& $p (0'5)$ \\
+			\midrule
+			$(S_{8}^{9},0)$	&	3	&	5 & 0'3	& 0'5	\\
+			$(S_{7}^{9},0)$	&	0	&	1	& 0	& 0'1	\\
+			$(S_{7}^{9},-0'33)$	&	0	&	1	& 0	& 0'1	\\
+			$(S_{6}^{9},0)$	&	3	&	1	& 0'3	& 0'1	\\
+			$(S_{5}^{9},0'33)$	&	1	&	0	& 0'1	& 0	\\
+			$(S_{5}^{9},0)$	&	2	&	1	& 0'2	& 0'1	\\				
+			$(S_{1}^{9},0)$	&	0	&	1	& 0	& 0'1	\\
+			$(S_{0}^{9},0)$	&	1	& 0 & 0'1	& 0	\\
+			\bottomrule
+		\end{tabular}
+	\caption{Cardinalidades y probabilidades}
+	\label{tab:Cardinalidades}
+\end{table}
+
+Ahora, ordenando las tuplas de ``menor'' a ``mayor'', incluyendo los nueve valores del conjunto semántico utilizado, aplicamos la función acumulada complementaria para obtener el \emph{expertón}.
+
+\begin{table}[h]
+		\centering
+		\begin{tabular} {c | c c }
+			\toprule
+			\multicolumn{3}{c}{$[0.04, 0.05]$} \\
+			\midrule
+			$(S_{0}^{9},0)$			&	0.9	& 1	\\
+			$(S_{1}^{9},0)$			&	0.9	&	0.9	\\
+			$(S_{2}^{9},0)$			&	0.9	&	0.9	\\
+			$(S_{3}^{9},0)$			&	0.9	&	0.9	\\
+			$(S_{4}^{9},0)$			&	0.9	&	0.9	\\
+			$(S_{5}^{9},0)$			&	0.7	&	0.8	\\
+			$(S_{5}^{9},0'33)$	&	0.6	&	0.8	\\
+			$(S_{6}^{9},0)$			&	0.3	&	0.7	\\
+			$(S_{7}^{9},-0'33)$	&	0.3	&	0.6	\\
+			$(S_{7}^{9},0)$			&	0.3	&	0.5	\\
+			$(S_{8}^{9},0)$			&	0		&	0	\\					
+			\bottomrule
+		\end{tabular}
+	\caption{Expertón para el intervalo $[0.04, 0.05]$}
+	\label{tab:Experton}
+\end{table}
+
+
+\end{ejem}

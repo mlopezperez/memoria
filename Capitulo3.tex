@@ -1,0 +1,154 @@
+\chapter{El modelo de 2-tuplas}
+\section{Introducción}
+En este capítulo introduciremos los conceptos matemáticos que necesitaremos para implementar los métodos de valoración de empresas usando computación con palabras.
+
+Veremos en primer lugar el modelo de 2-tuplas para la representación de la información lingüística e introduciremos las operaciones sobre las tuplas. 
+
+Después veremos las distintas formas de agregar la información lingüística representada en 2-tuplas a un proceso de decisión. Presentaremos primero el método de los expertones y a continuación el operador $LAMA$ de mayoría lingüística.
+
+Presentaremos, por último, los modelos matemáticos correspondientes a los dos métodos de valoración de empresas sobre los cuales vamos a agregar la información lingüística. Estos son el \emph{Método de flujos descontados} y el \emph{Método de analisis operativo o mixto}.
+
+\section{El modelo de 2-tuplas}
+\subsection{Variables Lingüísticas}
+Actualmente, el concepto de variable lingüística es ampliamente utilizado en aquellos problemas de decisión con afirmaciones imprecisas, expresadas en de modo lingüísitico para alguno de sus elementos. Normalmente, muchos aspectos de diferentes actividades no pueden ser expresados en forma cuantitativa, si no de forma cualitativa, como cuando tenemos, por ejemplo, informaciones vagas o imprecisas. En estos casos una mejor aproximación al problema puede ser usar valoraciones lingüísticas en lugar de valores numéricos. El enfoque mediante lingüística difusa representa aspectos cuantitativos como valores lingüísticos mediante variables lingüísticas.
+
+Este enfoque es adecuado solo en determinadas situaciones, como por ejemplo, cuando intentamos cuantificar álgún fenómeno relacionado con la percepción humana, a menudo nos vemos abocados a usar palabras en lenguaje natural. Esto puede ocurrir por diferentes razones. Hay situaciones en las que la información no puede ser cuantificada debido a su naturaleza, y por tanto, puede ser expresada solamente en términos lingüísticos (por ejemplo, evaluando una situación económica, se pueden usar términos como "`mala"', "`pobre"', "`tolerable"', "`media"' o "`buena"'). En otros casos puede que la información cuantitativa no esté disponible, o el coste computacional para obtenerla es demasiado alto, entonces un "`valor aproximado"' puede tolerarse. Este enfoque mediante lingüística difusa ha sido aplicado con muy buenos resultados a diversos problemas de toma de decisiones, recopilación de información, etc.
+
+\subsection{Representación con 2-tuplas}
+Este modelo de representación de información lingüística denominado \emph{2-tuplas} fue introducido por Francisco Herrera y Luis Martínez en su artículo \emph{A 2-tuple fuzzy linguistic representation model for computing with words}\cite{tuplasHerrera}. Está basado en el modelo simbólico y toma como base el concepto de \emph{Traducción Simbólica}. La información se representa mediante una 2-tupla $(p,\alpha)$, donde $p$ es un término lingüístico y $\alpha$ es un valor numérico que apoya al valor de la traducción simbólica.
+
+El primer paso para la representación del información linguistica es generar un conjunto de términos lingüísticos que podamos usar para expresar información. Una opción para generar este conjunto es suministrar una gramática de contexto libre. En cualquier caso, este enfoque implica establecer previamente los conjuntos borrosos asociados con cáda término, y las reglas semánticas que los modifican, y esto no es tarea sencilla. 
+
+Otra alternativa consiste en proveer directamente el conjunto de términos en el que consideramos todos los términos distribuidos en una escala y sobre el cual se define un orden total. Por ejemplo, un conjunto $P$ de siete términos podría darse así:
+
+\begin{multline*}	 
+	P=\{p_{0}=\ lo\ peor,\ p_{1}=muy\ malo,\ p_{2}=malo,\ p_{3}=medio,\\ 
+	\ p_{4}=bueno,\ p_{6}=muy\ bueno,\ p_{7}=lo\ mejor\}
+\end{multline*}
+
+En este proyecto utilizaremos etiquetas con pertenencia triangular (Figura \ref{fig:Etiquetas2} para simplificar los cálculos matemáticos. Por ejemplo, podemos asignar la siguiente semántica (Tabla \ref{tab:SemanticaEtiquetas}) a un conjunto de siete términos parecido al definido anteriormente.
+
+\begin{figure}[ht]
+	\centering
+		\includegraphics[scale=0.35]{./Imagenes/Etiquetas2}
+		\caption{Representación de las etiquetas lingüísticas}
+		\label{fig:Etiquetas2}
+\end{figure}
+
+\begin{table}[ht]
+	\centering
+		\begin{tabular}{ c c }
+		\toprule
+		\textbf{Etiqueta} & \textbf{Semántica} \\ 
+		\midrule
+		 Lo más alto	& 0.83, 1, 1 \\	
+		 Muy alto			& 0.67, 0.83, 1 \\	
+		 Alto					& 0.5, 0.67, 0.83 \\	
+		 Medio				& 0.33, 0.5, 0.67 \\	
+		 Bajo					& 0.17, 0.33, 0.5 \\	
+		 Muy bajo			& 0, 0.17, 0.33 \\	
+		 Lo más bajo	& 0, 0, 0.17 \\	
+		 \bottomrule
+		\end{tabular}
+	\caption{Semántica de las Etiquetas}
+	\label{tab:SemanticaEtiquetas}
+\end{table}
+
+La traducción simbólica de un término linguístico $p_{i}\in\left\{ p_{0}, p_{1}, \ldots, p_{g}\right\}$ es un valor numérico perteneciente al intervalo $\left[-0.5, 0.5\right]$ que representa la \emph{diferencia de información} entre un cálculo de la información $\beta$ evaluado en $\left[0,g\right]$, obtenido después de una operación de agregación simbólica (que actúa sobre el índice de las etiquetas), y el valor más cercano en $\left\{0,\ldots,g\right\}$ que indica el índice del término lingüístico más cercano en $P\left(p_{i}\right)$.
+%\newpage
+A partir de este concepto, Herrera y Martínez\cite{tuplasHerrera} desarrollan un modelo de representación de información lingüística por medio de 2-tuplas $\left(p_{i}, \alpha_{i}\right), p_{i}\in P \text{ y } \alpha_{i} \in \left[-0.5,0.5\right]$, donde $p_{i}$ representa la etiqueta lingüística central de la información, y $\alpha_{i}$ es un valor numérico que representa el desplazamiento del resultado original $\beta$ 	al índice de la etiqueta lingüística más cercana en el conjunto de términos, es decir, la Traducción Simbólica.
+
+Este modelo de representación lingüística define un conjunto de funciones para hacer transformaciones entre términos lingüísticos, 2-tuplas y valores numéricos.
+\begin{defi}
+	\label{def:theta}
+	Sea $p_{i} \in P$ un término lingüístico, entonces su 2-tupla equivalente viene dada por la función $\theta$ de este modo:
+	\begin{equation}	
+	\label{eq:theta}
+		\begin{gathered}
+			\theta:P \rightarrow \left( P\times \left[-0.5,0.5\right)\right) \\
+			\theta\left(p_{i}\right)=\left(p_{i},0\right)/p_{i} \in S
+		\end{gathered}
+	\end{equation}
+\end{defi}
+
+\begin{defi}
+	\label{def:delta}
+	Sea $P=\left\{p_{0}, p_{1},\ldots,p_{g}\right\}$ un conjunto de términos lingüísticos y sea $\beta\in\left[0,g\right]$ un valor que representa el resultado de una operación de agregación simbólica. Entonces la 2-tupla que representa la información equivalente a $\beta$ se obtiene con la siguiente función
+	
+	\begin{equation}
+	\label{eq:delta}
+	\begin{gathered}
+		\Delta:\left[0,g\right] \rightarrow P\times\left(\left[-0.5,0.5\right)\right) \\
+		\Delta\left(\beta\right) = \begin{cases}
+			p_{i} & i=round\left(\beta\right)  \\
+			\alpha = \beta - i	& \alpha \in \left[ -0.5, 0.5\right)
+		\end{cases}		
+	\end{gathered}
+	\end{equation}
+	Donde ``round'' es la operación de redondeo, $p_{i}$ es la etiqueta lingüística más cercana al valor de $\beta$ y $\alpha$ es el valor de la traducción simbólica. 
+\end{defi}
+
+\begin{defi}
+\label{def:deltaInv}
+Sea $P=\left\{p_{0}, p_{1},\ldots,p_{g}\right\}$ un conjunto de términos lingüísticos, y sea $(p_{i}, \alpha_{i})$ una 2-tupla lingüística. Hay siempre una función $\Delta^{-1}$ tal que, a partir de una 2-tupla, devuelve su valor numérico equivalente $\beta \in [0,g]$.
+\begin{equation}
+	\label{eq:deltaInv}
+	\begin{gathered}
+		\Delta^{-1}:P \times [-0.5,0.5) \rightarrow [0,g]	\\
+		\Delta^{-1}(p_{i},\alpha) = i + \alpha = \beta
+	\end{gathered}
+\end{equation}
+\end{defi}
+
+De acuerdo con lo anterior, la representación mediante 2-tuplas lingüísticas presenta ventajas sustantivas respecto a otras metodologías, debido a las posibilidades que ofrece para el tratamiento de información suministrada en distintos dominios de expresión, es decir, para operar con información lingüística multigranular sin pérdida de información.
+
+\subsection{Operaciones con 2-tuplas}
+
+Meter aqui los operadores $\oplus$ y $\otimes$
+
+\section{Jerarquías lingüísticas}
+La representación mediante 2-tuplas lingüísticas presenta ventajas sustantivas respecto a otras metodologías, debido a las posibilidades que ofrece para el tratamiento de información suministrada en distintos dominios de expresión, es decir, para operar con información lingüística con diferentes granularidades. En efecto, el proceso de unificación de información ha sido analizado desde diferentes enfoques, si bien todos ellos asumen el riesgo de pérdida de información e imprecisión en los resultados obtenidos. Sin embargo, el modelo propuesto por Herrera y Martínez\cite{tuplasHerrera} para operar en estas circunstancias, parte de contextos lingüísticos con diferentes granularidades, denominados jerarquías lingüísticas, las cuales cumplen una serie de reglas y condiciones que permiten unificar dicha información en un único domino de expresión sin pérdida de información. Las jerarquías lingüísticas están compuestas por un conjunto de niveles, donde cada nivel es un conjunto de términos lingüísticos con distinta granularidad al resto de niveles de su jerarquía. Cada nivel de una jerarquía se puede escribir como: $$L(t,n(t))$$ donde $t$ es el número que indica el nivel de la jerarquía y $n(t)$ la granularidad del conjunto lingüístico del nivel $t$.
+
+Los niveles dentro de una jerarquía están ordenados de acuerdo con su granularidad, es decir, para dos niveles sucesivos $t$ y $t+1$ se cumple que $n(t +1)>n(t)$.
+
+De acuerdo con lo anterior se puede definir una jerarquía lingüística $(LH)$ como la unión de todos los niveles 
+
+\begin{equation}
+\label{eq:jerarquiaLinguistica}
+	LH = \bigcup_{t}\ l(t,n(t))
+\end{equation}
+
+Para analizar la construccion de una jerarquia linguistica, teniendo en cuenta que su orden jerarquico viene dado por el incremento de la granularidad de los conjuntos de terminos linguisticos en cada nivel, se parte de un conjunto de etiquetas S sobre el dominio U en el nivel t, tal:
+\begin{equation}
+\label{eq:nivelJerarquia}
+S=\{s_{0},s_{1}\ldots,s_{n(t)-1}\}
+\end{equation}
+
+Siendo $s_{k}$ los terminos linguisticos del conjunto $S$ con $k = 0,\ldots, n(t)$.
+
+Para construir una jerarquia linguistica se puede extender la definicion de $S$, permitiendo la existencia de varios conjuntos de terminos linguisticos, cada uno con una granularidad distinta en cada nivel. Para ello se introduce el parametro $n(t)$ en la definicion de un conjunto de etiquetas, que representa la granularidad del conjunto del nivel $t$ donde está definido:
+\begin{equation}
+	\label{eq:conjuntoJerarquia}
+	S^{n(t)} = \{s_{0}^{n(t)},\ldots, s^{n(t)}_{n(t)-1}\}
+\end{equation}
+ 
+En general, cabe admitir que el conjunto de terminos del nivel $t+1$ se obtiene de su predecesor como sigue:
+\begin{equation}
+	\label{eq:nivelesJerarquia}
+	L(t,\ n(t)) \rightarrow L(t+1,\ 2\cdot n (t)-1)
+\end{equation}
+
+Asimismo, existe una funcion que permite trasladar informacion linguistica de un conjunto de terminos a otro sin perdida de informacion.Esta función es recursiva y permite la transformacion de un termino del nivel $t$ a uno del nivel $t'=t+a$ , con $a \in Z$.
+
+Por comodidad, en el presente trabajo utilizaremos la forma no recursiva de dicha función, que se define así:
+\begin{equation}
+	\label{eq:transJerarquia}
+	\begin{gathered}
+		TF^{t}_{t'}: l(t,n(t)) \rightarrow l(t',n(t')) \\
+		TF^{t}_{t'}(s_{i}^{n(t)},\alpha^{n(t)}) = \Delta\left(\frac{\Delta^{-1}(s^{n(t)}_{i}), \alpha^{n(t)})\cdot(n(t')-1)}{n(t)-1}\right)
+	\end{gathered}
+\end{equation}
+
+Esta función es idempotente, esto garantiza la transformación sin pérdida de información, por lo que la representación basada en 2-tuplas lingüísticas permite ``traducir'' los resultados de los dominios iniciales de cada experto, con independencia del dominio elegido para el proceso de unificación. 
+
+
