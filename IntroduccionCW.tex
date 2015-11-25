@@ -1,18 +1,58 @@
-\chapter{El modelo de 2-tuplas}
+\chapter{Computación con palabras}
+
 \section{Introducción}
 En este capítulo introduciremos los conceptos matemáticos que necesitaremos para implementar los métodos de valoración de empresas usando computación con palabras.
 
-Veremos en primer lugar el modelo de 2-tuplas para la representación de la información lingüística e introduciremos las operaciones sobre las tuplas. 
+Veremos en primer lugar una introducción a la lógica difusa y al concepto de etiqueta lingüística.
 
-Después veremos las distintas formas de agregar la información lingüística representada en 2-tuplas a un proceso de decisión. Presentaremos primero el método de los expertones y a continuación el operador $LAMA$ de mayoría lingüística.
+Estudiaremos después el modelo de 2-tuplas para la representación de la información lingüística e introduciremos las operaciones sobre las tuplas. 
 
-Presentaremos, por último, los modelos matemáticos correspondientes a los dos métodos de valoración de empresas sobre los cuales vamos a agregar la información lingüística. Estos son el \emph{Método de flujos descontados} y el \emph{Método de analisis operativo o mixto}.
+Por último veremos las distintas formas de agregar la información lingüística representada en 2-tuplas a un proceso de decisión. Presentaremos primero el método de los expertones y a continuación el operador $LAMA$ de mayoría lingüística.
+
+\section{Lógica difusa y computación con palabras}
+
+\subsection{Lógica difusa}
+Según el diccionario de la Real Academia de la Lengua Española, la lógica matemática es la ciencia que expone las leyes, modos y formas del conocimiento científico utilizando un lenguaje simbólico artificial y haciendo abstracción de los contenidos, mientras que la lógica difusa es la que admite una cierta incertidumbre entre la verdad o falsedad de sus proposiciones, a semejanza del raciocinio humano.	
+
+Este concepto nace de los distintos artículos publicados principalmente por Lotfi A. Zadeh, en el que explica su teoría de conjuntos difusos y que pone las bases para un sistema lógico con distintos grados de "`verdad"'.\cite{FuzzyZadeh}
+	
+En términos más específicos, lo que distingue a la lógica difusa es que, a diferencia de los sistemas lógicos clásicos, se centra en modelar los métodos imprecisos de razonamiento que juegan un papel esencial en la capacidad humana de tomar decisiones racionales en un entorno de incertidumbre e imprecisión. Esta habilidad depende de nuestra habilidad para inferir una respuesta aproximada a una pregunta basada en un conjunto de conocimientos que es inexacto, incompleto, o que no es totalmente confiable.
+
+Hay dos motivos principales por los cuales los sistemas de lógica clásica no pueden abordar éste tipo de problemas. Primero, no proveen un sistema para representar el significado de las proposiciones expresadas en lenguaje natural cuando el significado es impreciso; y segundo, en aquellos casos en los cuales el significado puede ser representado mediante un lenguaje simbólico, como por ejemplo una red semántica, no tenemos un mecanismo de inferencia.
+
+La lógica difusa afronta estos problemas. En primer lugar, el significado de una proposición léxicamente imprecisa es representado utilizando una restricción "`elástica"' sobre una variable.Y en segundo lugar, la respuesta a una consulta se deduce a través de la propagación de restricciones elásticas.
+	
+Aunque la lógica difusa puede ser vista como una extensión de la lógica multivaluada, sus usos y objetivos son un tanto diferentes. Así pues, el hecho de que la lógica difusa trate sobre aproximaciones más que de modelos precisos, implica que, en general, las cadenas de razonamiento son cortas y el rigor no juega un papel importante, como sí hace en los sistemas clásicos. Podríamos decir, en breve, que en la lógica difusa todo, incluso la VERDAD, es cuestión de grados.	
+
+\subsection{Conjuntos difusos}
+Ampliar-fusilar qué es un conjunto borroso y las funciones de pertenencia. 
+	
+\subsection{Computación con palabras}
+
+Como su propio nombre indica, la computación con palabras (abreviada como \emph{CW} por su nombre en inglés, \emph{Computing with Words}) es una metodología en la cual se utilizan palabras en lugar de números para computar y razonar.
+
+En su sentido tradicional, la computación implica, en su mayor parte, la manipulación de números y simbolos. Por el contrario, los humanos emplean generalmente palabras para "`computar"' y razonar, llegando a conclusiones, expresadas en palabras, a partir de premisas expresadas en lenguaje natural o en forma de percepciones. Estas palabras utilizadas en lenguaje natural tienen connotaciones "`difusas"', en el sentido de que no expresan verdades absolutas y están sujetas a interpretación. Esto mismo se aplica al papel que juegan las palabras en la CW. 
+
+Igual que la lógica difusa, la computación con palabras se basa también en los trabajos de Lotfi A. Zadeh, exponiendo expone los principios en vários artículos, como por ejemplo \emph{Outline of a new approach to the analysis of complex systems and decision processes}\cite{AnalysisZadeh} y \emph{PRUF--A Meaning Representation Language for Natural Languages}\cite{PRUFZadeh}, y además relacionandolo con los conceptos de la lógica difusa en el artículo \emph{Fuzzy Logic = Computing with words}\cite{CWZadeh}.
+
+\subsection{Etiquetas lingüísticas}
+
+Para la representación de la información cualitativa utilizaremos el concepto de \emph{etiqueta lingüística}. Una etiqueta lingüística es una función matemática que nos ayuda a representar conceptos difusos como \emph{totalmente}, \emph{mucho}, \emph{bastante}, \emph{nada}, etc. 
+
+Según se usen conjuntos con mayor o menor granularidad (número de etiquetas), se estarán definiendo escalas de mayor o menor precisión para la representación de la información. Estas funciones son transparentes a los expertos, ya que éstos emiten sus juicios en lenguaje natural haciendo uso de dichas etiquetas, siendo dentro del sistema de decisión donde se realiza la traslación de estas opiniones a al escala determinada para el problema.
+
+Según el tipo de función que se use se pueden encontrar etiquetas de diversa forma y propiedades, como por ejemplo: triangulares, trapezoidales o gaussianas, presentando cada una de ellas diversas ventajas a la hora de modelar la información. Comúnmente y por simplificación, la representación mas usada es la triangular. En la figura \ref{fig:Etiquetas1} se muestran tres escalas distintas que nos permiten dar tres grados de precisión al lenguaje natural.
+
+\begin{figure}[ht]
+	\centering
+		\includegraphics[scale=0.45]{./Imagenes/Etiquetas1}
+	\caption{Etiquetas triangulares en tres escalas distintas}
+	\label{fig:Etiquetas1}
+\end{figure}
+
+\textit{Introducir funciones de pertenencia?}
 
 \section{El modelo de 2-tuplas}
-\subsection{Variables Lingüísticas}
-Actualmente, el concepto de variable lingüística es ampliamente utilizado en aquellos problemas de decisión con afirmaciones imprecisas, expresadas en de modo lingüísitico para alguno de sus elementos. Normalmente, muchos aspectos de diferentes actividades no pueden ser expresados en forma cuantitativa, si no de forma cualitativa, como cuando tenemos, por ejemplo, informaciones vagas o imprecisas. En estos casos una mejor aproximación al problema puede ser usar valoraciones lingüísticas en lugar de valores numéricos. El enfoque mediante lingüística difusa representa aspectos cuantitativos como valores lingüísticos mediante variables lingüísticas.
-
-Este enfoque es adecuado solo en determinadas situaciones, como por ejemplo, cuando intentamos cuantificar álgún fenómeno relacionado con la percepción humana, a menudo nos vemos abocados a usar palabras en lenguaje natural. Esto puede ocurrir por diferentes razones. Hay situaciones en las que la información no puede ser cuantificada debido a su naturaleza, y por tanto, puede ser expresada solamente en términos lingüísticos (por ejemplo, evaluando una situación económica, se pueden usar términos como "`mala"', "`pobre"', "`tolerable"', "`media"' o "`buena"'). En otros casos puede que la información cuantitativa no esté disponible, o el coste computacional para obtenerla es demasiado alto, entonces un "`valor aproximado"' puede tolerarse. Este enfoque mediante lingüística difusa ha sido aplicado con muy buenos resultados a diversos problemas de toma de decisiones, recopilación de información, etc.
 
 \subsection{Representación con 2-tuplas}
 Este modelo de representación de información lingüística denominado \emph{2-tuplas} fue introducido por Francisco Herrera y Luis Martínez en su artículo \emph{A 2-tuple fuzzy linguistic representation model for computing with words}\cite{tuplasHerrera}. Está basado en el modelo simbólico y toma como base el concepto de \emph{Traducción Simbólica}. La información se representa mediante una 2-tupla $(p,\alpha)$, donde $p$ es un término lingüístico y $\alpha$ es un valor numérico que apoya al valor de la traducción simbólica.
@@ -107,7 +147,7 @@ De acuerdo con lo anterior, la representación mediante 2-tuplas lingüísticas pre
 Meter aqui los operadores $\oplus$ y $\otimes$
 
 \section{Jerarquías lingüísticas}
-La representación mediante 2-tuplas lingüísticas presenta ventajas sustantivas respecto a otras metodologías, debido a las posibilidades que ofrece para el tratamiento de información suministrada en distintos dominios de expresión, es decir, para operar con información lingüística con diferentes granularidades. En efecto, el proceso de unificación de información ha sido analizado desde diferentes enfoques, si bien todos ellos asumen el riesgo de pérdida de información e imprecisión en los resultados obtenidos. Sin embargo, el modelo propuesto por Herrera y Martínez\cite{tuplasHerrera} para operar en estas circunstancias, parte de contextos lingüísticos con diferentes granularidades, denominados jerarquías lingüísticas, las cuales cumplen una serie de reglas y condiciones que permiten unificar dicha información en un único domino de expresión sin pérdida de información. Las jerarquías lingüísticas están compuestas por un conjunto de niveles, donde cada nivel es un conjunto de términos lingüísticos con distinta granularidad al resto de niveles de su jerarquía. Cada nivel de una jerarquía se puede escribir como: $$L(t,n(t))$$ donde $t$ es el número que indica el nivel de la jerarquía y $n(t)$ la granularidad del conjunto lingüístico del nivel $t$.
+El modelo de 2-tuplas parte de contextos lingüísticos con diferentes granularidades, denominados jerarquías lingüísticas, las cuales cumplen una serie de reglas y condiciones que permiten unificar la información en un único domino de expresión sin pérdida de información. Las jerarquías lingüísticas están compuestas por un conjunto de niveles, donde cada nivel es un conjunto de términos lingüísticos con distinta granularidad al resto de niveles de su jerarquía. Cada nivel de una jerarquía se puede escribir como: $$L(t,n(t))$$ donde $t$ es el número que indica el nivel de la jerarquía y $n(t)$ la granularidad del conjunto lingüístico del nivel $t$.
 
 Los niveles dentro de una jerarquía están ordenados de acuerdo con su granularidad, es decir, para dos niveles sucesivos $t$ y $t+1$ se cumple que $n(t +1)>n(t)$.
 
