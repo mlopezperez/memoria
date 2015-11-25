@@ -7,29 +7,29 @@ El valor busca su apoyo en un fundamento lógico o matemático lo más riguroso pos
 
 Es en este punto justamente donde, con la introducción de operadores semánticos y computación con palabras, queremos dar un salto de calidad en la mejora de la información disponible para el inversor, toda vez que si con la metodología propuesta logramos cerrar la horquilla de valores posibles, acercaremos las posturas de las partes interesadas. Si lo conseguimos, habremos aumentado la posibilidad de acuerdo en cerrar la operación en un precio de equilibrio consensuado o mínimamente negociado. De esta forma habremos colaborado al aumento de la liquidez y eficiencia del mercado.
 
+%Añadir breve introduccion sobre computacion con palabras. 
+
 \section{Objetivos del proyecto}
 
-El objetivo principal es la implementación algorítmica de dos métodos valoración de empresas. El denominado \emph{Método de flujos descontados (Discounted Cash-flow) con operadores OWA}\cite{Cashflow1} y el \emph{Método de Análisis Mixto o Método operativo con operadores OWA}\cite{Expertones1}. Estos métodos hacen uso de computación con palabras a través del concepto de \emph{Mayoría Lingüística} y el operador $LAMA$, que es uno de los denominados \emph{operadores de agregación OWA (Ordered Weight Averaging)}.
+El objetivo principal es la implementación algorítmica de dos métodos de valoración de empresas usando computación con palabras. Por un lado, el denominado \emph{Método de flujos descontados (Discounted Cash-flow) con operadores OWA}\cite{Cashflow1} y por otro el \emph{Método de Análisis Mixto o Método operativo con operadores OWA}\cite{Expertones1}. Estos métodos hacen uso de computación con palabras a través del concepto de \emph{Mayoría Lingüística} y el operador $LAMA$, que es uno de los denominados \emph{operadores de agregación OWA (Ordered Weight Averaging)}.
 
 Con la implementación obtenida procederemos a la realización de una batería de pruebas automatizada, de forma que podamos obtener resultados comparativos de ambos métodos, dilucidando cual nos da horquillas de valoración más ajustadas en cada caso.
 
-Así mismo, se implementará una página web que funcione como interfaz de usuario para la ejecución de ejemplos sencillos con ambos métodos, facilitando la entrada de datos de forma sencilla e intuitiva, y muestre los resultados obtenidos de forma clara y concisa a cualquier usuario. 
+Así mismo, se implementará una interfaz de usuario para la ejecución de casos de ejemplo con ambos métodos, facilitando la entrada de datos de forma sencilla e intuitiva, y que muestre los resultados obtenidos de forma comparativa, clara y concisa a cualquier usuario. 
 
 \section{Estructura de la memoria}
 
-Para la presentación del proyecto estructuraremos la presente memoria en siete capítulos y dos apéndices, comenzando por este capítulo de introducción.
+Para la presentación del proyecto estructuraremos la presente memoria en X capítulos y dos apéndices, comenzando por este capítulo de introducción.
 
 En el capítulo dos trataremos de forma más extensa la problemática de la valoración de empresas, incidiendo en la importancia de la inclusión de información cualitativa en el proceso de valoración. Por último introduciremos los conceptos de lógica difusa y computación con palabras aplicados a la valoración de empresas.
 
-En el tercer capítulo introduciremos los conceptos matemáticos necesarios para el desarrollo de los métodos de valoración que utilizan computación con palabras. Presentaremos el modelo de 2-tuplas para la representación de la información lingüística y el concepto de mayoría. También introduciremos el método de los Expertones, que es otro modo, distinto al concepto de \emph{mayoría lingüística}, para introducir información cualitativa en la valoración de empresas. Por último presentaremos los métodos "`sin mayoría"' de valoración de empresas que luego modificaremos utilizando computación con palabras. Estos son el método de Flujos descontados (Cash-flow) y el método de Análisis Mixto u Operativo.
+En el tercer capítulo introduciremos los conceptos matemáticos necesarios para el desarrollo de los métodos de valoración que utilizan computación con palabras. Presentaremos el modelo de 2-tuplas para la representación de la información lingüística y el concepto de mayoría. También introduciremos el método de los Expertones, que es otro modo, distinto al concepto de \emph{mayoría lingüística}, para introducir información cualitativa en la valoración de empresas. Por último presentaremos los métodos "`sin mayoría"' de valoración de empresas, que luego modificaremos utilizando computación con palabras. Estos son el método de Flujos descontados (Cash-flow) y el método de Análisis Mixto u Operativo.
 
-En el cuarto capítulo presentaremos, de forma conceptual, los modelos de valoración utilizando computación con palabras. A partir de los dos modelos presentados en el tercer capítulo, introduciremos información cualitativa en dichos modelos utilizando el concepto de Mayoría, mostrando un ejemplo de utilización para cada modelo. 
+En el cuarto capítulo presentaremos, de forma conceptual, los modelos de valoración de empresas. Primero en su forma original, y después modificados convenientemente para incluir la información cualitativa utilizando el concepto de Mayoría, mostrando un ejemplo de utilización para cada modelo. 
 
-En el quinto capítulo trataremos la implementación computacional de dichos modelos desde el punto de vista de la ingeniería del software, introduciendo el diseño funcional y técnico utilizando diagramas UML y metodología de desarrollo DUM. Trataremos también, desde el mismo punto de vista, la implementación de la batería automatizada de pruebas, con el fin de obtener la mayor fluidez en la entrada de los casos de prueba y la mayor sencillez en la salida de los resultados para su mejor interpretación.
+En el quinto capítulo trataremos la implementación de dichos modelos, así como de la batería de pruebas a ejecutar sobre ellos, desde el punto de vista de la ingeniería del software, introduciendo el análisis funcional y técnico utilizando diagramas UML.
 
-El sexto capítulo tratará sobre el diseño y la implementación de la interfaz web para la introducción de datos de prueba y la obtención de resultados. Igual que en el quinto capítulo, haremos un análisis funcional y técnico de cara a la implementación de dicho software utilizando la ya mencionada metodología DUM.
-
-En el séptimo capítulo trataremos sobre la batería de pruebas realizada y sus resultados, para obtener una comparativa de ambos métodos. Analizaremos los resultados obtenidos para discernir en qué casos es mejor utilizar cada método y discutiremos las ventajas e inconvenientes de cada uno.
+En el sexto capítulo trataremos sobre la batería de pruebas realizada y sus resultados, para obtener una comparativa de ambos métodos. Analizaremos los resultados obtenidos para discernir en qué casos es mejor utilizar cada método y discutiremos las ventajas e inconvenientes de cada uno.
 
 Por último se incluirá un capítulo de conclusiones, en el que además sugeriremos futuros trabajos a realizar, ya sean mejoras sobre la implementación de los métodos de valoración como posibles mejoras o ampliaciones de la funcionalidad de la interfaz de usuario.
 
