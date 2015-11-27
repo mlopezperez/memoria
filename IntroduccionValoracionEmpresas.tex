@@ -4,7 +4,7 @@
 
 En este capítulo estudiaremos más a fondo la problemática de la valoración de empresas. Estudiaremos las causas que impiden que el valor de una empresa sea un valor absoluto y veremos además la importancia de la información cuantitativa en el escenario de incertidumbre en el que se llevan a cabo los procesos de valoración. 
 
-Por último introduciremos los dos métodos de valoración 
+Por último introduciremos brevemente los dos métodos de valoración que utilizaremos en este proyecto.
 
 \section{La problemática de la valoración de empresas}
 Podemos decir que una empresa vale, como cualquier otro elemento susceptible de ser comprado o vendido, el precio que alguien esté dispuesto a pagar por ella. Esta afirmación, que es totalmente obvia, recoge, sin embargo, una verdad absoluta sobre el valor de una empresa: que éste es totalmente subjetivo. Es decir, al contrario que pasa con otros elementos en la vida, no existe un valor objetivo, definitivo y absoluto, de una empresa, una cifra que nadie pudiera discutir y de la que se pudiera afirmar sin lugar a dudas: "`esta empresa vale esta cantidad."'
@@ -36,5 +36,55 @@ Para la introducción de estos valores cuantitativos o numéricos en el proceso de
 
 Para añadir la información cuantitativa, utilizaremos la computación con palabras y el concepto de \emph{mayoría lingüística}, que se basan en la \emph{lógica difusa}. A continuación haremos una breve introducción a estos conceptos, que estudiaremos con más profundidad en el siguiente capítulo.
 
-%Añadir introduccion a Cashflow y a análisis mixto
+\section{Métodos de valoración de empresas}
 
+Aunque el estudio a fondo de los métodos de valoración de empresas queda fuera de los objetivos de este proyecto, introduciremos brevemente los dos métodos a utilizar y sobre los que en los siguiente capítulos añadiremos la información cualitativa usando computación con palabras. 
+
+Se han ofrecido diversas alternativas parar realizar el proceso de valoración entre los que destacan los siguientes:
+
+\textit{Criterio del precio histórico}: Se basa en considerar como valor de cada elemento del activo el precio por el que se adquirió en el momento de su incorporación a la empresa, presentando por tanto claros inconvenientes al no considerar el efecto de la inflación, del progreso técnico, etc.
+
+\textit{Criterio del valor de reposición}: Este criterio toma como referencia en la estimación de los precios de cada una de las masas patrimoniales del activo su situación actual en el mercado y su eficiencia económica.
+
+\textit{Criterio del beneficio capitalizado}: Parte de la premisa de la obtención de beneficios como objetivo prioritario de la empresa, siendo estos últimos la base para el cálculo del valor de la empresa. De ahí, que la valoración se realice descontando, mediante el tipo de interés, los beneficios estimados para periodos futuros, siendo preciso establecer tres variables: tipo de interés, beneficios para cada periodo y tiempo que se considera para el análisis.
+
+El proceso de valoración realizado en función de este último criterio debe suponer un valor superior al realizado sobre la base del resto de criterios, denominándose la diferencia \emph{fondo de comercio} o \emph{goodwill}, cuyo cálculo se afronta desde dos perspectivas principales: el método directo que consiste en estimar unos beneficios posibles y unos beneficios normales actualizando la diferencia, y el método indirecto que consiste en actualizar la estimación de beneficios y restarle el valor sustancial.
+
+\subsection{Métodos de análisis mixto}
+El criterio del beneficio capitalizado matizado con el del valor sustancial da lugar a lo que se denominan métodos mixtos, entre los que destacan el método alemán, el método de Schmalenbach y el método anglosajón. El método alemán trata de evitar el inconveniente de la incertidumbre de los datos futuros. Para ello, y debido a la inexistencia de técnicas apropiadas para realizar su tratamiento, se ha optado por reducir el valor capitalizado a la mitad del goodwill tomando como justificación el principio de prudencia valorativa. De esta forma, se tiene que:
+	\[V_{e} = V_{s} + \frac{1}{2}GW = V_{c} - \frac{1}{2}GW = V_{c} - \frac{1}{2}(V_{c}-V_{s}) = \frac{V_{c}-V_{s}}{2}
+\]
+
+Donde $V_{e}$ es el valor de la empresa, $V_{s}$ es el valor sustancial, $V_{c}$ es el valor capitalizado, y $GW$ el \textit{goodwill} $\left(V_{c}-V_{s}\right)$.
+
+En la expresión anterior se puede observar que este método determina el valor de la empresa como la media entre el valor capitalizado y el valor sustancial, considerando en consecuencia la misma importancia para ambos tipos de valores.
+
+Por su parte, el método anglosajón realiza el cálculo añadiendo al valor sustancial el importe total del goodwill. En consecuencia, ambos métodos adolecen de similares limitaciones, ya que varía únicamente el procedimiento de cálculo, mientras que en el método alemán el goodwill se obtiene indirectamente como diferencia entre el valor capitalizado y el valor sustancial; por su parte, el método anglosajón lo obtiene directamente actualizando la diferencia entre los beneficios esperados y los rendimientos normales del valor sustancial, con lo cual, siendo \emph{i} el tipo de interés normal, el valor de la empresa vendrá dado por:
+
+	\[
+	V_{e} = V_{s} + \left(B+iV_{s}\right) \frac{\left(1+i\right)^n - 1}{\left(1+i\right)\cdot i}
+\]
+
+La expresión anterior refleja el hecho de que los rendimientos normales en lugar de ser calculados sobre el valor sustancial tienen en cuenta el valor de la empresa, denotando lo que teóricamente pagarán los eventuales compradores.
+
+En caso de que la estimación de beneficios y tipos de interés para los periodos futuros presente distintos valores en cada periodo, el valor de la empresa vendrá determinado por la expresión que se recoge a continuación:
+
+	\[
+	V_{e} = V_{s} + \left(B_{1}-i_{1}V_{}s\right)\left(1+i_{1}\right)^{-1} + \cdots + \left(B_{n}-i_{n}V_{s}\right)\left(1+i_{1}\right)^{-1}\left(1+i_{2}\right)^{-1}\cdots\left(1+i_{n}\right)^{-1}	
+\]
+
+Sin embargo, el cálculo así efectuado presenta una serie de inconvenientes que es preciso considerar y tratar de evitar para poder establecer una valoración, lo más cercana a la realidad posible.
+
+Entre estos inconvenientes están la forma en que se expresan las estimaciones y la forma en que se agrega la información. Tanto las valoraciones de los tipos de interés como de los beneficios futuros esperados debe ser realizada por expertos, en cuyo caso se debe establecer un mecanismo que facilite la obtención y posterior agregación de dicha información. Para la expresión de las estimaciones, al no poderse obtener mediante un valor cuantitativo, es más factible obtenerla expresada de forma cualitativa para lo que se debe usar un enfoque lingüístico. Además, como se ha indicado anteriormente, es muy importante que el valor agregado sea cercano a la mayoría de las estimaciones obtenidas por los expertos. Por ello es interesante considerar nuevos operadores que permitan introducir el concepto de mayoría difusa en la agregación.
+
+\subsection{Método de los flujos descontados}
+
+En los últimos años, con la globalización de los mercados, el paralelo desarrollo tecnológico de los mismos y la aparición de nuevos instrumentos financieros, se han desarrollado también nuevas técnicas de valoración y mejorado las existentes. Ello ha llevado consigo un aumento del espectro de métodos de valoración, de su posible marco de actuación y de la necesidad de discriminar qué métodos son aplicables en unas determinadas circunstancias u otras y la veracidad y credibilidad de sus resultados.
+
+En el presente trabajo utilizaremos el método qque en la actualidad tiene mayor aceptación en la comunidad científica y profesional, que no es otro que el modelo de los flujos descontados o \textit{discounted cashflow} por su nombre en inglñés. La conocida expresión general que lo caracteriza es la siguiente:
+
+	\[
+	V_{E} = \sum^{n}_{t=1}\frac{CFL_{t}}{\prod^{t}_{j=1}\left(1+K_{j}\right)^t}
+\]
+
+Donde $V_{E}$ representa el valor actual de la empresa, $CFL_{t}$ es el cash-flow libre de la empresa para el periodo $t$, incluyendo el valor residual, $K_{j}$ es la tasa de actualización adecuada y ajustada por riesgo (WACC) para el periodo $j$, y $n$ es el horizonte de valoración. 
