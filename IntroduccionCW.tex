@@ -24,8 +24,51 @@ La lógica difusa afronta estos problemas. En primer lugar, el significado de una
 	
 Aunque la lógica difusa puede ser vista como una extensión de la lógica multivaluada, sus usos y objetivos son un tanto diferentes. Así pues, el hecho de que la lógica difusa trate sobre aproximaciones más que de modelos precisos, implica que, en general, las cadenas de razonamiento son cortas y el rigor no juega un papel importante, como sí hace en los sistemas clásicos. Podríamos decir, en breve, que en la lógica difusa todo, incluso la VERDAD, es cuestión de grados.	
 
-\subsection{Conjuntos difusos}
-Ampliar-fusilar qué es un conjunto borroso y las funciones de pertenencia. 
+\subsection{Conjuntos borrosos}
+La necesidad natural del ser humano de clasificar objetos y conceptos, propició la aparición de los llamados conjuntos clásicos o conjuntos \textit{crisp}. Para este tipo clásico de conjuntos, podemos decir, dentro de un dominio o \emph{Universo de Discurso} si un elemento pertenece o no al conjunto de una forma absoluta. Esto es, una \textit{pera} SÍ pertenece al conjunto \textit{frutas}, pero NO pertenece al conjunto \textit{muebles}.
+
+Si consideramos $X$ el universo de discurso, y A el conjunto, podemos definir la función de pertenencia como:
+
+\begin{equation}
+\label{eq:pertenenciaClasica}
+A(x) = 
+\begin{cases}
+	1 & si \  x\in A \\
+	0 & si \ x \notin A
+\end{cases}
+\end{equation} 
+
+Vemos que existe una restricción $A(x):X\rightarrow{0,1}$.
+
+Pero, ¿qué ocurre cuando la relación de pertenencia no tiene unos límites claros y definidos? Si tomamos como ejemplo la temperatura, ¿en qué punto podemos considerar que una temperatura de 30 grados pertenece al conjunto "`temperatura alta"'? En este caso podemos definir "`grados"' de pertenencia, "`relajando"' la restricción de pertenencia, aceptando valores en el intervalo contínuo $\left[0,1\right]$.
+
+\begin{defi}
+\label{def:pertenenciaFuzzy}	
+Un conjunto borroso $A$ se define como una \textbf{Función de Pertenencia} que enlaza o empareja los elementos de un dominio o \emph{Universo de discurso} $X$ con elementos del intervalo $\left[0,1\right]$, esto es, una función $A:X\rightarrow\left[0,1\right]$
+\end{defi}
+
+La función de pertenencia a elegir dependerá del concepto a definir, del contexto al que se refiera, de la aplicación que vayamos a hacer de ella, etc. 
+
+En general es preferible usar funciones simples, debido a que simplifican mucho los cálculos y no pierden exactitud, debido a que precisamente se está definiendo un concepto difuso.
+
+Entre las funciones más usadas se encuentran la triangular, la trapezoidal, la gaussiana, etc. Por comodidad en los cálculos, en el presente trabajo utilizaremos la función triangular, definida a continuación.
+
+\begin{defi}
+\label{def:pertenenciaTriangular}
+Sea $a$ el límite inferior de un conjunto, sea $b$ su límite superior, y sea $m$ su valor modal, tal que $a<m<b$.
+Se define la función de pertenencia triangular $A:X\rightarrow\left[0,1\right]$ como:
+	\begin{equation}
+	\label{eq:pertenenciaTriangular}
+		A(x) = 
+			\begin{cases}
+				0 & si \ x\leq a \\
+				\frac{\left(x-a\right)}{\left(m-a\right)} & si \ x\in \left(a,m\right] \\
+				\frac{\left(b-x\right)}{\left(b-m\right)} & si \ x\in \left(m,b\right) \\
+				0 & si \ x \geq b
+			\end {cases}
+	\end{equation}
+\end{defi} 
+
 	
 \subsection{Computación con palabras}
 
@@ -37,11 +80,16 @@ Igual que la lógica difusa, la computación con palabras se basa también en los t
 
 \subsection{Etiquetas lingüísticas}
 
-Para la representación de la información cualitativa utilizaremos el concepto de \emph{etiqueta lingüística}. Una etiqueta lingüística es una función matemática que nos ayuda a representar conceptos difusos como \emph{totalmente}, \emph{mucho}, \emph{bastante}, \emph{nada}, etc. 
+Si aplicamos el concepto de conjunto borroso a la computación con palabras, de forma que asociemos un término en lenguaje natural a un conjunto borroso, obtenemos el concepto de \emph{etiqueta lingüística}. Una etiqueta lingüística nos ayuda a representar conceptos difusos como \emph{totalmente}, \emph{mucho}, \emph{bastante}, \emph{nada}, etc. 
 
-Según se usen conjuntos con mayor o menor granularidad (número de etiquetas), se estarán definiendo escalas de mayor o menor precisión para la representación de la información. Estas funciones son transparentes a los expertos, ya que éstos emiten sus juicios en lenguaje natural haciendo uso de dichas etiquetas, siendo dentro del sistema de decisión donde se realiza la traslación de estas opiniones a al escala determinada para el problema.
+\begin{defi}
+\label{def:etiquetaLinguistica}
+Una \emph{etiqueta lingüística} es un nombre a un conjunto borroso. Es decir, es una terceta $(Nombre, A, X)$, donde $Nombre$ es el nombre asociado al conjunto borroso $A$ en el universo $X$. Es convencional confundir la etiqueta lingüística con su propio nombre.
+\end{defi}
 
-Según el tipo de función que se use se pueden encontrar etiquetas de diversa forma y propiedades, como por ejemplo: triangulares, trapezoidales o gaussianas, presentando cada una de ellas diversas ventajas a la hora de modelar la información. Comúnmente y por simplificación, la representación mas usada es la triangular. En la figura \ref{fig:Etiquetas1} se muestran tres escalas distintas que nos permiten dar tres grados de precisión al lenguaje natural.
+Según se usen conjuntos de etiquetas con mayor o menor granularidad (número de etiquetas), se estarán definiendo escalas de mayor o menor precisión para la representación de la información. Estas funciones son transparentes a los expertos, ya que éstos emiten sus juicios en lenguaje natural haciendo uso de dichas etiquetas, siendo dentro del sistema de decisión donde se realiza la traslación de estas opiniones a al escala determinada para el problema.
+
+En la figura \ref{fig:Etiquetas1} se muestran tres escalas distintas que nos permiten dar tres grados de precisión al lenguaje natural.
 
 \begin{figure}[ht]
 	\centering
@@ -49,8 +97,6 @@ Según el tipo de función que se use se pueden encontrar etiquetas de diversa for
 	\caption{Etiquetas triangulares en tres escalas distintas}
 	\label{fig:Etiquetas1}
 \end{figure}
-
-\textit{Introducir funciones de pertenencia?}
 
 \section{El modelo de 2-tuplas}
 
@@ -116,7 +162,7 @@ Este modelo de representación lingüística define un conjunto de funciones para h
 	Sea $P=\left\{p_{0}, p_{1},\ldots,p_{g}\right\}$ un conjunto de términos lingüísticos y sea $\beta\in\left[0,g\right]$ un valor que representa el resultado de una operación de agregación simbólica. Entonces la 2-tupla que representa la información equivalente a $\beta$ se obtiene con la siguiente función
 	
 	\begin{equation}
-	\label{eq:delta}
+	\label{eq:delta}	
 	\begin{gathered}
 		\Delta:\left[0,g\right] \rightarrow P\times\left(\left[-0.5,0.5\right)\right) \\
 		\Delta\left(\beta\right) = \begin{cases}

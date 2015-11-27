@@ -12,7 +12,7 @@ Veremos a continuación cómo funcionan las funciones de agregación de información
 
 Tradicionalmente el concepto de mayoría ha estado muy ligado a la idea del grupo mayoritario o a la idea de la mitad más uno. Todo esto dio lugar a las denominadas \emph{dictaduras de la mayoría}, donde se hacía lo que indicada el grupo más numeroso sin tener en cuenta a los grupos minoritarios. En contra de estás actitudes surgieron nuevas formas o  métodos  de decisión que intentaban solucionar estos problemas, y con ellas las herramientas necesarias para llevarlas a cabo, pero cual ha sido la sorpresa que al analizar dichos métodos se ha podido comprobar que las dictaduras de la mayorías han dado lugar a las dictaduras de las minorías, donde las opiniones minoritarias son más influyentes que las opiniones mayoritarias.
 
-Este problema se muestra en el siguiente ejemplo: sean los siguientes elementos: $\left\{0.7, 0.7, 0.7, 0.7, 0.5, 0.4, 0.1, 0.1, 0.1\right\}$. Si se analiza este ejemplo se puede apreciar que el $55\%$ de los elementos es mayor que 0.4, siendo el valor 0.7 el 44\% del total. Debido a este resultado, se puede suponer que un valor que fuese representativo del grupo, debería ser mayor a 0.5 e inferior a 0.7. Sin embargo, si se obtiene un valor de representación para dichos valores haciendo uso de los operadores tradicionales más utilizados como son la media aritmética y media geométrica, se obtendrían los valores 0.444 y 0.331 respectivamente, valores que aun siendo correctos desde un punto de vista matemático, semánticamente no reflejan la opinión mayoritaria y si el valor de la minoría. 
+Este problema se muestra en el siguiente ejemplo: sean los siguientes elementos: $\left\{0.7, 0.7, 0.7, 0.7, 0.5, 0.4, 0.1, 0.1, 0.1\right\}$. Si se analiza este ejemplo se puede apreciar que el $55\%$ de los elementos es mayor que 0.4, siendo el valor 0.7 el 44\% del total. Debido a este resultado, se puede suponer que un valor que fuese representativo del grupo, debería ser mayor a 0.5 e inferior a 0.7. Sin embargo, si se obtiene un valor de representación para dichos valores haciendo uso de los operadores tradicionales más utilizados como son la media aritmética y media geométrica, se obtendrían los valores 0.444 y 0.331 respectivamente, valores que aun siendo correctos desde un punto de vista matemático, semánticamente no reflejan la opinión mayoritaria y sí el valor de la minoría. 
 
 Otro ejemplo que muestra el problema anterior es el siguiente: Supongamos un pueblo donde residen 1001 personas, las cuales tienen los siguientes ingresos mensuales: 1.000 personas tienen unos ingresos de 1000 euros, mientras que 1 persona tiene unos ingresos de 1000.000.000 euros. Si se calculan los ingresos medios, y nuevamente se utiliza la media aritmética resulta que dicho pueblo muestra que sus habitantes tienen unos ingresos medios mensuales de 1.000.000 de euros aproximadamente. Nuevamente aun siendo correcto este valor desde un punto de vista matemático, sin embargo desde un punto de vista semántico y de información social dicho valor dista mucho de dar una información que sea representativa de la mayoría de la población. 
 
@@ -78,11 +78,11 @@ La aplicación de los procesos de mayoría fuzzy permite dar mayor representativid
 	\caption{Dominio de los procesos de decisión tradicionales, de mayoría, y de mayoría \emph{fuzzy}}
 \end{figure}
 
+Diferentes operadores de mayoría han sido definidos en la literatura. Así, para representar el concepto de mayoría en entornos aditivos, destaca el operador $MA-OWA$, o para mayoría cuantificada operadores como $IOWA$ y $QMA-OWA$. A continuación se va a presentar de manera formal el operador $LAMA$, que será utilizado posteriormente para agregar la información lingüística al proceso de valoración de empresas. 
+
 \subsection{Operadores de mayoría lingüísticos aditivos. El operador $LAMA$}
 
-Diferentes operadores de mayoría han sido definidos en la literatura. Así, para representar el concepto de mayoría en entornos aditivos, destaca el operador $MA-OWA$, o para mayoría cuantificada operadores como $IOWA$ y el $QMA-OWA$. A continuación se va a presentar de manera formal el operador $LAMA$, que será utilizado posteriormente en un breve ejemplo de valoración de empresas. 
-
-El operador $LAMA$, acrónimo de \emph{Linguistic Aggregation of Majority Additive} o \emph{Agregación linguistica de mayoría aditiva} es presentado en el artículo \emph{LAMA: A linguistic aggregation of Majority Additive Operator}\cite{PelaezLAMA} de J.I. Peláez y J.M. Doña, y es un operador de mayoría para entornos lingüísticos con un espacio de etiquetas S, que se define como una media aritmética de medias aritméticas, de forma que el resultado final es una media aritmética ponderada.
+El operador $LAMA$, acrónimo de \emph{Linguistic Aggregation of Majority Additive} o \emph{Agregación linguistica de mayoría aditiva} es presentado en el artículo \emph{LAMA: A linguistic aggregation of Majority Additive Operator}\cite{PelaezLAMA} de J.I. Peláez y J.M. Doña, y es un operador de mayoría para entornos lingüísticos con un espacio de etiquetas $S$, que se define como una media aritmética de medias aritméticas, de forma que el resultado final es una media aritmética ponderada.
 
 \begin{defi}
 \label{def:lama}
@@ -149,11 +149,13 @@ Definidos por Kaufmann\cite{expertonesKaufmann}, el método de los expertones per
 
 Aplicado al modelo de 2-tuplas, lo que haremos será recoger las opiniones de los distintos expertos, normalizadas a un único conjunto de etiquetas, y a partir de la frecuencia absoluta de cada etiqueta, calcularemos su funcion de probabilidad acumulada complementaria.
 
+No es objetivo de este trabajo presentar la teoría completa sobre los expertones, por lo que simplemente ilustraremos su uso con un ejemplo práctico para ajustar un intervalo sobre un expertizaje expresado con el modelo de 2-tuplas. 
+
 \begin{ejem}
 Consideremos el intervalo $[0'04, 0'05]$ de posibles tipos de interes inicial para la valoración de una empresa.
 
-Para alcanzar un consenso sobre la validez de dicha información, se pide a diez expertos que den su opinion, usando distintos conjuntos de etiquetas semánticas. Tomando como conjunto de referencia el conjunto $S_{9}$, obtenemos las siguientes opiniones:
-\begin{table}[ht]
+Para alcanzar un consenso sobre la validez de dicha información, se pide a diez expertos que den su opinion, usando distintos conjuntos de etiquetas semánticas. Tomando como conjunto de referencia el conjunto $S_{9}$, obtenemos las opiniones reflejadas en la tabla \ref{tab:OpinionExpertones}
+\begin{table}[!htb]
 	\centering
 		\begin{tabular}{c c}
 			\toprule
@@ -175,9 +177,9 @@ Para alcanzar un consenso sobre la validez de dicha información, se pide a diez 
 	\label{tab:OpinionExpertones}
 \end{table}
 
-Observamos las frecuencias de cada 2-tupla. Además, para estandarizar los valores, dividimos por 10, que es el número de opiniones disponibles, obteniendo así la siguiente tabla:
+Observamos las frecuencias de cada 2-tupla. Para estandarizar los valores, dividimos por 10, que es el número de opiniones disponibles, obteniendo así la tabla \ref{tab:Cardinalidades}
 
-\begin{table}[ht]
+\begin{table}[!htb]
 		\centering
 		\begin{tabular} {c | c c | c c}
 			\toprule
@@ -197,9 +199,9 @@ Observamos las frecuencias de cada 2-tupla. Además, para estandarizar los valore
 	\label{tab:Cardinalidades}
 \end{table}
 
-Ahora, ordenando las tuplas de ``menor'' a ``mayor'', incluyendo los nueve valores del conjunto semántico utilizado, aplicamos la función acumulada complementaria para obtener el \emph{expertón}.
+Ahora, ordenando las tuplas de ``menor'' a ``mayor'', incluyendo los nueve valores del conjunto semántico utilizado, aplicamos la función acumulada complementaria para obtener el \emph{expertón} reflejado en la tabla \ref{tab:Experton}.
 
-\begin{table}[h]
+\begin{table}[!htb]
 		\centering
 		\begin{tabular} {c | c c }
 			\toprule
@@ -222,5 +224,44 @@ Ahora, ordenando las tuplas de ``menor'' a ``mayor'', incluyendo los nueve valor
 	\label{tab:Experton}
 \end{table}
 
+Para obtener el $R^{+}$-experton para el intervalo $[\alpha_{0},\alpha_{1}]$ aplicamos
+	\[
+	\alpha_{0}+\left(\left(\alpha_ {1}-\alpha_{0}\right)\right)\cdot Experton
+	\]
+
+De esta forma obtenemos el $R^{+}$-Experton para el ejemplo en la tabla \ref{tab:RExperton}.
+\begin{table}[!htb]
+		\centering
+		\begin{tabular} {c | c c | c c }
+			\toprule
+			\multicolumn{5}{c}{$[0.04, 0.05]$} \\
+			\midrule
+			&\multicolumn{2}{c}{$Experton$}&\multicolumn{2}{c}{$R^{+}-Experton$} \\
+			\midrule
+			$(S_{0}^{9},0)$			&	0.9	& 1 	& 0.049 & 0.010 \\
+			$(S_{1}^{9},0)$			&	0.9	&	0.9	& 0.049 & 0.050 \\
+			$(S_{2}^{9},0)$			&	0.9	&	0.9	& 0.049	& 0.049 \\
+			$(S_{3}^{9},0)$			&	0.9	&	0.9	& 0.049	& 0.049 \\
+			$(S_{4}^{9},0)$			&	0.9	&	0.9	& 0.049	& 0.049 \\
+			$(S_{5}^{9},0)$			&	0.7	&	0.8	& 0.049	& 0.049 \\
+			$(S_{5}^{9},0'33)$	&	0.6	&	0.8	& 0.047	& 0.048 \\
+			$(S_{6}^{9},0)$			&	0.3	&	0.7	& 0.043	& 0.047 \\
+			$(S_{7}^{9},-0'33)$	&	0.3	&	0.6	& 0.043	& 0.046 \\
+			$(S_{7}^{9},0)$			&	0.3	&	0.5	& 0.043	& 0.045 \\
+			$(S_{8}^{9},0)$			&	0		&	0		& 0.040	& 0.040 \\					
+			\bottomrule
+		\end{tabular}
+	\caption{Expertón y $R^{+}$-Experton para el intervalo $[0.04, 0.05]$}
+	\label{tab:Experton}
+\end{table}
+
+Finalmente obtenemos el intervalo ajustado, calculando la esperanza matemática del expertón. Esto es, sumando todos los valores del expertón en cada extremo del intervalo (excepto el nivel 0), y dividiendo entre el número de elementos.
+	
+	\[
+	\begin{gathered}
+	i_{inicial} = \left[0,04, 0.05\right] \\
+	i_{ajustado} = \left[0.04610, 0.04720\right]
+	\end{gathered}
+\]
 
 \end{ejem}
