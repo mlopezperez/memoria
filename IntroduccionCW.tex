@@ -30,12 +30,12 @@ La necesidad natural del ser humano de clasificar objetos y conceptos, propició 
 Si consideramos $X$ el universo de discurso, y A el conjunto, podemos definir la función de pertenencia como:
 
 \begin{equation}
-\label{eq:pertenenciaClasica}
 A(x) = 
 \begin{cases}
 	1 & si \  x\in A \\
 	0 & si \ x \notin A
 \end{cases}
+\label{eq:pertenenciaClasica}
 \end{equation} 
 
 Vemos que existe una restricción $A(x):X\rightarrow{0,1}$.
@@ -43,8 +43,8 @@ Vemos que existe una restricción $A(x):X\rightarrow{0,1}$.
 Pero, ¿qué ocurre cuando la relación de pertenencia no tiene unos límites claros y definidos? Si tomamos como ejemplo la temperatura, ¿en qué punto podemos considerar que una temperatura de 30 grados pertenece al conjunto "`temperatura alta"'? En este caso podemos definir "`grados"' de pertenencia, "`relajando"' la restricción de pertenencia, aceptando valores en el intervalo contínuo $\left[0,1\right]$.
 
 \begin{defi}
-\label{def:pertenenciaFuzzy}	
 Un conjunto borroso $A$ se define como una \textbf{Función de Pertenencia} que enlaza o empareja los elementos de un dominio o \emph{Universo de discurso} $X$ con elementos del intervalo $\left[0,1\right]$, esto es, una función $A:X\rightarrow\left[0,1\right]$
+\label{def:pertenenciaFuzzy}	
 \end{defi}
 
 La función de pertenencia a elegir dependerá del concepto a definir, del contexto al que se refiera, de la aplicación que vayamos a hacer de ella, etc. 
@@ -54,7 +54,6 @@ En general es preferible usar funciones simples, debido a que simplifican mucho 
 Entre las funciones más usadas se encuentran la triangular, la trapezoidal, la gaussiana, etc. Por comodidad en los cálculos, en el presente trabajo utilizaremos la función triangular, definida a continuación.
 
 \begin{defi}
-\label{def:pertenenciaTriangular}
 Sea $a$ el límite inferior de un conjunto, sea $b$ su límite superior, y sea $m$ su valor modal, tal que $a<m<b$.
 Se define la función de pertenencia triangular $A:X\rightarrow\left[0,1\right]$ como:
 	\begin{equation}
@@ -67,6 +66,7 @@ Se define la función de pertenencia triangular $A:X\rightarrow\left[0,1\right]$ 
 				0 & si \ x \geq b
 			\end {cases}
 	\end{equation}
+	\label{def:pertenenciaTriangular}
 \end{defi} 
 
 	
@@ -83,8 +83,8 @@ Igual que la lógica difusa, la computación con palabras se basa también en los t
 Si aplicamos el concepto de conjunto borroso a la computación con palabras, de forma que asociemos un término en lenguaje natural a un conjunto borroso, obtenemos el concepto de \emph{etiqueta lingüística}. Una etiqueta lingüística nos ayuda a representar conceptos difusos como \emph{totalmente}, \emph{mucho}, \emph{bastante}, \emph{nada}, etc. 
 
 \begin{defi}
-\label{def:etiquetaLinguistica}
 Una \emph{etiqueta lingüística} es un nombre a un conjunto borroso. Es decir, es una terceta $(Nombre, A, X)$, donde $Nombre$ es el nombre asociado al conjunto borroso $A$ en el universo $X$. Es convencional confundir la etiqueta lingüística con su propio nombre.
+\label{def:etiquetaLinguistica}
 \end{defi}
 
 Según se usen conjuntos de etiquetas con mayor o menor granularidad (número de etiquetas), se estarán definiendo escalas de mayor o menor precisión para la representación de la información. Estas funciones son transparentes a los expertos, ya que éstos emiten sus juicios en lenguaje natural haciendo uso de dichas etiquetas, siendo dentro del sistema de decisión donde se realiza la traslación de estas opiniones a al escala determinada para el problema.
@@ -112,13 +112,13 @@ Otra alternativa consiste en proveer directamente el conjunto de términos en el 
 	\ p_{4}=bueno,\ p_{6}=muy\ bueno,\ p_{7}=lo\ mejor\}
 \end{multline*}
 
-En este proyecto utilizaremos etiquetas con pertenencia triangular (Figura \ref{fig:Etiquetas2} para simplificar los cálculos matemáticos. Por ejemplo, podemos asignar la siguiente semántica (Tabla \ref{tab:SemanticaEtiquetas}) a un conjunto de siete términos parecido al definido anteriormente.
+En este proyecto utilizaremos etiquetas con pertenencia triangular (Figura \ref{fig:etiquetas2} para simplificar los cálculos matemáticos. Por ejemplo, podemos asignar la siguiente semántica (Tabla \ref{tab:semanticaEtiquetas}) a un conjunto de siete términos parecido al definido anteriormente.
 
 \begin{figure}[ht]
 	\centering
 		\includegraphics[scale=0.35]{./Imagenes/Etiquetas2}
 		\caption{Representación de las etiquetas lingüísticas}
-		\label{fig:Etiquetas2}
+		\label{fig:etiquetas2}
 \end{figure}
 
 \begin{table}[ht]
@@ -137,7 +137,7 @@ En este proyecto utilizaremos etiquetas con pertenencia triangular (Figura \ref{
 		 \bottomrule
 		\end{tabular}
 	\caption{Semántica de las Etiquetas}
-	\label{tab:SemanticaEtiquetas}
+	\label{tab:semanticaEtiquetas}
 \end{table}
 
 La traducción simbólica de un término linguístico $p_{i}\in\left\{ p_{0}, p_{1}, \ldots, p_{g}\right\}$ es un valor numérico perteneciente al intervalo $\left[-0.5, 0.5\right]$ que representa la \emph{diferencia de información} entre un cálculo de la información $\beta$ evaluado en $\left[0,g\right]$, obtenido después de una operación de agregación simbólica (que actúa sobre el índice de las etiquetas), y el valor más cercano en $\left\{0,\ldots,g\right\}$ que indica el índice del término lingüístico más cercano en $P\left(p_{i}\right)$.
@@ -146,7 +146,6 @@ A partir de este concepto, Herrera y Martínez\cite{tuplasHerrera} desarrollan un
 
 Este modelo de representación lingüística define un conjunto de funciones para hacer transformaciones entre términos lingüísticos, 2-tuplas y valores numéricos.
 \begin{defi}
-	\label{def:theta}
 	Sea $p_{i} \in P$ un término lingüístico, entonces su 2-tupla equivalente viene dada por la función $\theta$ de este modo:
 	\begin{equation}	
 	\label{eq:theta}
@@ -155,10 +154,10 @@ Este modelo de representación lingüística define un conjunto de funciones para h
 			\theta\left(p_{i}\right)=\left(p_{i},0\right)/p_{i} \in S
 		\end{gathered}
 	\end{equation}
+	\label{def:theta}
 \end{defi}
 
 \begin{defi}
-	\label{def:delta}
 	Sea $P=\left\{p_{0}, p_{1},\ldots,p_{g}\right\}$ un conjunto de términos lingüísticos y sea $\beta\in\left[0,g\right]$ un valor que representa el resultado de una operación de agregación simbólica. Entonces la 2-tupla que representa la información equivalente a $\beta$ se obtiene con la siguiente función
 	
 	\begin{equation}
@@ -172,10 +171,10 @@ Este modelo de representación lingüística define un conjunto de funciones para h
 	\end{gathered}
 	\end{equation}
 	Donde ``round'' es la operación de redondeo, $p_{i}$ es la etiqueta lingüística más cercana al valor de $\beta$ y $\alpha$ es el valor de la traducción simbólica. 
+\label{def:delta}
 \end{defi}
 
 \begin{defi}
-\label{def:deltaInv}
 Sea $P=\left\{p_{0}, p_{1},\ldots,p_{g}\right\}$ un conjunto de términos lingüísticos, y sea $(p_{i}, \alpha_{i})$ una 2-tupla lingüística. Hay siempre una función $\Delta^{-1}$ tal que, a partir de una 2-tupla, devuelve su valor numérico equivalente $\beta \in [0,g]$.
 \begin{equation}
 	\label{eq:deltaInv}
@@ -184,6 +183,7 @@ Sea $P=\left\{p_{0}, p_{1},\ldots,p_{g}\right\}$ un conjunto de términos lingüís
 		\Delta^{-1}(p_{i},\alpha) = i + \alpha = \beta
 	\end{gathered}
 \end{equation}
+\label{def:deltaInv}
 \end{defi}
 
 De acuerdo con lo anterior, la representación mediante 2-tuplas lingüísticas presenta ventajas sustantivas respecto a otras metodologías, debido a las posibilidades que ofrece para el tratamiento de información suministrada en distintos dominios de expresión, es decir, para operar con información lingüística multigranular sin pérdida de información.
@@ -200,8 +200,8 @@ Los niveles dentro de una jerarquía están ordenados de acuerdo con su granularid
 De acuerdo con lo anterior se puede definir una jerarquía lingüística $(LH)$ como la unión de todos los niveles 
 
 \begin{equation}
-\label{eq:jerarquiaLinguistica}
 	LH = \bigcup_{t}\ l(t,n(t))
+	\label{eq:jerarquiaLinguistica}
 \end{equation}
 
 Para analizar la construccion de una jerarquia linguistica, teniendo en cuenta que su orden jerarquico viene dado por el incremento de la granularidad de los conjuntos de terminos linguisticos en cada nivel, se parte de un conjunto de etiquetas S sobre el dominio U en el nivel t, tal:
@@ -214,21 +214,21 @@ Siendo $s_{k}$ los terminos linguisticos del conjunto $S$ con $k = 0,\ldots, n(t
 
 Para construir una jerarquia linguistica se puede extender la definicion de $S$, permitiendo la existencia de varios conjuntos de terminos linguisticos, cada uno con una granularidad distinta en cada nivel. Para ello se introduce el parametro $n(t)$ en la definicion de un conjunto de etiquetas, que representa la granularidad del conjunto del nivel $t$ donde está definido:
 \begin{equation}
-	\label{eq:conjuntoJerarquia}
 	S^{n(t)} = \{s_{0}^{n(t)},\ldots, s^{n(t)}_{n(t)-1}\}
+\label{eq:conjuntoJerarquia}
 \end{equation}
  
 En general, cabe admitir que el conjunto de terminos del nivel $t+1$ se obtiene de su predecesor como sigue:
 \begin{equation}
-	\label{eq:nivelesJerarquia}
 	L(t,\ n(t)) \rightarrow L(t+1,\ 2\cdot n (t)-1)
+\label{eq:nivelesJerarquia}
 \end{equation}
 
 Asimismo, existe una funcion que permite trasladar informacion linguistica de un conjunto de terminos a otro sin perdida de informacion.Esta función es recursiva y permite la transformacion de un termino del nivel $t$ a uno del nivel $t'=t+a$ , con $a \in Z$.
 
 Por comodidad, en el presente trabajo utilizaremos la forma no recursiva de dicha función, que se define así:
 \begin{equation}
-	\label{eq:transJerarquia}
+	\label{eq:transformarJerarquia}
 	\begin{gathered}
 		TF^{t}_{t'}: l(t,n(t)) \rightarrow l(t',n(t')) \\
 		TF^{t}_{t'}(s_{i}^{n(t)},\alpha^{n(t)}) = \Delta\left(\frac{\Delta^{-1}(s^{n(t)}_{i}), \alpha^{n(t)})\cdot(n(t')-1)}{n(t)-1}\right)

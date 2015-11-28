@@ -1,6 +1,6 @@
 \chapter{Agregación de información lingüísitica}
 \section{Introducción}
-Hasta ahora hemos visto la importancia de la información lingüística en el proceso de valoración de empresas, así como el modelo de 2-tuplas que nos permite expresar formalmente dicha información. En el presente capítulo veremos cómo tener en cuenta dicha información lingüística, obteniendo un valor representativo que podamos usar en los calculos para la valoración de empresas.
+Hasta ahora hemos visto la importancia de la información lingüística en el proceso de valoración de empresas, hemos introducido la computación con palabras y el modelo matemático de 2-tuplas que nos permite expresar formalmente dicha información. En el presente capítulo veremos cómo tener en cuenta dicha información lingüística, obteniendo un valor representativo que podamos usar en los calculos para la valoración de empresas.
 
 Introduciremos dos métodos para este fin. Primero introduciremos el operador de mayoría lingüística $LAMA$, que será el principal objeto de estudio de este trabajo al aplicarlo al proceso de valoración de empresas. Después introduciremos el método de \emph{los expertones}, cuyo impacto en la valoración de empresas ya ha sido estudiado en trabajos anteriores, como por ejemplo los llevados a cabo por Cristina Mendaña Cuervo y otros\cite{TuplasMenda}, y que usaremos en el presente trabajo con fines comparativos.
 
@@ -18,7 +18,7 @@ Otro ejemplo que muestra el problema anterior es el siguiente: Supongamos un pue
 
 Con objeto de paliar los problemas anteriores, ha surgido un nuevo concepto denominado Mayoría, que trata de obtener un valor de opinión que sea representativo de la mayoría pero sin olvidar a las minorías. 
 
-La diferencia entre los procesos clásicos y los nuevos procesos denominados de mayoría, se basa en la forma en que son considerados los elementos a la hora de obtener un valor de representación. Como muestra la figura \ref{fig:Procesos1}, en los procesos clásicos los elementos son considerados de manera aislada, y sobre estos elementos se opera para obtener un valor para el grupo. Sin embargo, en los procesos de mayoría los elementos no son considerados de manera individual si no que forman grupos de elementos, en base a una función de distancia entre ellos, que comparten una misma opinión y que se enfrentan unos con otros para obtener un valor común. 
+La diferencia entre los procesos clásicos y los nuevos procesos denominados de mayoría, se basa en la forma en que son considerados los elementos a la hora de obtener un valor de representación. Como muestra la figura \ref{fig:procesos1}, en los procesos clásicos los elementos son considerados de manera aislada, y sobre estos elementos se opera para obtener un valor para el grupo. Sin embargo, en los procesos de mayoría los elementos no son considerados de manera individual si no que forman grupos de elementos, en base a una función de distancia entre ellos, que comparten una misma opinión y que se enfrentan unos con otros para obtener un valor común. 
 
 El enfrentamiento entre elementos de distintos grupos se lleva a cabo tomando un elemento de cada uno de los grupos, con los cuales se opera para obtener un nuevo valor que sea representante de los mismos. La operación se puede llevar a cabo mediante operadores tradicionales. Los elementos que han sido considerados son eliminados de los grupos iniciales, pasando a formar un nuevo grupo con valor igual al calculado y cardinalidad el número de elementos que han sido considerados. Este proceso continua hasta que queda un solo grupo de elementos. Aquellos grupos que en un momento dado han enfrentado a todos sus representantes, dejan de participar en el proceso y por lo tanto de influir a partir de ese momento en el valor final. 
 
@@ -26,12 +26,12 @@ El enfrentamiento entre elementos de distintos grupos se lleva a cabo tomando un
 	\centering
 		\includegraphics[scale=0.6]{Imagenes/Procesos1.png}
 	\caption{Procesos de Mayoría y Procesos Clásicos.}
-	\label{fig:Procesos1}
+	\label{fig:procesos1}
 \end{figure}
 
 Actualmente el concepto anterior que ha sido definido como Mayoría, ha dado lugar al concepto de Mayoría Fuzzy. La Mayoría Fuzzy se modela a través del uso de cuantificadores lingüísticos, tales como ``al menos el 80\%'', ``muchos'', ``algunos'', etcétera, definiéndose formalmente como un subconjunto borroso dentro de un dominio numérico, que trata de delimitar el número de elementos de cada uno de los grupos. 
 
-La semántica de un subconjunto borroso se describe a través del uso de una función de pertenencia la cual describe la compatibilidad de un valor absoluto o porcentual con respecto al concepto expresado por el cuantificador lingüístico. De esta forma, el cuantificador lingüístico se puede ver como un concepto borroso que se refiere a la cantidad de elementos a considerar en el conjunto de referencia. En la ecuación \ref{eq:muchos} vemos la definición matemática del cuantificador lingüístico muchos, y en la figura \ref{fig:GraficaMuchos} su representación gráfica.
+La semántica de un subconjunto borroso se describe a través del uso de una función de pertenencia la cual describe la compatibilidad de un valor absoluto o porcentual con respecto al concepto expresado por el cuantificador lingüístico. De esta forma, el cuantificador lingüístico se puede ver como un concepto borroso que se refiere a la cantidad de elementos a considerar en el conjunto de referencia. En la ecuación \ref{eq:muchos} vemos la definición matemática del cuantificador lingüístico muchos, y en la figura \ref{fig:graficaMuchos} su representación gráfica.
 
 \begin{align}
 \mu_{muchos}(x) = 
@@ -46,35 +46,35 @@ La semántica de un subconjunto borroso se describe a través del uso de una funci
 \begin{figure}[ht]
 	\centering
 		\includegraphics[scale=0.4]{Imagenes/GraficaMuchos.png}
-	\label{fig:GraficaMuchos}
+	\label{fig:graficaMuchos}
 	\caption{Cuantificador ``muchos''}
 \end{figure}
 
 La aplicación del cuantificador se puede llevar a cabo atendiendo a aspectos sociales, dando lugar a la cuantificación individual o en grupo.
 
-La  cuantificación individual consiste en indicar el grado con que cada miembro del conjunto de valores representa el concepto de mayoría. Para ello, esta estrategia aplica la semántica del cuantificador directamente sobre el peso individual de cada elemento de la agregación, donde el peso ha sido previamente calculado con un operador de agregación. La figura \ref{fig:CuantificadorIndividual} muestra un ejemplo de aplicación de la cuantificación individual sobre un conjunto de valores a agregar. Los valores por encima de la línea no son considerados en la agregación.
+La  cuantificación individual consiste en indicar el grado con que cada miembro del conjunto de valores representa el concepto de mayoría. Para ello, esta estrategia aplica la semántica del cuantificador directamente sobre el peso individual de cada elemento de la agregación, donde el peso ha sido previamente calculado con un operador de agregación. La figura \ref{fig:cuantificadorIndividual} muestra un ejemplo de aplicación de la cuantificación individual sobre un conjunto de valores a agregar. Los valores por encima de la línea no son considerados en la agregación.
 
-\begin{figure}[htbp]
+\begin{figure}[ht]
 	\centering
 		\includegraphics[scale=0.6]{Imagenes/CuantificadorIndividual.png}
-	\label{fig:CuantificadorIndividual}
+	\label{fig:cuantificadorIndividual}
 	\caption{Representación gráfica del corte del cuantificador con la semántica de cuantificación individual}
 \end{figure}
 
-Pero desde un punto de vista social existen problemas de toma de decisión en grupo donde se debe cumplir la premisa, que todos los grupos de opiniones estén representados por al menos un representante. Como muestra la figura \ref{fig:CuantificadorIndividual} esta premisa no siempre se cumple con la cuantificación individual ya que existen grupos de opinión que son eliminados del proceso de decisión. Para solucionar este problema se propone la cuantificación en grupo, la cual siempre garantiza dicha premisa. La figura \ref{fig:CuantificadorGrupo} muestra un ejemplo de aplicación de la cuantificación en grupo sobre un conjunto de valores a agregar. Los valores por encima de la línea no son considerados en la agregación.
+Pero desde un punto de vista social existen problemas de toma de decisión en grupo donde se debe cumplir la premisa, que todos los grupos de opiniones estén representados por al menos un representante. Como muestra la figura \ref{fig:cuantificadorIndividual} esta premisa no siempre se cumple con la cuantificación individual ya que existen grupos de opinión que son eliminados del proceso de decisión. Para solucionar este problema se propone la cuantificación en grupo, la cual siempre garantiza dicha premisa. La figura \ref{fig:cuantificadorGrupo} muestra un ejemplo de aplicación de la cuantificación en grupo sobre un conjunto de valores a agregar. Los valores por encima de la línea no son considerados en la agregación.
 
-\begin{figure}[htbp]
+\begin{figure}[ht]
 	\centering
 		\includegraphics[scale=0.6]{Imagenes/CuantificadorGrupo.png}
-		\label{fig:CuantificadorGrupo}
+		\label{fig:cuantificadorGrupo}
 		\caption{Representación gráfica del corte del cuantificador con la semántica de cuantificación en grupo}
 \end{figure}
 
-La aplicación de los procesos de mayoría fuzzy permite dar mayor representatividad a los resultados en los procesos de decisión, permitiendo modelar conceptos como muchos, pocos, algunos, etc. En la figura \ref{img:Dominios} se muestra el dominio de los procesos clásicos, los procesos de mayoría  y los procesos de mayoría fuzzy. Para ello se ha considerado un ejemplo con 7 valores que han sido representados mediante elipses. 
+La aplicación de los procesos de mayoría fuzzy permite dar mayor representatividad a los resultados en los procesos de decisión, permitiendo modelar conceptos como muchos, pocos, algunos, etc. En la figura \ref{fig:dominios} se muestra el dominio de los procesos clásicos, los procesos de mayoría  y los procesos de mayoría fuzzy. Para ello se ha considerado un ejemplo con 7 valores que han sido representados mediante elipses. 
 \begin{figure}[ht]
 	\centering
 			\includegraphics{Imagenes/Dominios.png}
-		\label{img:Dominios}
+		\label{fig:dominios}
 	\caption{Dominio de los procesos de decisión tradicionales, de mayoría, y de mayoría \emph{fuzzy}}
 \end{figure}
 
@@ -117,7 +117,7 @@ y donde $\oplus$ es la suma de etiquetas y $\otimes$ es el producto de una etiqu
 Podemos definir el operador $LAMA^{e}$ como una extensión del operador $LAMA$ para operar con información lingüística representada mediante el modelo de 2-tuplas expuesto.
 
 \begin{defi}
-\label{lamae}
+\label{def:lamae}
 Sean $(p_{1}, \alpha_{1}),\ (p_{2},\alpha_{2}),\ldots,\ (p_{n}, \alpha_{n})$ las 2-tuplas a ser agregadas, y sean$ \delta_{1},\ \delta_{2},\ldots\ \delta_{n} \in N$ la frecuencia o cardinalidad de dichas 2-tuplas, donde $\delta_{i} \leq \delta_{i+1}$ para todo $1 \leq i \leq n-1$. El operador $LAMA^{e}$ es la 2-tupla $(p_{m},\alpha_{m})$ dada por:
 \begin{gather*}
 LAMA^{e}((p_{1}, \alpha_{1}),\ (p_{2},\alpha_{2}),\ldots,\ (p_{n}, \alpha_{n})) = \Delta(\Delta^{-1}(p_{1},\alpha{1})\cdot\lambda_{1} \\
@@ -131,7 +131,7 @@ El valor de la cardinalidad de cada 2-tupla puede calcularse usando dos metodolo
 	\item Usando como cardinalidad el número de 2-tuplas que representan información similar. 
 \end{enumerate}
 \begin{defi}
-\label{comparacion2tupla}
+\label{def:comparacion2tupla}
 Sean $(p_{i},\alpha_{1})$ y $(p_{j},\alpha_{2})$ dos 2-tuplas, cada una representando una cantidad de información, entonces, si $i=j$, entonces:
 \begin{itemize}
 	\item Si $\alpha_{1} = \alpha_{2}$, entonces ambas tuplas representan la misma información
@@ -154,7 +154,7 @@ No es objetivo de este trabajo presentar la teoría completa sobre los expertones
 \begin{ejem}
 Consideremos el intervalo $[0'04, 0'05]$ de posibles tipos de interes inicial para la valoración de una empresa.
 
-Para alcanzar un consenso sobre la validez de dicha información, se pide a diez expertos que den su opinion, usando distintos conjuntos de etiquetas semánticas. Tomando como conjunto de referencia el conjunto $S_{9}$, obtenemos las opiniones reflejadas en la tabla \ref{tab:OpinionExpertones}
+Para alcanzar un consenso sobre la validez de dicha información, se pide a diez expertos que den su opinion, usando distintos conjuntos de etiquetas semánticas. Tomando como conjunto de referencia el conjunto $S_{9}$, obtenemos las opiniones reflejadas en la tabla \ref{tab:opinionExpertones}
 \begin{table}[!htb]
 	\centering
 		\begin{tabular}{c c}
@@ -174,10 +174,10 @@ Para alcanzar un consenso sobre la validez de dicha información, se pide a diez 
 			\bottomrule			
 		\end{tabular}
 	\caption{Opinion de los expertos}
-	\label{tab:OpinionExpertones}
+	\label{tab:opinionExpertones}
 \end{table}
 
-Observamos las frecuencias de cada 2-tupla. Para estandarizar los valores, dividimos por 10, que es el número de opiniones disponibles, obteniendo así la tabla \ref{tab:Cardinalidades}
+Observamos las frecuencias de cada 2-tupla. Para estandarizar los valores, dividimos por 10, que es el número de opiniones disponibles, obteniendo así la tabla \ref{tab:cardinalidades}
 
 \begin{table}[!htb]
 		\centering
@@ -196,10 +196,10 @@ Observamos las frecuencias de cada 2-tupla. Para estandarizar los valores, divid
 			\bottomrule
 		\end{tabular}
 	\caption{Cardinalidades y probabilidades}
-	\label{tab:Cardinalidades}
+	\label{tab:cardinalidades}
 \end{table}
 
-Ahora, ordenando las tuplas de ``menor'' a ``mayor'', incluyendo los nueve valores del conjunto semántico utilizado, aplicamos la función acumulada complementaria para obtener el \emph{expertón} reflejado en la tabla \ref{tab:Experton}.
+Ahora, ordenando las tuplas de ``menor'' a ``mayor'', incluyendo los nueve valores del conjunto semántico utilizado, aplicamos la función acumulada complementaria para obtener el \emph{expertón} reflejado en la tabla \ref{tab:experton}.
 
 \begin{table}[!htb]
 		\centering
@@ -221,7 +221,7 @@ Ahora, ordenando las tuplas de ``menor'' a ``mayor'', incluyendo los nueve valor
 			\bottomrule
 		\end{tabular}
 	\caption{Expertón para el intervalo $[0.04, 0.05]$}
-	\label{tab:Experton}
+	\label{tab:experton}
 \end{table}
 
 Para obtener el $R^{+}$-experton para el intervalo $[\alpha_{0},\alpha_{1}]$ aplicamos
@@ -229,14 +229,14 @@ Para obtener el $R^{+}$-experton para el intervalo $[\alpha_{0},\alpha_{1}]$ apl
 	\alpha_{0}+\left(\left(\alpha_ {1}-\alpha_{0}\right)\right)\cdot Experton
 	\]
 
-De esta forma obtenemos el $R^{+}$-Experton para el ejemplo en la tabla \ref{tab:RExperton}.
+De esta forma obtenemos el $R^{+}$-Experton para el ejemplo en la tabla \ref{tab:rExperton}.
 \begin{table}[!htb]
 		\centering
 		\begin{tabular} {c | c c | c c }
 			\toprule
 			\multicolumn{5}{c}{$[0.04, 0.05]$} \\
 			\midrule
-			&\multicolumn{2}{c}{$Experton$}&\multicolumn{2}{c}{$R^{+}-Experton$} \\
+			&\multicolumn{2}{c}{$Experton$}&\multicolumn{2}{c}{$R^{+}$-Experton} \\
 			\midrule
 			$(S_{0}^{9},0)$			&	0.9	& 1 	& 0.049 & 0.010 \\
 			$(S_{1}^{9},0)$			&	0.9	&	0.9	& 0.049 & 0.050 \\
@@ -252,10 +252,10 @@ De esta forma obtenemos el $R^{+}$-Experton para el ejemplo en la tabla \ref{tab
 			\bottomrule
 		\end{tabular}
 	\caption{Expertón y $R^{+}$-Experton para el intervalo $[0.04, 0.05]$}
-	\label{tab:Experton}
+	\label{tab:rExperton}
 \end{table}
 
-Finalmente obtenemos el intervalo ajustado, calculando la esperanza matemática del expertón. Esto es, sumando todos los valores del expertón en cada extremo del intervalo (excepto el nivel 0), y dividiendo entre el número de elementos.
+Finalmente obtenemos el intervalo ajustado, calculando la esperanza matemática del $R^{+}$-expertón. Esto es, sumando todos los valores del expertón en cada extremo del intervalo (excepto el nivel 0), y dividiendo entre el número de elementos.
 	
 	\[
 	\begin{gathered}

@@ -52,8 +52,10 @@ El proceso de valoración realizado en función de este último criterio debe supon
 
 \subsection{Métodos de análisis mixto}
 El criterio del beneficio capitalizado matizado con el del valor sustancial da lugar a lo que se denominan métodos mixtos, entre los que destacan el método alemán, el método de Schmalenbach y el método anglosajón. El método alemán trata de evitar el inconveniente de la incertidumbre de los datos futuros. Para ello, y debido a la inexistencia de técnicas apropiadas para realizar su tratamiento, se ha optado por reducir el valor capitalizado a la mitad del goodwill tomando como justificación el principio de prudencia valorativa. De esta forma, se tiene que:
-	\[V_{e} = V_{s} + \frac{1}{2}GW = V_{c} - \frac{1}{2}GW = V_{c} - \frac{1}{2}(V_{c}-V_{s}) = \frac{V_{c}-V_{s}}{2}
-\]
+\begin{equation}
+	V_{e} = V_{s} + \frac{1}{2}GW = V_{c} - \frac{1}{2}GW = V_{c} - \frac{1}{2}(V_{c}-V_{s}) = \frac{V_{c}-V_{s}}{2}
+	\label{eq:goodwill}
+\end{equation}
 
 Donde $V_{e}$ es el valor de la empresa, $V_{s}$ es el valor sustancial, $V_{c}$ es el valor capitalizado, y $GW$ el \textit{goodwill} $\left(V_{c}-V_{s}\right)$.
 
@@ -61,17 +63,22 @@ En la expresión anterior se puede observar que este método determina el valor de
 
 Por su parte, el método anglosajón realiza el cálculo añadiendo al valor sustancial el importe total del goodwill. En consecuencia, ambos métodos adolecen de similares limitaciones, ya que varía únicamente el procedimiento de cálculo, mientras que en el método alemán el goodwill se obtiene indirectamente como diferencia entre el valor capitalizado y el valor sustancial; por su parte, el método anglosajón lo obtiene directamente actualizando la diferencia entre los beneficios esperados y los rendimientos normales del valor sustancial, con lo cual, siendo \emph{i} el tipo de interés normal, el valor de la empresa vendrá dado por:
 
-	\[
+\begin{equation}
 	V_{e} = V_{s} + \left(B+iV_{s}\right) \frac{\left(1+i\right)^n - 1}{\left(1+i\right)\cdot i}
-\]
+	\label{eq:goodwill2}
+\end{equation}
 
 La expresión anterior refleja el hecho de que los rendimientos normales en lugar de ser calculados sobre el valor sustancial tienen en cuenta el valor de la empresa, denotando lo que teóricamente pagarán los eventuales compradores.
 
 En caso de que la estimación de beneficios y tipos de interés para los periodos futuros presente distintos valores en cada periodo, el valor de la empresa vendrá determinado por la expresión que se recoge a continuación:
 
-	\[
-	V_{e} = V_{s} + \left(B_{1}-i_{1}V_{}s\right)\left(1+i_{1}\right)^{-1} + \cdots + \left(B_{n}-i_{n}V_{s}\right)\left(1+i_{1}\right)^{-1}\left(1+i_{2}\right)^{-1}\cdots\left(1+i_{n}\right)^{-1}	
-\]
+\begin{equation}
+	\begin{split}
+	V_{e} &= V_{s} + \left(B_{1}-i_{1}V_{}s\right)\left(1+i_{1}\right)^{-1} + \cdots \\
+	& \cdots+ \left(B_{n}-i_{n}V_{s}\right)\left(1+i_{1}\right)^{-1}\left(1+i_{2}\right)^{-1}\cdots\left(1+i_{n}\right)^{-1}	
+	\end{split}
+	\label{eq:analisisMixto}	
+\end{equation}
 
 Sin embargo, el cálculo así efectuado presenta una serie de inconvenientes que es preciso considerar y tratar de evitar para poder establecer una valoración, lo más cercana a la realidad posible.
 
@@ -83,8 +90,9 @@ En los últimos años, con la globalización de los mercados, el paralelo desarroll
 
 En el presente trabajo utilizaremos el método qque en la actualidad tiene mayor aceptación en la comunidad científica y profesional, que no es otro que el modelo de los flujos descontados o \textit{discounted cashflow} por su nombre en inglñés. La conocida expresión general que lo caracteriza es la siguiente:
 
-	\[
+\begin{equation}
 	V_{E} = \sum^{n}_{t=1}\frac{CFL_{t}}{\prod^{t}_{j=1}\left(1+K_{j}\right)^t}
-\]
+	\label{eq:cashflow}	
+\end{equation}
 
 Donde $V_{E}$ representa el valor actual de la empresa, $CFL_{t}$ es el cash-flow libre de la empresa para el periodo $t$, incluyendo el valor residual, $K_{j}$ es la tasa de actualización adecuada y ajustada por riesgo (WACC) para el periodo $j$, y $n$ es el horizonte de valoración. 
