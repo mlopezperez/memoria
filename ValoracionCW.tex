@@ -206,13 +206,49 @@ Con la información representada en 2-tuplas lingüísticas y unificadas en el mism
 	\label{tab:cardinalidadesEtiquetasEstandar}
 \end{table}
 
+Con estas cardinalades podemos calcular los pesos de cada etiqueta, tal y como se define en \ref{def:lamae}.
 
-\begin{comment}
-Fusilar aquí los ejemplos de los artículos
-\begin{itemize}
-	\item Cashflow + mayoría LAMA
-	\item Cashflow + Expertones
-	\item Mixto + Mayoria LAMA
-	\item Mixto + Expertones
-\end{itemize}
-\end{comment}
+Para el extremo del intervalo $[0.04]$:
+\begin{equation*}
+	\begin{gathered}
+	w_1 = \frac{1}{5 \cdot 4 \cdot 3} + \frac{1}{4 \cdot 3} + \frac{1}{3} = 0.433; \\ 
+	w_2 = \frac{1}{5 \cdot 4 \cdot 3} + \frac{1}{4 \cdot 3} + \frac{1}{3} = 0.433; \\
+	w_3 = \frac{1}{5 \cdot 4 \cdot 3} + \frac{1}{4 \cdot 3} + \frac{0}{3} = 0.1; \\ 
+	w_4 = \frac{1}{5 \cdot 4 \cdot 3} + \frac{0}{4 \cdot 3} + \frac{0}{3} = 0.017; \\
+	w_5 = \frac{1}{5 \cdot 4 \cdot 3} + \frac{0}{4 \cdot 3} + \frac{0}{3} = 0.017; 
+	\end{gathered}
+\end{equation*}
+
+Aplicamos el operador $LAMA$:
+\begin{equation*}
+	\begin{split}
+		LAMA = & (S_8, 0) \otimes 0.433 \oplus (S_6, 0) \otimes 0.433 \oplus (S_5, 0) \otimes 0.1 \\
+		& \oplus (S_5, 0.33) \otimes 0.0.17 \oplus (S_0, 0) \otimes 0.017 \\
+		= & (S_7, -0.35)
+	\end{split}
+\end{equation*}
+
+Para el extremo $[0.06]$ del primer intervalo:
+\begin{equation*}
+	\begin{gathered}
+	w_1 = \frac{1}{6 \cdot 2 \cdot 2 \cdot 2 \cdot 2} + \frac{1}{2 \cdot 2 \cdot 2 \cdot 2} 
+				+ \frac{1}{2 \cdot 2 \cdot 2} + \frac{1}{2 \cdot 2} + \frac{1}{2} = 0.947; \\ 
+	w_{2,3,4,5,6} = \frac{1}{6 \cdot 2 \cdot 2 \cdot 2 \cdot 2} + \frac{0}{2 \cdot 2 \cdot 2 \cdot 2} 
+				+ \frac{0}{2 \cdot 2 \cdot 2} + \frac{0}{2 \cdot 2} + \frac{0}{2} = 0.0106; \\
+	\end{gathered}
+\end{equation*}
+
+Aplicando el operador $LAMA$:
+\begin{equation*}
+	\begin{split}
+		LAMA = & (S_8, 0) \otimes 0.947 \oplus (S_7, -0.33) \otimes 0.0106 \oplus (S_7, 0) \otimes 0.0106 \\
+		& \oplus (S_6, 0) \otimes 0.0106 \oplus (S_5, 0) \otimes 0.0106 \oplus (S_1, 0) \otimes 0.0106\\
+		= & (S_8, -0.15)
+	\end{split}
+\end{equation*}
+
+De forma que el intervalo ajustado para dicho periodo será:
+	\[
+	i_1 = [0.04] + (0.01)(\cdot)[0.738, 0.872] = [0.04738, 0.04872]
+\]
+
