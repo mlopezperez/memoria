@@ -33,6 +33,8 @@ A continuación estudiaremos un ejemplo de agregación de información lingüística 
 
 Para analizar el valor de la empresa, el proceso de estimación para los tipos de interés normalmente comienza con un análisis que permite considerar los posibles intervalos en los cuales se espera que la tasa de interés fluctúe durante los periodos considerados en el estudio, de forma que estos sirvan como punto de inicio en la negociación entre las partes que participan en el proceso de valoración.
 
+\subsection{Cálculo de los intereses futuros}
+
 En el ejemplo práctico que proponemos, se ha establecido un periodo de análisis de tres años, para los cuales hemos considerado los siguientes intervalos de tasas de interés:
 \[
 	\left[0.04, 0.05\right],\ \left[0.045, 0.06\right],\ \left[0.05, 0.06\right]
@@ -208,7 +210,7 @@ Con la información representada en 2-tuplas lingüísticas y unificadas en el mism
 
 Con estas cardinalades podemos calcular los pesos de cada etiqueta, tal y como se define en \ref{def:lamae}.
 
-Para el extremo del intervalo $[0.04]$:
+Para el extremo del intervalo $[0,04]$:
 \begin{equation*}
 	\begin{gathered}
 	w_1 = \frac{1}{5 \cdot 4 \cdot 3} + \frac{1}{4 \cdot 3} + \frac{1}{3} = 0.433; \\ 
@@ -223,7 +225,7 @@ Aplicamos el operador $LAMA$:
 \begin{equation*}
 	\begin{split}
 		LAMA = & (S_8, 0) \otimes 0.433 \oplus (S_6, 0) \otimes 0.433 \oplus (S_5, 0) \otimes 0.1 \\
-		& \oplus (S_5, 0.33) \otimes 0.0.17 \oplus (S_0, 0) \otimes 0.017 \\
+		& \oplus (S_5, 0.33) \otimes 0.017 \oplus (S_0, 0) \otimes 0.017 \\
 		= & (S_7, -0.35)
 	\end{split}
 \end{equation*}
@@ -251,4 +253,314 @@ De forma que el intervalo ajustado para dicho periodo será:
 	\[
 	i_1 = [0.04] + (0.01)(\cdot)[0.738, 0.872] = [0.04738, 0.04872]
 \]
+
+De forma análoga calculamos los intervalos ajustados para los periodos 2 y 3. Por brevedad omitiremos los cálculos intermedios.
+
+	\[
+	i_2 = [0.045] + (0.015)(\cdot)[0.6172, 0.8577] = [0.05425, 0.05786]
+\]
+
+	\[
+	i_3 = [0.04] + (0.01)(\cdot)[0.1831, 0.4362] = [0.05183, 0.05436]
+\]
+
+\subsection{Cálculo del beneficio futuro}
+
+Ahora, para continuar con el proceso de valoración, necesitamos establecer los valores en los que tanto compradores como vendedores acuerdan estimar el beneficio futuro de la empresa en los periodos estimados en el proceso. Para ello estableceremos unos intervalos de inicio que servirán de referencia para recabar la opinión de los expertos. Estos intervalos deben ser negociados y establecidos por las partes compradora y vendedora.
+
+En nuestro caso, para los tres periodos a tener en cuenta, hemos establecido los siguientes intervalos:
+\[
+	B_1=[4000, 6000], B_2=[3000, 6000], B_3=[2000, 5000]
+\]
+
+Para estos tres intervalos, el grupo de expertos expresa su opinión usando los conjuntos de términos definidos anteriormente y que podemos ver en la tabla \ref{tab:expertizajeBeneficios}.
+
+\begin{table}[!htb]
+\centering	
+	\begin{tabular}{c | c  | c | c}
+		\toprule
+		Compradores	& $[4000, 6000]$ & $[3000, 6000]$ & $[2000, 5000]$ \\ 
+		\midrule
+		$e_1$	&	$S_2^5 - S_3^5$ & $S_1^5 - S_2^5$ & $S_1^5 - S_2^5$	\\
+		$e_2$	&	$S_2^7 - S_3^7$ & $S_3^7 - S_5^7$ & $S_0^7 - S_3^7$	\\
+		$e_3$	&	$S_5^9$ 				& $S_1^9 - S_2^9$ & $S_0^9 - S_3^9$	\\
+		$e_4$	&	$S_5^9$					& $S_5^9 - S_6^9$ & $S_2^9 - S_4^9$	\\
+		$e_5$	&	$S_1^5 - S_2^5$ & $S_2^5 - S_3^5$ & $S_1^5$					\\
+		\midrule
+		Vendedores	& $[4000, 6000]$ & $[3000, 6000]$ & $[2000, 5000]$ \\ 
+		\midrule
+		$e_1$	&	$S_5^7 - S_6^7$ & $S_3^7 - S_4^7$ & $S_4^7 - S_5^7$	\\
+		$e_2$	&	$S_4^9 - S_6^9$ & $S_7^9 - S_8^9$ & $S_3^9 - S_4^9$	\\
+		$e_3$	&	$S_2^5 - S_3^5$ & $S_3^5$					& $S_1^5 - S_2^5$	\\
+		$e_4$	&	$S_1^5 - S_3^5$ & $S_1^5 - S_2^5$ & $S_1^5 - S_3^5$	\\
+		$e_5$	&	$S_5^9 - S_6^9$ & $S_7^9 - S_8^9$ & $S_6^9 - S_7^9$	\\
+		\bottomrule
+	\end{tabular}
+	\caption{Expertizaje de beneficios futuros}
+	\label{tab:expertizajeBeneficios}
+\end{table}
+
+Que una vez estandarizado al conjunto de términos $S_9$ y expresado con notación 2-tuplas queda reflejado en la tabla \ref{tab:expertizajeBeneficiosEstandar}
+
+\begin{table}[!htb]
+\centering	
+	\begin{tabular}{c | c  | c | c}
+		\toprule
+		Compradores	& $[4000, 6000]$ & $[3000, 6000]$ & $[2000, 5000]$ \\ 
+		\midrule
+		$e_1$	&	$(S_4^9, 0) - (S_6^9, 0)$ 		& $(S_2^9, 0) - (S_4^9, 0)$ 		& $(S_2^9, 0) - (S_4^9, 0)$	\\
+		$e_2$	&	$(S_1^9, 0.33) - (S_4^9, 0)$	& $(S_4^9, 0) - (S_7^9, -0.33)$ & $(S_0^9, 0) - (S_4^9, 0)$	\\
+		$e_3$	&	$(S_5^9, 0)$									& $(S_1^9, 0) - (S_2^9, 0)$			& $(S_0^9, 0) - (S_3^9, 0)$	\\
+		$e_4$	&	$(S_5^9, 0)$									& $(S_5^9, 0) - (S_6^9, 0)$			& $(S_2^9, 0) - (S_4^9, 0)$	\\
+		$e_4$	&	$(S_2^9, 0) - (S_4^9, 0)$			& $(S_4^9, 0) - (S_6^9, 0)$			& $(S_2^9, 0)$							\\	
+		\midrule
+		Vendedores	& $[4000, 6000]$ & $[3000, 6000]$ & $[2000, 5000]$ \\ 
+		\midrule
+		$e_1$	&	$(S_7^9, -0.33) - (S_8^9, 0)$	& $(S_4^9, 0) - (S_5^9, 0.33)$	& $(S_5^9, 0.33) - (S_7^9, -0.33)$	\\
+		$e_2$	&	$(S_4^9, 0) - (S_6^9, 0)$			& $(S_7^9, 0) - (S_8^9, 0)$ 		& $(S_3^9, 0) - (S_4^9, 0)$	\\
+		$e_3$	&	$(S_4^9, 0) - (S_6^9, 0)$			& $(S_6^9, 0)$ 									& $(S_2^9, 0) - (S_4^9, 0)$	\\
+		$e_4$	&	$(S_4^9, 0) - (S_6^9, 0)$			& $(S_2^9, 0) - (S_4^9, 0)$			& $(S_2^9, 0) - (S_6^9, 0)$	\\
+		$e_4$	&	$(S_5^9, 0) - (S_6^9, 0)$			& $(S_7^9, 0) - (S_8^9, 0)$			& $(S_6^9, 0) - (S_7^9, 0)$	\\		
+		\bottomrule
+	\end{tabular}
+	\caption{Expertizaje de beneficios futuros estandizado}
+	\label{tab:expertizajeBeneficiosEstandar}
+\end{table}
+
+Siguiendo la misma metodología que para los tipos de interés, agrupamos y calculamos las cardinalidades, obteniendo las tablas \ref{tab:cardinalidadesBeneficioCompradores} y \ref{tab:cardinalidadesBeneficioVendedores}
+
+\begin{table}[!htb]
+\centering	
+	\begin{tabular}{c | c  c | c c | c c }
+		\toprule
+		Etiqueta	& \multicolumn{2}{c}{$[4000, 6000]$} & \multicolumn{2}{c}{$[3000, 6000]$} & \multicolumn{2}{c}{$[2000, 5000]$} \\ 
+		\midrule
+			$(S_{7}, -0.33)$	& 0		& 0		& 0		& 1		& 0		& 0	\\
+			$(S_{6}, 0)$			& 0		& 1		& 0		& 2		& 0		& 0	\\
+			$(S_{5}, -0.33)$	& 2		& 2		& 1		& 0		& 0		& 0	\\
+			$(S_{6}, 0)$			& 1		& 2		& 2		& 1		& 0		& 3	\\
+			$(S_{3}, 0)$			& 0		& 0		& 0		& 0		& 0		& 1	\\
+			$(S_{2}, 0)$			& 1		& 0		& 1		& 1		& 3		& 1	\\
+			$(S_{1}, 0.33)$		& 1		& 0		& 0		& 0		& 0		& 0	\\
+			$(S_{1}, 0)$			& 0		& 0		& 1		& 0		& 0		& 0	\\
+			$(S_{0}, 0)$			& 0		& 0		& 0		& 0		& 2		& 0	\\			
+		\bottomrule
+	\end{tabular}
+	\caption{Cardinalidades de etiquetas para compradores}
+	\label{tab:cardinalidadesBeneficioCompradores}
+\end{table}
+
+\begin{table}[!htb]
+\centering	
+	\begin{tabular}{c | c  c | c c | c c }
+		\toprule
+		Etiqueta	& \multicolumn{2}{c}{$[4000, 6000]$} & \multicolumn{2}{c}{$[3000, 6000]$} & \multicolumn{2}{c}{$[2000, 5000]$} \\ 
+		\midrule
+			$(S_{8}, 0)$			& 0		& 1		& 0		& 2		& 0		& 0	\\
+			$(S_{7}, 0)$			& 1		& 0		& 2		& 0		& 0		& 1	\\
+			$(S_{7}, -0.33)$	& 0		& 0		& 0		& 0		& 0		& 1	\\
+			$(S_{6}, 0)$			& 0		& 4		& 1		& 1		& 1		& 1	\\
+			$(S_{5}, 0.33)$		& 0		& 0		& 0		& 1		& 1		& 0	\\
+			$(S_{5}, 0)$			& 2		& 0		& 0		& 0		& 0		& 0	\\
+			$(S_{4}, 0)$			& 1		& 0		& 1		& 1		& 0		& 2	\\
+			$(S_{3}, 0.33)$		& 0		& 0		& 0		& 0		& 1		& 0	\\
+			$(S_{2}, 0)$			& 1		& 0		& 1		& 0		& 2		& 0	\\
+		
+		\bottomrule
+	\end{tabular}
+	\caption{Cardinalidades de etiquetas para vendedores}
+	\label{tab:cardinalidadesBeneficioVendedores}
+\end{table}
+
+Con dicha información, calcularemos los intervalos ajustados para el primer periodo para los compradores, utilizando el operador $LAMA$. 
+
+Para el extremo $[4000]$
+\begin{equation*}
+	\begin{gathered}
+	w_1 = \frac{1}{4 \cdot 2} + \frac{1}{2} = 0.625; 
+	w_2 = \frac{1}{4 \cdot 2} + \frac{0}{2} = 0.125; \\
+	w_3 = \frac{1}{4 \cdot 2} + \frac{0}{2} = 0.125;
+	w_4 = \frac{1}{4 \cdot 2} + \frac{0}{2} = 0.125; 	 
+	\end{gathered}
+\end{equation*}
+
+Aplicando el operador $LAMA$:
+\begin{equation*}
+	\begin{split}
+		LAMA = & (S_5, 0) \otimes 0.625 \oplus (S_4, 0) \otimes 0.125 \oplus (S_2, 0) \otimes 0.125 \oplus (S_1, 0.33) \otimes 0.125 \\
+		= & (S_4, 0.04)
+	\end{split}
+\end{equation*}
+
+Para el extremo $[6000]$
+\begin{equation*}
+	\begin{gathered}
+	w_1 = \frac{1}{3 \cdot 3} + \frac{1}{3} = 0.444; 
+	w_2 = \frac{1}{3 \cdot 3} + \frac{1}{3} = 0.444; \\
+	w_3 = \frac{1}{3 \cdot 3} + \frac{0}{3} = 0.112; 	 
+	\end{gathered}
+\end{equation*}
+
+Y aplicando el operador $LAMA$
+
+\begin{equation*}
+	\begin{split}
+		LAMA = & (S_5, 0) \otimes 0.444 \oplus (S_4, 0) \otimes 0.444 \oplus (S_6, 0) \otimes 0.112 \\
+		= & (S_4, -0.34)
+	\end{split}
+\end{equation*}
+
+Por tanto, el intervalo 1 para los compradores queda:
+\[
+	B_1^C = [4000] + (2000)(\cdot)[0.4490, 0.5185] = [4898, 5037]
+\]
+
+Operando del mismo modo para los vendedores, obtenemos:
+
+\[
+	B_1^V = [4000] + (2000)(\cdot)[0.4768, 0.6805] = [4953, 5361] \\
+\]
+
+Y aplicado al resto de intervalos:
+
+\[
+	B_2^C = [3000] + (3000)(\cdot)[0.388, 0.6018] = [4166, 4805] \\
+\]
+\[
+	B_2^V = [3000] + (3000)(\cdot)[0.6527, 0.7688] = [4958, 5306] \\
+\]
+\[
+	B_3^C = [2000] + (3000)(\cdot)[0.1666, 0.4166] = [2499, 3249] \\
+\]
+\[
+	B_3^V = [2000] + (3000)(\cdot)[0.3379, 0.5601] = [3013, 3680] \\
+\]
+
+En una aproximación inicial, para el primer periodo, la opinión agregada de los expertos por parte del comprador establece un valor mínimo de $4898$. Por su parte, los compradores establecen una valoración máxima de $5361$, de modo que un nuevo ajustado será $[4898, 5361]$, en el cual aparecen todas las opiniones expresadas por los expertos.
+
+Por tanto, un punto de encuentro que sirve como base para el proceso de negociación ha sido alcanzado, aunque una nueva evaluación podría ser necesaria para el intervalo obtenido. En este caso, proceder del mismo modo como se ha hecho con los intervalso iniciales permitiría reducir de nuevo la incertidumbre y disminuir la base del intervalo obtenido.
+
+\subsection{Cáculo del valor total}
+Tal y como se especificó en el capítulo dos, en la definición \ref{eq:analisisMixto}, la expresión para obtener el valor total de una empresa es:
+
+\begin{equation*}
+	\begin{split}
+	V_{e} &= V_{s} + \left(B_{1}-i_{1}V_{}s\right)\left(1+i_{1}\right)^{-1} + \cdots \\
+	& \cdots+ \left(B_{n}-i_{n}V_{s}\right)\left(1+i_{1}\right)^{-1}\left(1+i_{2}\right)^{-1}\cdots\left(1+i_{n}\right)^{-1}	
+	\end{split}	
+\end{equation*}
+
+Que usando la siguiente nomenclatura:
+\begin{equation*}
+	\begin{gathered}
+	I_1^{-1} = (1+i_1)^{-1} \\
+	I_2^{-1} = (1+i_1)^{-1} \cdot (1+i_2)^{-1} \\
+	I_n^{-1} = (1+i_1)^{-1} \cdot (1+i_2)^{-1} \cdots (1+i_n)^{-1} \\
+ 	\end{gathered}
+\end{equation*}
+
+Puede ser simplificada como:
+
+\begin{equation}
+	V_e = \frac{V_s + \sum_i^n{B_i\cdot I_i^{-1}}}{1+ \sum_i^n{i_i \cdot I_i^{-1}}}
+	\label{eq:analisisMixtoSimplificado}
+\end{equation}
+
+Para el valor sustancial, o ANR, asumiremos un valor fijo aceptado por ambas partes de 3000 unidades monetarias. Por tanto, la información disponible para el cálculo del valor de la empresa es la siguiente:
+	\[
+	V_s = 3000;
+\]
+	\[
+	i_1 = [0.04738, 0.04872];\ i_2=[0.05425, 0.05786];\ i_3=[0.05183, 0.05436]
+\]
+	\[
+	B_1=[4898, 5361];\ B_2=[4166, 5306];\ B_3=[2499, 3680];
+\]
+
+Con la información de los tipos de interés podemos obtener las tasas de actualización:
+	\[
+	[1(+)i_1]^{-1} = [0.9535, 0.9547];
+\]
+	\[
+	[1(+)i_2]^{-1} = [0.9453, 0.9485];
+\]
+	\[
+	[1(+)i_3]^{-1} = [0.9484, 0.9507];
+\]
+	\[
+	I_1^{-1} = [1(+)i_1]^{-1} = [0.9535, 0.9547];
+\]
+	\[
+	I_2^{-1} = [1(+)i_1]^{-1} \cdot [1(+)i_2]^{-1}  = [0.9013, 0.9055];
+\]
+	\[
+	I_3^{-1} = [1(+)i_1]^{-1} \cdot [1(+)i_2]^{-1} \cdot [1(+)i_3]^{-1} = [0.8547, 0.8608];
+\]
+
+El proceso para obtener las tasas de interés y los beneficios actualizados para cada periodo de análisis se lleva a cabo con los siguientes cálculos:
+	\[
+	B_1(\cdot)I_1^{-1} = [4898, 5361](\cdot)[0.9535, 0.9547] = [4670, 5118]
+\]
+	\[
+	B_2(\cdot)I_2^{-1} = [4166, 5306](\cdot) [0.9013, 0.9055] = [3938, 5032]
+\]
+	\[
+	B_3(\cdot)I_3^{-1} = [2499, 3680](\cdot) [0.8547, 0.8608] = [2135, 3167]
+\]
+	\[
+	i_1(\cdot)I_1^{-1} = [0.04738, 0.04872](\cdot)[0.9535, 0.9547] = [0.04516, 0.04651]
+\]
+	\[
+	i_2(\cdot)I_3^{-1} = [0.05425, 0.05786](\cdot)[0.9013, 0.9055]= [0.05128, 0.05488]
+\]
+	\[
+	i_3(\cdot)I_3^{-1} = [0.05183, 0.05436](\cdot) [0.8547, 0.8608] = [0.04429, 0.04679]
+\]
+
+Por lo que aplicando la definición \ref{eq:analisisMixtoSimplificado}.
+
+	\[
+		V_e = \frac{3000(+)[10743, 13317]}{1(+)[0.1407, 0.1481]} = [12047, 14212]
+\]
+
+El resultado previo permite asegurar que el beneficio nunca será más bajo de $12047$ ni sobrepasará las $14212$ unidades monetarias. La amplitud del intervalo debe ser objeto de negociación entre las partes, aunque si se considera que una incertidumbre de base más baja es necesaria, entonces sería posible recurrir a una nueva evaluación hasta que la incertidumbre se reduzca lo suficiente para permitir la negociación entre compradores y vendedores.
+
+\subsection{Comparativa del método}
+Para comparar la efectividad del proces, se ha decidido utilizar la metodología de los expertones, tal y como se ha presentado en el capítulo 4, utilizando exactamente los mismos datos y expertizajes presentados hasta ahora.
+
+Dado que en el capítulo anterior ya propusimos un ejemplo de como ajustar un intervalo usando expertones, evitaremos reproducir los cálculos y solo mostraremos los resultados obtenidos para la el problema que nos ocupa.
+
+Para los tipos de interés, la esperanza matemática obtenida a partir de los $R^{+}$-expertones de cada periodo es:
+	\[
+	i_1 = [0.04610, 0.4720];\ i_2=[0.05632, 0.05836];\ i_3=[0.05289, 0.05544];
+\]
+
+Para calcular los beneficios futuros operamos de forma similar, obteniendo los $R^{+}$-expertones correspondientes con sus esperanzas matemáticas para cada intervalo. Los resultados obtenidos son:
+	\[
+	B_1^C = [4978, 5288];\ B_1^V = [4978, 5422];
+\]
+	\[
+	B_2^C = [4068, 4688];\ B_2^V = [4734, 5133];
+\]
+	\[
+	B_3^C = [2450, 3275];\ B_3^V = [3140, 3740];
+\]
+
+Con estos valores obtenemos la valoración final de la empresa, tras calcular los tipos de interés y de actualización para cada periodo, quedando así:
+
+	\[
+	V_e = \frac{3000(+)[10515, 13039]}{1(+)[0.1400, 0.1455]} = [11855, 14001];
+\]
+
+Una vez hemos resuelto el problema con ambos métodos, podemos ver que los resultados producidos por el método de la mayoría son comparables, tanto los parciales como el resultado final, a los obtenidos con el método de los expertones, resultado un ligero desplazamiento en el intervalo de valoración final, producido por la aplicación del concepto de mayoría en las valoraciones expresadas por los expertos. Este hecho nos permite establecer que los resultados que el método de la mayoría produce son correctos, dado que están dentro del rango de valores que otros metodos tradicionales producen, como el método de los expertones.
+
+Más información sobre la comparativa de ambos métodos puede encontrarse en \cite{Expertones1}.
+
+
+
+
+
+
+
+
 
