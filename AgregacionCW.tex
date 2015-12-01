@@ -119,12 +119,53 @@ Podemos definir el operador $LAMA^{e}$ como una extensión del operador $LAMA$ pa
 \begin{defi}
 \label{def:lamae}
 Sean $(p_{1}, \alpha_{1}),\ (p_{2},\alpha_{2}),\ldots,\ (p_{n}, \alpha_{n})$ las 2-tuplas a ser agregadas, y sean$ \delta_{1},\ \delta_{2},\ldots\ \delta_{n} \in N$ la frecuencia o cardinalidad de dichas 2-tuplas, donde $\delta_{i} \leq \delta_{i+1}$ para todo $1 \leq i \leq n-1$. El operador $LAMA^{e}$ es la 2-tupla $(p_{m},\alpha_{m})$ dada por:
-\begin{gather*}
-LAMA^{e}((p_{1}, \alpha_{1}),\ (p_{2},\alpha_{2}),\ldots,\ (p_{n}, \alpha_{n})) = \Delta(\Delta^{-1}(p_{1},\alpha{1})\cdot\lambda_{1} \\
-+ \Delta^{-1}(p_{2},\alpha_{2})\cdot\lambda_{2} + \ldots + \lambda^{-1}(p_{n},\alpha_{n})\cdot\lambda_{n})
-\end{gather*}
-donde el valor de cada $\lambda_{i}$ se calcula, como se expuso en el punto anterior para el operador $LAMA$ genérico, a partir de las cardinalidades de cada 2-tupla.	
+
+\begin{equation}
+\begin{split}
+LAMA^{e}((p_{1}, \alpha_{1}),\ (p_{2},\alpha_{2}),\ldots,\ (p_{n}, \alpha_{n})) = \Delta(\Delta^{-1}(p_{1},\alpha{1})\cdot w_{1} \\
++ \Delta^{-1}(p_{2},\alpha_{2})\cdot w_{2} + \ldots + \Delta^{-1}(p_{n},\alpha_{n})\cdot w_{n})
+\end{split}
+\label{eq:lamae}
+\end{equation}
+
+donde el valor de cada $w_{i}$ se calcula a partir de las cardinalidades de cada 2-tupla de la siguiente manera.
+
+Sea $\delta_i$ la cardinalidad de la etiqueta $i$ con $\delta_i>0$, entonces:
+
+\begin{equation}
+\begin{split}
+w_i=  &\frac{\gamma_i^{\delta_{min}}}{\Theta_{\delta_{max}}\cdot\Theta_{\delta_{max}-1}\cdot\dots\cdot\Theta_{\delta_{min}-1}\cdot\Theta_{\delta_{min}}} + 
+\frac{\gamma_i^{\delta_{min}}}{\Theta_{\delta_{max}}\cdot\Theta_{\delta_{max}-1}\cdot\dots\cdot\Theta_{\delta_{min}-1}} + \\ 
+& \cdots +
+\frac{\gamma_i^{\delta_{min}}}{\Theta_{\delta_{max}}\cdot\Theta_{\delta_{max}-1}} +
+\frac{\gamma_i^{\delta_{min}}}{\Theta_{\delta_{max}}}
+\end{split} 
+\label{eq:weights}
+\end{equation}
+
+donde
+\begin{equation}
+	\gamma_i^k = 
+		\begin{cases}
+		1 & if \  \delta_i \geq k \\
+		0 & en\ otro\ caso
+		\end{cases}
+	\label{eq:gammaForWeights}
+\end{equation}
+
+y
+
+\begin{equation}
+	\Theta_i = 
+		\begin{cases}
+			(numero\ de\ etiqueta\ con\ cardinalidad \geq i) + 1 & si\ i \neq \delta_{min} \\
+			(numero\ de\ etiqueta\ con\ cardinalidad \geq i) 		 & en\ otro\ caso
+		\end{cases}	
+\label{eq:thetaForWeights}
+\end{equation}	
 \end{defi}
+
+
 El valor de la cardinalidad de cada 2-tupla puede calcularse usando dos metodologías diferentes:
 \begin{enumerate}
     \item Usando como cardinalidad el número de 2-tuplas que representan la misma información
