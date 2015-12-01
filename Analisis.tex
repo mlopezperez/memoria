@@ -1,15 +1,14 @@
-\chapter{Análisis funcional}
+\chapter{Análisis funcional}	
 
 
 \section{Introducción}
-En el presente capitulo presentamos en detalle el análisis de negocio obtenido tras las tres primeras fases de la metodología DUM, incluyendo los distintos diagramas UML necesarios para representar los casos de uso, estructura de clases, despliegue del sistema, etc.
+En el presente capitulo presentamos en detalle el análisis de negocio para la implementación de la aplicación, incluyendo los distintos diagramas UML necesarios para representar los casos de uso, estructura de clases y relaciones entre estas, despliegue del sistema, etc.
 
-Con este análisis podremos llevar a cabo con éxito la fase de construcción, en la que realizaremos la implementación, obteniendo así una primera versión del producto.
 
 \section{Descripción funcional del sistema}
 Con fines académicos, se pretende implementar un sistema que realice valoraciones de empresas usando computación con palabras. 
 
-Existen varios métodos de valoración de empresas, y todos ellos pueden ser expresados con funciones matemáticas trivialmente computables. El objetivo es facilitar la comparación de resultados entre estos diversos métodos, dados unos datos iniciales.
+Tal como vimos en la primera parte de este trabajo, existen varios métodos de valoración de empresas, y todos ellos pueden ser expresados con funciones matemáticas trivialmente computables. El objetivo es facilitar la comparación de resultados entre estos diversos métodos, dados unos datos iniciales.
 
 El sistema implementará dos de los mencionados métodos de valoración. Estos son:
 \begin{itemize}
@@ -19,9 +18,9 @@ El sistema implementará dos de los mencionados métodos de valoración. Estos son:
 
 El usuario proveerá los datos de entrada de dichos métodos, y el sistema, tras procesarlos, devolverá el intervalo de valores resultante. Como la utilidad principal del sistema es el estudio comparativo, se dará la posibilidad de aplicar ambos métodos simultaneamente, mostrando los resultados de ambos al usuario, y remarcando el resultado más óptimo, que en valoración de empresas corresponderá al intervalo de menor amplitud.
 
-Dado que hablamos de un sistema que utilizará computación con palabras, los datos de entrada a los métodos de valoración no serán solo información cuantitativa o numérica, si no que además deberemos proveer al usuario de una interfaz que le permita introducir información cuantitativa o lingüística, es decir, en lenguaje natural, acerca de los datos de entrada. Esta información normalmente serán opiniones de distintos expertos sobre los datos de entrada. Este conjunto de opiniones lo que llamaremos \emph{expertizaje}.
+Dado que hablamos de un sistema que utilizará computación con palabras, los datos de entrada a los métodos de valoración no serán solo información cuantitativa o numérica, si no que además deberemos proveer al usuario de una interfaz que le permita introducir información cuantitativa o lingüística, es decir, en lenguaje natural, acerca de los datos de entrada. Esta información normalmente serán opiniones de distintos expertos sobre los datos de entrada. Este conjunto de opiniones es lo que llamaremos \emph{expertizaje}.
 
-Esta interfaz de expertizaje ofrecerá distintos términos lingüísticos definidos en una jerarquía lingüística para evaluar cada dado cuantitativo. El sistema tendrá definida por defecto una jerarquía lingüísitica con varios niveles de granularidad, pero se ofrecerá al usuario la posibilidad de definir sus propias jerarquías, ya sea manualmente utilizando la interfaz gráfica provista por el sistema, o bien a partir de un archivo XML, conforme a un esquema XSD, que defina una jerarquía y que el usuario podrá importar al sistema.
+Esta interfaz de expertizaje ofrecerá distintos términos lingüísticos definidos en una jerarquía lingüística para evaluar cada dato cuantitativo. El sistema tendrá definida por defecto una jerarquía lingüísitica con varios niveles de granularidad, pero se ofrecerá al usuario la posibilidad de definir sus propias jerarquías, ya sea manualmente utilizando la interfaz gráfica provista por el sistema, o bien importando los datos a través de un archivo de texto con formato JSON.
 
 Por tanto, el módo básico de funcionamiento del sistema, de forma que nos permita valorar una empresa utilizando información lingüística, se compondrá de los siguientes pasos:
 
@@ -29,39 +28,14 @@ Por tanto, el módo básico de funcionamiento del sistema, de forma que nos permit
 	\item Definición de la jerarquía lingüística, si no se va a utilizar la definida por defecto.	
 	\item Selección del método (o métodos) a utilizar.
 	\item Introducción de los datos numéricos de entrada.
-	\item Selección de la jerarquía a utilizar en el expertizaje. 	
 	\item Introducción del expertizaje.
 	\item Procesado y retorno de resultados.
 \end{itemize}
 
-A este proceso de funcionamiento para valorar una sola empresa, con un solo expertizaje lo llamaremos \emph{Modo Simple}.
-
-Ahora bien, como hemos mencionado anteriormente, el objetivo del sistema es facilitar un estudio comparativo entre los distintos métodos de valoración de empresas utilizando computación con palabras. Dado que para obtener resultados útiles necesitamos hacer multitud de pruebas, no resulta eficiente la introducción de datos manual, ni el ejecutar las valoraciones una a una. 
-
-Definiremos por tanto un segundo modo de funcionamiento del sistema al que llamaremos \emph{Modo Batch} o de procesamiento por lotes.
-
-Este modo de funcionamiento por lotes permitirá importar al sistema un único archivo XML que defina en primer lugar la jerarquía lingüística que se utilizará. El archivo contendrá después distintos datos de entrada para cada parámetro de cada método, y a su vez cada parámetro podrá incluir diversos expertizajes. Este archivo será procesado por el sistema que mostrará los resultados de las distintas valoraciones con sus distintos expertizajes. 
-
-El archivo XML de entrada se ajustará a un esquema XSD predefinido en el sistema, por lo que no se aceptarán archivos XML con formato incorrecto. Además, cualquier usuario podrá crear sus propios archivos de entrada a partir de dicho esquema XSD e implementar su propia batería de pruebas. 
-
-La automatización total en el modo \emph{Batch} resultará de la automatización por separado de los diversos componentes del sistema. 
-
-Ya hemos hablado de la funcionalidad que permite la introducción de una jerarquía lingüística a partir de un XML. La definición de la jerarquía será el único punto del sistema donde no permitiremos multiplicidad. Es decir, solo podremos utilizar una jerarquía linguística a la vez. Esto tiene sentido si queremos que los datos obtenidos sean coherentes, dado que si realizamos los distintos expertizajes con distintas jerarquías no obtendremos información fiable en el proceso de agregación de información lingüística al no poder usar un único conjunto de términos como referecia.
-
-Cuando trabajemos en ``Modo Simple'' el resto de pasos del proceso, además de la definición de la jerarquía, permitirán también la introducción de datos desde archivos XML. Será necesario por tanto definir los esquemas XSD para los archivos XML de datos cuantitativos y para los XML de expertizajes. El resultado de unir estos esquemas dará el esquema XSD del archivo ``Batch'' para pruebas.
-
-La principal diferencia residirá en que si estamos trabajando en ``Modo Simple'', solo procesaremos un caso de cada XML cada vez. Es decir, aunque introduzcamos un XML de información cuantitativa con diez conjuntos de datos, solo procesaremos el primero, y solo se pedirá el expertizaje para dicho conjunto de datos. En caso de que el XML de expertizajes contenga varios expertizajes, se elegirá solo el primero, y por tanto finalmente solo obtendremos una única valoración.
-
-Podemos expresar la funcionalidad del sistema con el siguiente diagrama de casos de uso:
-
-DIAGRAMA AQUÍ
-
 \section{Definición de la jerarquía lingüística}
 El sistema vendrá con una jerarquía lingüística predefinida, compuesta por tres niveles de granularidades 5, 7 y 9 respectivamente.
 
-La jerarquía se mostrará al usuario en un control visual tipo ``Vista de arbol'', que permitirá añadir o eliminar niveles de la jerarquía, así como editar el término en lenguaje natural asociado a cada etiqueta lingüística. 
-
-No se permitirá añadir o eliminar etiquetas de un nivel de jerarquía, debido a que el orden de los niveles dentro de la jerarquía depende de la granularidad de dicho nivel, y por tanto solo permitiremos añadir o borrar niveles completos con una granularidad fija.
+La jerarquía se mostrará al usuario en un control visual tipo lista, que permitirá añadir o eliminar niveles de la jerarquía, con una lista paralela conteniendo los términos de cada nivel. La interfaz permitirá editar los terminos en lenguaje natural de cada nivel, así como el mismo nombre del nivel.
 
 Veamos a continuación los distintos elementos que componen una jerarquía lingüística para determinar la funcionalidad necesaria a cada nivel de jerarquía. 
 
@@ -72,20 +46,23 @@ Será el elemento de mayor nivel que contendrá los distintos conjuntos de etiquet
 	\item La cardinalidad del nivel $t+1$ será $2*n(t) - 1$, donde $n(t)$ es la cardinalidad del nivel $t$. Por tanto al insertar un nuevo nivel se calculará automáticamente su cardinalidad.
 \end{itemize}
 
-Como hemos mencionado, una jerarquía se mostrará al usuario en forma de ``Vista de arbol'', con un nivel raiz que contiene el nombre de la jerarquía, y del que colgarán los demás niveles. Dentro de cada nivel aparecerán tantos nodos ``hoja'' como etiquetas lingüística tenga dicho nivel.
-
 Implementaremos los métodos necesarios para añadir y eliminar niveles de una jerarquía. Así mismo, se implementará la función de transformación que permitirá trasladar información lingüística expresada con el modelo de 2-tuplas de un nivel a otro.
 
-\subsubsection{Conjunto de etiquetas}
-Cada nivel de la jerarquía lingüística será un conjunto de etiquetas cuya cardinalidad viene dada por su posición dentro de la jerarquía, tal como explicamos en el punto anterior. Cada conjunto de etiquetas estará ordenado según los índices de las etiquetas que lo forman, y estará, además, caracterizado por su orden o nivel dentro de la jerarquía, que se expresará con un número natural.
+\subsubsection{Conjunto de términos}
+Cada nivel de la jerarquía lingüística será un conjunto de términos cuya cardinalidad viene dada por su posición dentro de la jerarquía, tal como explicamos en el punto anterior. Cada conjunto de términos estará ordenado según los índices de las términos que lo forman.
 
-\subsubsection{Etiqueta lingüística}
-Cada etiqueta vendrá definida por dos índices, ambos números naturales. El primero indicará su orden dentro del conjunto, e irá de 0 para el elemento menor hasta $n-1$ para el mayor del conjunto, donde $n$ es la cardinalidad del conjunto. El segundo indicará el conjunto o nivel de la jerarquía al que pertenecen. Cada etiqueta vendrá además caracterizada por una cadena de texto que contendrá el término en lenguaje natural que representa. 
+\subsubsection{Término}
+Cada término perteneciente a un conjunto vendrá caracterizado por una cadena de texto que contendrá el término en lenguaje natural que representa, así como una referencia al conjunto de términos al que pertenece.  
 
 Implementaremos propiedades para acceder a éstas características, así como una función que nos permita expresar una etiqueta en el modelo de 2-tuplas, siempre y cuando dicha etiqueta pertenezca a un conjunto o una jerarquía.
 
 \subsubsection{2-Tupla}
-Como vimos en capítulos anteriores, una 2-tupla consta de una etiqueta lingüística y un número real en el intervalo $[-0'5, 0,5]$. El sistema deberá definir internamente la representación en 2-tuplas, con sus funciones y operaciones correspondientes, ya que este será el sistema para tratar computacionalmente la información cualitativa. Implementaremos las funciones $\Delta$, $\Delta^{-1}$ y $\theta$ definidas en el capítulo N. 
+Como vimos en capítulos anteriores, una 2-tupla consta de una etiqueta lingüística y un número real en el intervalo $[-0'5, 0,5]$. El sistema deberá definir internamente la representación en 2-tuplas, con sus funciones y operaciones correspondientes, ya que este será el sistema para tratar computacionalmente la información cualitativa. Implementaremos las funciones $\Delta$ y $\Delta^{-1}$ definidas en el capítulo 3. 
+
+\subsection{Expertizaje}
+Un expertizaje viene dado por el intervalo de valores sobre el que estamos pidiendo opinión, la jerarquía lingüística usada, y 2-tuplas asignadas por cada experto con sus correspondientes cardinalidades para cada extremo del intervalo evaluado. 
+
+Dado que un expertizaje no tiene porqué estar estandarizado de antemano, añadiremos también una referencia al conjunto de términos que usaremos para estandarizar los valores.
 
 \section{Arquitectura del sistema}
 

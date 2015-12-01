@@ -525,8 +525,8 @@ Por lo que aplicando la definición \ref{eq:analisisMixtoSimplificado}.
 
 El resultado previo permite asegurar que el beneficio nunca será más bajo de $12047$ ni sobrepasará las $14212$ unidades monetarias. La amplitud del intervalo debe ser objeto de negociación entre las partes, aunque si se considera que una incertidumbre de base más baja es necesaria, entonces sería posible recurrir a una nueva evaluación hasta que la incertidumbre se reduzca lo suficiente para permitir la negociación entre compradores y vendedores.
 
-\subsection{Comparativa del método}
-Para comparar la efectividad del proces, se ha decidido utilizar la metodología de los expertones, tal y como se ha presentado en el capítulo 4, utilizando exactamente los mismos datos y expertizajes presentados hasta ahora.
+\section{Comparativa del método}
+Para comparar la efectividad del proceso, se ha decidido utilizar la metodología de los expertones, tal y como se ha presentado en el capítulo 4, utilizando exactamente los mismos datos y expertizajes presentados hasta ahora.
 
 Dado que en el capítulo anterior ya propusimos un ejemplo de como ajustar un intervalo usando expertones, evitaremos reproducir los cálculos y solo mostraremos los resultados obtenidos para la el problema que nos ocupa.
 
@@ -554,13 +554,19 @@ Con estos valores obtenemos la valoración final de la empresa, tras calcular los
 
 Una vez hemos resuelto el problema con ambos métodos, podemos ver que los resultados producidos por el método de la mayoría son comparables, tanto los parciales como el resultado final, a los obtenidos con el método de los expertones, resultado un ligero desplazamiento en el intervalo de valoración final, producido por la aplicación del concepto de mayoría en las valoraciones expresadas por los expertos. Este hecho nos permite establecer que los resultados que el método de la mayoría produce son correctos, dado que están dentro del rango de valores que otros metodos tradicionales producen, como el método de los expertones.
 
-Más información sobre la comparativa de ambos métodos puede encontrarse en \cite{Expertones1}.
+Más información sobre la comparativa de ambos métodos puede encontrarse en el artículo \textit{"`A system based on the concept of Linguistic Majority for the companies valuation"'} de J.I. Peláez y J.M. Doña.\cite{Expertones1}.
+
+\section{Aplicación a otros métodos de valoración}
+Hemos visto hasta ahora como agregar información lingüística a un proceso de valoración de empresas utilizando el método del análisis mixto, usando el operador $LAMA$ y comparando los resultados obtenidos con el método de los expertones.
+
+Esta misma metodología mostrada se puede aplicar fácilmente al método de valoración con flujos descontados (o método del \emph{cashflow}). 
+
+Dada la similitud del proceso y para evitar redundancias, consistente en recabar el expertizaje correspondiente, estandarizar los valores a un único domino de expresión y ajustar los intervalos tanto para el cashflow esperado como para las tasas de ajuste WACC, para finalmente aplicar la expresión matemática \ref{eq:cashflow} presentada en el capítulo 2, no incluiremos un ejemplo de aplicación con dicho método de valoración en el presente trabajo, pudiendo encontrarse un ejemplo de dicha aplicación en el artículo \emph{Toma de Decisión Fuzzy en Entornos Empresariales: El Concepto de Mayoría}\cite{cashflowBolsa}
 
 
+\section{Resumen}
+En el presente capítulo hemos estudiado un ejemplo de como aplicar el concepto de mayoría lingüística al proceso de valoración de una empresa utilizando el operador $LAMA$ y el método de los expertones. Así mismo hemos estudiado brevemente la diferencia de resultados entre ambos métodos y hemos hecho una breve introducción a como usar la misma metodología con el método de valoración del \emph{cashflow}.
 
+Con este capítulo damos por terminada la segunda parte de este trabajo, en la que hemos introducido los conceptos teóricos a implementar en la segunda parte. 
 
-
-
-
-
-
+En la tercera parte del trabajo veremos como, aplicando los principios de la ingeniería del software, diseñar una aplicación informática que haga uso de estos conceptos teóricos y que facilite la introducción de datos, tanto numéricos como cualitativos, facilitando al usuario una herramienta rápida y eficaz que le permita comparar los resultados obtenidos en el proceso de valoración, con y sin información cualitativa.
