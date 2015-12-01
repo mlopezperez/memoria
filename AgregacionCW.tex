@@ -106,8 +106,8 @@ con
 		\begin{cases}
 			1																																					&	\text{si } i=1, n=1	\\
 			n^{\delta_{2}}																														&	\text{si } i=1, n=2 \\
-			n^{\delta_{2}} \cdot \prod^{n-2}_{j=1}{(n-j)^{\delta_{j+1}-\delta_{j+1}}}	& \text{si } i=1, n>2 \\
-			\prod^{n-2}_{j=i-1}{(n-j)^{\delta_{j+1}-\delta_{j+1}}}										& \text{si } i>1
+			n^{\delta_{2}} \cdot \prod\limits^{n-2}_{j=1}{(n-j)^{\delta_{j+1}-\delta_{j+1}}}	& \text{si } i=1, n>2 \\
+			\prod\limits^{n-2}_{j=i-1}{(n-j)^{\delta_{j+1}-\delta_{j+1}}}										& \text{si } i>1
 		\end{cases}
 	\end{align*}
 y donde $\oplus$ es la suma de etiquetas y $\otimes$ es el producto de una etiqueta por un real positivo.
@@ -128,7 +128,9 @@ LAMA^{e}((p_{1}, \alpha_{1}),\ (p_{2},\alpha_{2}),\ldots,\ (p_{n}, \alpha_{n})) 
 \label{eq:lamae}
 \end{equation}
 
-donde el valor de cada $w_{i}$ se calcula a partir de las cardinalidades de cada 2-tupla de la siguiente manera.
+donde $w_i\in[0,1]$ y $\sum\limits_{i=1}^{n}{w_i} = 1$.
+
+El valor de cada peso $w_{i}$ se calcula a partir de las cardinalidades de cada 2-tupla de la siguiente manera.
 
 Sea $\delta_i$ la cardinalidad de la etiqueta $i$ con $\delta_i>0$, entonces:
 
