@@ -15,9 +15,11 @@
 \newtheorem{defi}{Definición}[chapter]
 
 % Make a pagestyle called 'myplain', if 'plain' has already been redefined
-\makepagestyle{plain} 
-\makeevenfoot{plain}{}{\thepage}{} 
-\makeoddfoot{plain}{}{\thepage}{}
+\makeevenhead{headings}{}{}{\slshape\leftmark}
+\makeoddhead{headings}{\slshape\rightmark}{}{}
+\makeevenfoot{headings}{}{\thepage}{} 
+\makeoddfoot{headings}{}{\thepage}{}
+
 
 \renewcommand{\baselinestretch}{1.5}
 
@@ -25,7 +27,7 @@
 \author{Manuel López Pérez}
 
 \begin{document}
-\pagestyle{plain}
+%\pagestyle{plain}
 \spanishdecimal{,}
 \def\tablename{Tabla}
 \setlength{\parskip}{1.5ex plus 0.5ex minus 0.2ex}
@@ -54,6 +56,7 @@
 
 \part {Diseño e implementación}
 \input{Analisis}
+\input{Diseno}
 
 %\part{Estudio de resultados}
 %\chapter{Comparativa de modelos}
