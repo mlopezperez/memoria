@@ -1,0 +1,80 @@
+\section{Requisitos funcionales}
+Definimos a continuación la lista de requisitos funcionales de la aplicación, obtenida de la descripción en la sección anterior.
+
+Para definir estos requisitos usaremos la convención "`Dado..."' [Condición] "`Cuando..."' [Acción] "`Entonces..."' [Resultado].
+
+Aunque deberíamos definir formalmente los requisitos relativos al aspecto de la interfaz de usuario, dado que esta ha sido descrita en la sección anterior, incluyendo diversos prototipos, evitaremos incluir ese tipo de requisitos en la presente lista, centrándonos en definir el comportamiento de cada componente y pantalla. 
+
+\subsection{Requisitos de la vista de jerarquías}
+
+\begin{itemize}
+
+\item
+Cuando se inicie la aplicación, entonces la ventana principal se muestra y la pestaña "`Jerarquías"' aparece seleccionada por defecto, mostrando su correspondiente contenido.
+
+\item
+Cuando se inicie la aplicación, entonces la vista de jerarquías contendrá una jerarquía por defecto con tres niveles, de cardinalidad 5, 7 y 9.
+
+\item
+Dado una cadena de texto introducida en el cuadro de texto de nombre de jerarquía, cuando el usuario hace click en el botón "`añadir"', entonces una nueva jerarquía con el nombre definido y un conjunto de términos vacío aparece en el último lugar de la lista. 
+
+\item
+Cuando ningún nivel está seleccionado en la lista de niveles de jerarquía, entonces la lista de términos aparece vacía, el cuadro de texto de nombre de término aparece vacío y desactivado, y los botones "`añadir"', "`arriba"', "`abajo"' y "`borrar"' de la lista de términos aparecen desactivados.
+
+\item
+Cuando el usuario hace click en alguno de los elementos de la lista de niveles de jerarquía, entonces el nivel aparece seleccionado en la lista de niveles y el conjunto de términos de dicho nivel aparece en la lista de términos.
+
+\item
+Cuando el usuario hace click en alguno de los elementos de la lista de niveles de jerarquía, entonces el nombre de dicho nivel aparece en el cuadro de texto de nombre de jerarquía y el botón "`Añadir"' cambia su etiqueta a "`Actualizar"'. 
+
+\item
+Cuando el usuario cambia el nombre de uno de los niveles existentes haciendo uso del cuadro de texto de nombre de jerarquia y después hace click en el botón actualizar, entonces el nombre del nivel de la jerarquía se actualiza en la lista de niveles.
+
+\item
+Dada una jerarquía y el primer nivel de dicha jerarquía seleccionado en la lista de niveles, cuando el usuario hace click en el botón "`arriba"', entonces el orden de la lista se mantiene igual.
+
+\item
+Dada una jerarquía y un nivel de dicha jerarquía distinto del primero seleccionado en la lista de niveles, cuando el usuario hace click en el botón "`arriba"', entonces el orden de la lista cambia, de forma que el nivel seleccionado pase a la posición inmediatamente superior. 
+
+\item
+Dada una jerarquía y el último nivel de dicha jerarquía seleccionado en la lista de niveles, cuando el usuario hace click en el botón "`abajo"', entonces el orden de la lista se mantiene igual.
+
+\item
+Dada una jerarquía y un nivel de dicha jerarquía distinto del último seleccionado en la lista de niveles, cuando el usuario hace click en el botón "`abajo"', entonces el orden de la lista cambia, de forma que el nivel seleccionado pase a la posición inmediatamente inferior.
+
+\item
+Dada una jerarquía y un nivel de dicha jerarquía seleccionado en la lista de niveles, cuando el usuario hace click en el botón "`borrar"', entonces el nivel es completamente eliminado, dejando de aparecer en la lista de niveles, el nivel inmediatamente inferior es automáticamente seleccionado, y la lista de términos es actualizada para mostrar los términos correspondientes a dicho nivel inferior.
+
+\item
+Dado una cadena de texto introducida en el cuadro de texto de nombre de término, cuando el usuario hace click en el botón "`añadir"', entonces un nuevo término con el nombre definido en el último lugar de la lista. 
+
+\item
+Cuando el usuario hace click en alguno de los elementos de la lista de términos, entonces el nombre de dicho término aparece en el cuadro de texto de nombre de término y el botón "`Añadir"' cambia su etiqueta a "`Actualizar"'. 
+
+\item
+Cuando el usuario cambia el nombre de uno de los términos y después hace click en el botón actualizar, entonces el nombre del término se actualiza en la lista de términos.
+
+\item
+Dado un nivel seleccionado en la lista de niveles, y el primer término de dicho nivel seleccionado en la lista de términos, cuando el usuario hace click en el botón "`arriba"' de la lista de niveles, entonces el orden de la lista se mantiene igual.
+
+\item
+Dado un nivel seleccionado en la lista de niveles, y cualquier término distinto del primero seleccionado en la lista de términos, cuando el usuario hace click en el botón "`arriba"', entonces el orden de la lista cambia, de forma que el término seleccionado pase a la posición inmediatamente superior. 
+
+\item
+Dada un nivel seleccionado en la lista de niveles, y el último término de dicho nivel seleccionado en la lista de términos, cuando el usuario hace click en el botón "`abajo"' de la lista de términos, entonces el orden de la lista se mantiene igual.
+
+\item
+Dado un nivel seleccionado en la lista de niveles, y cualquier término distinto del último seleccionado en la lista de términos, cuando el usuario hace click en el botón "`abajo"' de la lsita de términos, entonces el orden de la lista cambia, de forma que el término seleccionado pase a la posición inmediatamente inferior. 
+
+\item
+Dado un nivel seleccionado en la lista de niveles, y cualquier término seleccionado en la lista de términos, cuando el usuario hace click en el botón "`borrar"' de la lista de términos, entonces el término es eliminado de la lista de términos. 
+
+\item
+Cuando el usuario interactue creando, borrando o reordenando términos o niveles, entonces una validación se lleva a cabo, comprobando que las cardinalidades de cada nivel corresponden con el orden de los niveles definidos, de menor a mayor.
+
+\item 
+Cuando la validación anteriormente mencionada falla, entonces un mensaje de advertencia se mostrará al usuario bajo las listas de niveles y términos, y el resto de pestañas de la aplicación será desactivado, impidiendo cualquier interacción hasta que el error sea solventado.
+
+\end{itemize}
+
+\subsection{Requisitos de la vista de cashflow}

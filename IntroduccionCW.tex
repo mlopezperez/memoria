@@ -40,7 +40,7 @@ A(x) =
 
 Vemos que existe una restricción $A(x):X\rightarrow{0,1}$.
 
-Pero, ¿qué ocurre cuando la relación de pertenencia no tiene unos límites claros y definidos? Si tomamos como ejemplo la temperatura, ¿en qué punto podemos considerar que una temperatura de 30 grados pertenece al conjunto "`temperatura alta"'? En este caso podemos definir "`grados"' de pertenencia, "`relajando"' la restricción de pertenencia, aceptando valores en el intervalo contínuo $\left[0,1\right]$.
+Pero, ¿qué ocurre cuando la relación de pertenencia no tiene unos límites claros y definidos? Si tomamos como ejemplo la temperatura, ¿en qué punto podemos considerar que una temperatura de 30 grados pertenece al conjunto "`temperatura alta"'? En este caso podemos definir "`grados"' de pertenencia, "`relajando"' la restricción de pertenencia, aceptando valores en el intervalo continuo $\left[0,1\right]$.
 
 \begin{defi}
 Un conjunto borroso $A$ se define como una \textbf{Función de Pertenencia} que enlaza o empareja los elementos de un dominio o \emph{Universo de discurso} $X$ con elementos del intervalo $\left[0,1\right]$, esto es, una función $A:X\rightarrow\left[0,1\right]$
@@ -74,9 +74,9 @@ Se define la función de pertenencia triangular $A:X\rightarrow\left[0,1\right]$ 
 
 Como su propio nombre indica, la computación con palabras (abreviada como \emph{CW} por su nombre en inglés, \emph{Computing with Words}) es una metodología en la cual se utilizan palabras en lugar de números para computar y razonar.
 
-En su sentido tradicional, la computación implica, en su mayor parte, la manipulación de números y simbolos. Por el contrario, los humanos emplean generalmente palabras para "`computar"' y razonar, llegando a conclusiones, expresadas en palabras, a partir de premisas expresadas en lenguaje natural o en forma de percepciones. Estas palabras utilizadas en lenguaje natural tienen connotaciones "`difusas"', en el sentido de que no expresan verdades absolutas y están sujetas a interpretación. Esto mismo se aplica al papel que juegan las palabras en la CW. 
+En su sentido tradicional, la computación implica, en su mayor parte, la manipulación de números y símbolos. Por el contrario, los humanos emplean generalmente palabras para "`computar"' y razonar, llegando a conclusiones, expresadas en palabras, a partir de premisas expresadas en lenguaje natural o en forma de percepciones. Estas palabras utilizadas en lenguaje natural tienen connotaciones "`difusas"', en el sentido de que no expresan verdades absolutas y están sujetas a interpretación. Esto mismo se aplica al papel que juegan las palabras en la CW. 
 
-Igual que la lógica difusa, la computación con palabras se basa también en los trabajos de Lotfi A. Zadeh, exponiendo expone los principios en vários artículos, como por ejemplo \emph{Outline of a new approach to the analysis of complex systems and decision processes}\cite{AnalysisZadeh} y \emph{PRUF--A Meaning Representation Language for Natural Languages}\cite{PRUFZadeh}, y además relacionandolo con los conceptos de la lógica difusa en el artículo \emph{Fuzzy Logic = Computing with words}\cite{CWZadeh}.
+Igual que la lógica difusa, la computación con palabras se basa también en los trabajos de Lotfi A. Zadeh, exponiendo expone los principios en varios artículos, como por ejemplo \emph{Outline of a new approach to the analysis of complex systems and decision processes}\cite{AnalysisZadeh} y \emph{PRUF--A Meaning Representation Language for Natural Languages}\cite{PRUFZadeh}, y además relacionándolo con los conceptos de la lógica difusa en el artículo \emph{Fuzzy Logic = Computing with words}\cite{CWZadeh}.
 
 \subsection{Etiquetas lingüísticas}
 
@@ -103,7 +103,7 @@ En la figura \ref{fig:Etiquetas1} se muestran tres escalas distintas que nos per
 \subsection{Representación con 2-tuplas}
 Este modelo de representación de información lingüística denominado \emph{2-tuplas} fue introducido por Francisco Herrera y Luis Martínez en su artículo \emph{A 2-tuple fuzzy linguistic representation model for computing with words}\cite{tuplasHerrera}. Está basado en el modelo simbólico y toma como base el concepto de \emph{Traducción Simbólica}. La información se representa mediante una 2-tupla $(p,\alpha)$, donde $p$ es un término lingüístico y $\alpha$ es un valor numérico que apoya al valor de la traducción simbólica.
 
-El primer paso para la representación del información linguistica es generar un conjunto de términos lingüísticos que podamos usar para expresar información. Una opción para generar este conjunto es suministrar una gramática de contexto libre. En cualquier caso, este enfoque implica establecer previamente los conjuntos borrosos asociados con cáda término, y las reglas semánticas que los modifican, y esto no es tarea sencilla. 
+El primer paso para la representación del información lingüística es generar un conjunto de términos lingüísticos que podamos usar para expresar información. Una opción para generar este conjunto es suministrar una gramática de contexto libre. En cualquier caso, este enfoque implica establecer previamente los conjuntos borrosos asociados con cada término, y las reglas semánticas que los modifican, y esto no es tarea sencilla. 
 
 Otra alternativa consiste en proveer directamente el conjunto de términos en el que consideramos todos los términos distribuidos en una escala y sobre el cual se define un orden total. Por ejemplo, un conjunto $P$ de siete términos podría darse así:
 
@@ -190,7 +190,7 @@ De acuerdo con lo anterior, la representación mediante 2-tuplas lingüísticas pre
 
 \subsection{Operaciones con 2-tuplas}
 
-Meter aqui los operadores $\oplus$ y $\otimes$
+Meter aquí los operadores $\oplus$ y $\otimes$
 
 \section{Jerarquías lingüísticas}
 El modelo de 2-tuplas parte de contextos lingüísticos con diferentes granularidades, denominados jerarquías lingüísticas, las cuales cumplen una serie de reglas y condiciones que permiten unificar la información en un único domino de expresión sin pérdida de información. Las jerarquías lingüísticas están compuestas por un conjunto de niveles, donde cada nivel es un conjunto de términos lingüísticos con distinta granularidad al resto de niveles de su jerarquía. Cada nivel de una jerarquía se puede escribir como: $$L(t,n(t))$$ donde $t$ es el número que indica el nivel de la jerarquía y $n(t)$ la granularidad del conjunto lingüístico del nivel $t$.
@@ -204,27 +204,27 @@ De acuerdo con lo anterior se puede definir una jerarquía lingüística $(LH)$ com
 	\label{eq:jerarquiaLinguistica}
 \end{equation}
 
-Para analizar la construccion de una jerarquia linguistica, teniendo en cuenta que su orden jerarquico viene dado por el incremento de la granularidad de los conjuntos de terminos linguisticos en cada nivel, se parte de un conjunto de etiquetas S sobre el dominio U en el nivel t, tal:
+Para analizar la construcción de una jerarquía lingüística, teniendo en cuenta que su orden jerárquico viene dado por el incremento de la granularidad de los conjuntos de términos lingüísticos en cada nivel, se parte de un conjunto de etiquetas S sobre el dominio U en el nivel t, tal:
 \begin{equation}
 \label{eq:nivelJerarquia}
 S=\{s_{0},s_{1}\ldots,s_{n(t)-1}\}
 \end{equation}
 
-Siendo $s_{k}$ los terminos linguisticos del conjunto $S$ con $k = 0,\ldots, n(t)$.
+Siendo $s_{k}$ los términos lingüísticos del conjunto $S$ con $k = 0,\ldots, n(t)$.
 
-Para construir una jerarquia linguistica se puede extender la definicion de $S$, permitiendo la existencia de varios conjuntos de terminos linguisticos, cada uno con una granularidad distinta en cada nivel. Para ello se introduce el parametro $n(t)$ en la definicion de un conjunto de etiquetas, que representa la granularidad del conjunto del nivel $t$ donde está definido:
+Para construir una jerarquía lingüística se puede extender la definición de $S$, permitiendo la existencia de varios conjuntos de términos lingüísticos, cada uno con una granularidad distinta en cada nivel. Para ello se introduce el parámetro $n(t)$ en la definición de un conjunto de etiquetas, que representa la granularidad del conjunto del nivel $t$ donde está definido:
 \begin{equation}
 	S^{n(t)} = \{s_{0}^{n(t)},\ldots, s^{n(t)}_{n(t)-1}\}
 \label{eq:conjuntoJerarquia}
 \end{equation}
  
-En general, cabe admitir que el conjunto de terminos del nivel $t+1$ se obtiene de su predecesor como sigue:
+En general, cabe admitir que el conjunto de términos del nivel $t+1$ se obtiene de su predecesor como sigue:
 \begin{equation}
 	L(t,\ n(t)) \rightarrow L(t+1,\ 2\cdot n (t)-1)
 \label{eq:nivelesJerarquia}
 \end{equation}
 
-Asimismo, existe una funcion que permite trasladar informacion linguistica de un conjunto de terminos a otro sin perdida de informacion.Esta función es recursiva y permite la transformacion de un termino del nivel $t$ a uno del nivel $t'=t+a$ , con $a \in Z$.
+Asimismo, existe una función que permite trasladar información lingüística de un conjunto de términos a otro sin perdida de información.Esta función es recursiva y permite la transformación de un termino del nivel $t$ a uno del nivel $t'=t+a$ , con $a \in Z$.
 
 Por comodidad, en el presente trabajo utilizaremos la forma no recursiva de dicha función, que se define así:
 \begin{equation}

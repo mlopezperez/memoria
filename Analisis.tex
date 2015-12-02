@@ -1,97 +1,219 @@
 \chapter{Análisis funcional}	
 
-
 \section{Introducción}
-En el presente capitulo presentamos en detalle el análisis de negocio para la implementación de la aplicación, incluyendo los distintos diagramas UML necesarios para representar los casos de uso, estructura de clases y relaciones entre estas, despliegue del sistema, etc.
+En el presente capitulo presentamos en detalle el análisis de negocio para la implementación de la aplicación.
 
+Ofreceremos primero una descripción funcional del sistema, incluyendo una descripción de la interfaz de usuario, así como las distintas características que el software deberá implementar.
+
+A partir de esta descripción funcional, redactaremos una serie de requisitos funcionales que describirán en profundidad el comportamiento del sistema. Estos requisitos servirán como casos de prueba a la hora de asegurar la calidad del sistema. 
+
+Por último, describiremos una serie de requisitos no funcionales, incluyendo características sobre rendimiento, hardware y sistema operativo a utilizar y otras consideraciones.
 
 \section{Descripción funcional del sistema}
-Con fines académicos, se pretende implementar un sistema que realice valoraciones de empresas usando computación con palabras. 
-
 Tal como vimos en la primera parte de este trabajo, existen varios métodos de valoración de empresas, y todos ellos pueden ser expresados con funciones matemáticas trivialmente computables. El objetivo es facilitar la comparación de resultados entre estos diversos métodos, dados unos datos iniciales.
 
-El sistema implementará dos de los mencionados métodos de valoración. Estos son:
-\begin{itemize}
-	\item Metodo 1
-	\item Metodo 2
-\end{itemize}
-
-El usuario proveerá los datos de entrada de dichos métodos, y el sistema, tras procesarlos, devolverá el intervalo de valores resultante. Como la utilidad principal del sistema es el estudio comparativo, se dará la posibilidad de aplicar ambos métodos simultaneamente, mostrando los resultados de ambos al usuario, y remarcando el resultado más óptimo, que en valoración de empresas corresponderá al intervalo de menor amplitud.
-
-Dado que hablamos de un sistema que utilizará computación con palabras, los datos de entrada a los métodos de valoración no serán solo información cuantitativa o numérica, si no que además deberemos proveer al usuario de una interfaz que le permita introducir información cuantitativa o lingüística, es decir, en lenguaje natural, acerca de los datos de entrada. Esta información normalmente serán opiniones de distintos expertos sobre los datos de entrada. Este conjunto de opiniones es lo que llamaremos \emph{expertizaje}.
-
-Esta interfaz de expertizaje ofrecerá distintos términos lingüísticos definidos en una jerarquía lingüística para evaluar cada dato cuantitativo. El sistema tendrá definida por defecto una jerarquía lingüísitica con varios niveles de granularidad, pero se ofrecerá al usuario la posibilidad de definir sus propias jerarquías, ya sea manualmente utilizando la interfaz gráfica provista por el sistema, o bien importando los datos a través de un archivo de texto con formato JSON.
-
-Por tanto, el módo básico de funcionamiento del sistema, de forma que nos permita valorar una empresa utilizando información lingüística, se compondrá de los siguientes pasos:
+La aplicación ofrecerá funcionalidad para obtener el resultado del proceso de valoración mediante los siguiente métodos:
 
 \begin{itemize}
-	\item Definición de la jerarquía lingüística, si no se va a utilizar la definida por defecto.	
-	\item Selección del método (o métodos) a utilizar.
-	\item Introducción de los datos numéricos de entrada.
-	\item Introducción del expertizaje.
-	\item Procesado y retorno de resultados.
+	\item Método del análisis mixto sin información lingüística agregada
+	\item Método del análisis mixto con información lingüística agregada mediante operador LAMA
+	\item Método del análisis mixto con información lingüística agregada mediante expertones
+	\item Método del cashflow sin información lingüística agregada
+	\item Método del cashflow con información lingüística agregada mediante operador LAMA
+	\item Método del cashflow con información lingüística agregada mediante expertones
 \end{itemize}
 
-\section{Definición de la jerarquía lingüística}
-El sistema vendrá con una jerarquía lingüística predefinida, compuesta por tres niveles de granularidades 5, 7 y 9 respectivamente.
-
-La jerarquía se mostrará al usuario en un control visual tipo lista, que permitirá añadir o eliminar niveles de la jerarquía, con una lista paralela conteniendo los términos de cada nivel. La interfaz permitirá editar los terminos en lenguaje natural de cada nivel, así como el mismo nombre del nivel.
-
-Veamos a continuación los distintos elementos que componen una jerarquía lingüística para determinar la funcionalidad necesaria a cada nivel de jerarquía. 
-
-\subsubsection{Jerarquía Lingüística}
-Será el elemento de mayor nivel que contendrá los distintos conjuntos de etiquetas. Deberá tener las siguientes características:
+Con las siguientes premisas:
 \begin{itemize}
-	\item Cada nivel tiene mayor granularidad que el anterior. Será necesario implementar esta relación de orden.
-	\item La cardinalidad del nivel $t+1$ será $2*n(t) - 1$, donde $n(t)$ es la cardinalidad del nivel $t$. Por tanto al insertar un nuevo nivel se calculará automáticamente su cardinalidad.
+	\item Los métodos de valoración de empresas (análisis mixto y cashflow) son independientes. Es decir, podremos introducir datos para uno de los dos métodos y para el otro no. 
+	\item Los dos métodos de agregación lingüística van ligados. Es decir, una vez añadamos la información lingüística al conjunto de datos de entrada, esta será agregada usando ambos operadores.
+	\item Los resultados serán mostrados de forma gráfica para que el usuario pueda distinguir y comparar visualmente las diferencias entre ellos.
+	\item Los resultados serán actualizados en tiempo real cada vez que un dato de entrada cambia. 	
 \end{itemize}
 
-Implementaremos los métodos necesarios para añadir y eliminar niveles de una jerarquía. Así mismo, se implementará la función de transformación que permitirá trasladar información lingüística expresada con el modelo de 2-tuplas de un nivel a otro.
+\section{Prototipo de la interfaz de usuario}
+La interfaz de usuario constará de una ventana principal con diferentes pestañas en las que el usuario podrá definir los diferentes parámetros de entrada para los distintos métodos de valoración anteriormente mencionados.
 
-\subsubsection{Conjunto de términos}
-Cada nivel de la jerarquía lingüística será un conjunto de términos cuya cardinalidad viene dada por su posición dentro de la jerarquía, tal como explicamos en el punto anterior. Cada conjunto de términos estará ordenado según los índices de las términos que lo forman.
+Mostraremos a continuación una serie de "`mocks"' o prototipos del aspecto que tendrá la aplicación. Aunque en la implementación final intentaremos ceñirnos lo más posible a estos prototipos, podrá haber diferencias en la posición de los controles, siendo los prototipos presentados simplemente una referencia de cara a ilustrar la funcionalidad de la aplicación.  
 
-\subsubsection{Término}
-Cada término perteneciente a un conjunto vendrá caracterizado por una cadena de texto que contendrá el término en lenguaje natural que representa, así como una referencia al conjunto de términos al que pertenece.  
+\subsection{Definición de jerarquías}
+La primera pestaña de la aplicación mostrará la vista de definición de jerarquías lingüística a utilizar para introducir la información cualitativa. La presentación será en forma de dos tablas paralelas. En la primera mostraremos los diferentes niveles de la jerarquía, y en la segunda los distintos términos que componen el nivel seleccionado en la primera tabla, tal y como refleja la figura \ref{fig:mockUiJerarquia}.
 
-Implementaremos propiedades para acceder a éstas características, así como una función que nos permita expresar una etiqueta en el modelo de 2-tuplas, siempre y cuando dicha etiqueta pertenezca a un conjunto o una jerarquía.
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/mockUidefinicionJerarquiaNoGuardar.png}
+	\caption{Ventana de definición de jerarquía.}
+	\label{fig:mockUiJerarquia}
+\end{figure}
 
-\subsubsection{2-Tupla}
-Como vimos en capítulos anteriores, una 2-tupla consta de una etiqueta lingüística y un número real en el intervalo $[-0'5, 0,5]$. El sistema deberá definir internamente la representación en 2-tuplas, con sus funciones y operaciones correspondientes, ya que este será el sistema para tratar computacionalmente la información cualitativa. Implementaremos las funciones $\Delta$ y $\Delta^{-1}$ definidas en el capítulo 3. 
-
-\subsection{Expertizaje}
-Un expertizaje viene dado por el intervalo de valores sobre el que estamos pidiendo opinión, la jerarquía lingüística usada, y 2-tuplas asignadas por cada experto con sus correspondientes cardinalidades para cada extremo del intervalo evaluado. 
-
-Dado que un expertizaje no tiene porqué estar estandarizado de antemano, añadiremos también una referencia al conjunto de términos que usaremos para estandarizar los valores.
-
-\section{Arquitectura del sistema}
-
-El sistema se compondrá de varios módulos bien diferenciados:
 \begin{itemize}
-	\item Una librería de funciones o API (\emph{Application Programming Interface}) que provea las funciones necesarias para la computación con palabras, de forma que pueda ser utilizada en otros entornos distintos a la valoración de empresas.
-	\item Una API que implemente distintos métodos de valoración de empresas. Esta API será independiente de la anterior, de forma que pueda ser reutilizada para otros fines de valoraciones de empresas.
-	\item Una aplicación web que sirva de interfaz gráfica o GUI (\emph{Graphic User Interface}) y que permita la entrada/salida de datos a las API de valoración de empresas y de computación con palabras. Esta aplicación a su vez se estructará en tres capas: Capa de presentación, capa de lógica de negocio (que utilizará las API ya mencionadas), y capa de acceso a datos. 	
+	\item Por defecto la aplicación incluirá una jerarquía con 3 niveles de cardinalidad 5, 7 y 9 respectivamente.
+	\item Los niveles incluidos por defecto traerán definida una lista de términos en lenguaje natural asociados y fácilmente comprensibles, de forma que el usuario pueda usarlos por defecto sin tener que definir nuevos términos si es necesario. Ej: "`Muy Poco"', "`Poco"', "`Medio"', "`Mucho"', "`Muchísimo"'.
+	\item Tras cada cambio, se verificará que los distintos niveles están bien definidos y el orden de la jerarquía es el correcto. En caso de que haya algún error se mostrará un mensaje de advertencia en la parte inferior de la ventana, tal y como se muestra en la figura \ref{fig:mockUiJerarquiaWarning}
 \end{itemize}
 
-\subsection{Librería de computación con palabras}
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/mockUidefinicionJerarquiaWarning.png}
+	\caption{Advertencia de jerarquía incorrecta.}
+	\label{fig:mockUiJerarquiaWarning}
+\end{figure}
 
-En esta librería implementaremos los objetos que encapsularán las entidades y funciones necesarias para la computación con palabras. 
-
-Distinguiremos los siguientes componentes a implementar:
+Para definir los distintos niveles de una jerarquía:
 \begin{itemize}
-	\item Etiqueta lingüística
-	\item Conjunto de etiquetas lingüísticas
-	\item Jerarquía lingüística
-	\item 2-tupla
+	\item Con el botón "`Añadir"' de la tabla izquierda, añadiremos un nuevo nivel a la jerarquía. El nombre de la jerarquía vendrá dado por el texto introducido en el campo de texto izquierdo.
+	\item La tabla izquierda muestra la lista de niveles, ordenados desde el inferior (menor cardinalidad) hasta superior (mayor cardinalidad).
+	\item Los controles "`Arriba"' y "`Abajo"' junto a la tabla izquierda permiten reordenar los niveles de la jerarquía. 
+	\item Al seleccionar cualquier nivel de la jerarquía, su nombre aparece en el campo de texto superior, permitiendo cambiarlo.
+	\item Al seleccionar cualquier nivel de la jerarquía, su conjunto de términos se carga en la lista derecha de la vista.
 \end{itemize}
 
-El elemento principal en el que nos basaremos será el conjunto de etiquetas, ya que una etiqueta por si sola no da información suficiente.
+Para definir los distintos términos de un nivel:
+\begin{itemize}
+	\item Con el botón "`Añadir"' de la tabla derecha, añadiremos un nuevo término al nivel seleccionado. El término en lenguaje natural asociado vendrá dado por el texto introducido en el campo de texto izquierdo.
+	\item La tabla derecha muestra la lista términos, ordenados desde el de menor valor al máximo.
+	\item Los controles "`Arriba"' y "`Abajo"' junto a la tabla izquierda permiten reordenar los términos del conjunto. 
+	\item Al seleccionar cualquier término, su nombre aparecerá en el campo de texto superior a la lista, permitiendo cambiarlo.	
+\end{itemize}
 
-Pero profundicemos en cada elemento:
+Una vez guardados los cambios, podremos utilizar la jerarquía para definir expertizajes en cualquiera de los dos métodos de valoración a utilizar.
 
+\subsection{Definición de valores para la valoración}
+Para realizar la valoración de una empresa utilizando el método del cashflow o de análisis mixto, tendremos que introducir los distintos intervalos de valoración, y sus correspondientes expertizajes.
 
-Dotaremos a esta clase de métodos para agregar etiquetas al conjunto y...
+Tanto en la vista de datos para el método del cashflow como para el método del análisis mixto, tendremos sendas tablas en las que podremos definir los intervalos para los distintos datos necesarios. Estos son:
 
-\subsection{Librería de valoración de empresas}
+Para el método del cashflow (imagen \ref{fig:mockUiCashflow}):
+\begin{itemize}
+	\item Intervalos de cashflow esperado
+	\item Intervalos de tasa de actualización
+\end{itemize}
 
-\subsection{Interfaz de usuario}
+Que en la ventana aparecerán como dos tablas con los valores de los intervalos a utilizar.  
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiCashflow.png}
+		\caption{Vista de datos para el método del cashflow}
+	\label{fig:mockUiCashflow}
+\end{figure}
+
+Para el método del análisis mixto, los datos necesarios son:
+\begin{itemize}
+	\item Valor sustancial (fijo). 
+	\item Intervalos de beneficio futuro estimado
+	\item Intervalos de interés de tasa de actualización
+\end{itemize}
+
+Dado que el valor sustancial es un valor fijo sobre el que no aplicaremos expertizajes, y no un intervalo, se mostrará una entrada de texto en la que introducir el valor. El valor introducido será validado para no permitir valores no numéricos. Los intervalos de beneficio futuro estimado y las tasas de actualización se mostrarán como tablas en las que podremos añadir filas con nuevos intervalos (imagen \ref{fig:mockUiMixto}).
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiMixto.png}
+	\caption{Vista de datos para análisis mixto}
+	\label{fig:mockUiMixto}
+\end{figure}
+
+En ambos casos, para cada tabla de datos conteniendo intervalos, se mostrarán tres botones para añadir, borrar o editar filas. 
+
+En caso de que se introduzcan datos inconsistentes o el número de intervalos sea distinto para cada dato introducido, se advertirá al usuario mediante un mensaje resaltado, como se ilustra en la figura \ref{fig:mockUiCashflowWarning}
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiCashflowWarning.png}
+	\caption{Advertencia de datos inconsistentes}
+	\label{fig:mockUiCashflowWarning}
+\end{figure}
+
+\subsection{Definición de intervalos de datos}
+
+Cuando queramos añadir o editar un intervalo, haciendo uso de los botones "`Añadir"' o "`Editar"', se mostrará la ventana de edición de intervalos, donde podremos definir los límites inferior y superior del intervalo, así como introducir el expertizaje correspondiente a cada intervalo (figura \ref{fig:mockUiDefineInterval}).
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiDefineInterval.png}
+	\caption{Ventana de definición de intervalo}
+	\label{fig:mockUiDefineInterval}
+\end{figure}
+
+Si al intentar aceptar el intervalo no se cumple que valor del límite inferior es menor que el valor del límite superior, una advertencia se mostrará al usuario y no se podrán aceptar los valores hasta que se hayan corregido (figura \ref{fig:mockUiDefineIntervalWarning}).
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiDefineIntervalWarning.png}
+	\caption{Advertencia de intervalo incorrecto}
+	\label{fig:mockUiDefineIntervalWarning}
+\end{figure}
+
+\subsection{Definición de los expertizajes}
+Si al crear o editar el intervalo, hacemos click en el botón "`Expertizaje"', podremos definir el expertizaje de cada extremo del intervalo. Se mostrará una nueva ventana (figura \ref{fig:mockUiDefineExpertise}) con dos pestañas, una para cada extremo del intervalo, en la que podremos añadir una nueva linea por cada opinión.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiDefineExpertise.png}
+	\caption{Ventana de definición de expertizaje}
+	\label{fig:mockUiDefineExpertise}
+\end{figure}
+
+En cada linea podremos definir el conjunto de términos a utilizar para expresar la opinión, y con un control deslizante podremos definir el término a utilizar. Con el botón de "`Añadir"' podremos añadir una nueva linea para agregar una nueva opinión. Así mismo podremos seleccionar y borrar las opiniones que ya no sean necesarias.
+
+Dado que los posibles valores a introducir en esta ventana vienen predefinidos, no hay posibilidad de que el usuario introduzca datos erroneos en cada opinión. Aun así, el sistema comprobará que los expertizajes definidos para ambos extremos del intervalo tienen el mismo número de opiniones. En caso de no ser así, se mostrará una advertencia y no se permitirá aceptar los valores hasta que los datos sean correctos, pudiendo descartarlos usando la opción "`Cancelar"' (figura \ref{fig:mockUiDefineExpertiseWarning}).
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiDefineExpertiseWarning.png}
+	\caption{Advertencia de expertizaje incorrecto}
+	\label{fig:mockUiDefineExpertiseWarning}
+\end{figure}
+
+\subsection{Vista de resultados}
+Una vez tenemos los suficientes datos para computar el valor de una empresa por cualquiera de los dos métodos, en la pestaña de resultados se ofrecerá una gráfica que muestre de forma comparativa los resultados obtenidos con todos los métodos computables con los datos de entrada (figura \ref{fig:mockUiResultados}).
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiResultados.png}
+	\caption{Vista de resultados}
+	\label{fig:mockUiResultados}
+\end{figure}
+
+Esta vista cumple los siguientes puntos:
+\begin{itemize}
+	\item Se mostrarán tantos resultados como sea posible con los datos de entrada. Por ejemplo, si solo se han introducido datos para el método del cashflow, no se mostrará ningun resultado para el método de análisis mixto.
+	\item Si para uno de los dos métodos no se ha introducido información cualitativa, solo se mostrará el resultado de la valoración según la fórmula matemática habitual, sin ninguna agregación lingüistica.
+	\item Si para alguno de los métodos se introduce información cualitativa, se mostrarán los resultados obtenidos tanto por el método de agregación $LAMA$ como por el método de los expertones.
+\end{itemize}
+
+\section{Interfaz REST}
+Con vistas a ser utilizado por distintos clientes, el sistema proveerá una API con arquitectura REST accesible vía web. 
+
+(Explicar brevemente REST y citar fuente)
+
+\subsection{Contrato para valoración de empresas sin información cualitativa}
+A definir más adelante
+
+\subsection{Contrato para valoración de empresas con información cualitativa}
+A definir más adelante
+
+\section{Requisitos no funcionales}
+Definimos los siguiente requisitos no funcionales que deberá cumplir nuestro software:
+
+\begin{itemize}
+	\item El software debe ser una aplicación ejecutable bajo sistema operativo Windows 7 o superior.
+	\item El software requerirá la presencia del Framework Microsoft .NET versión 4.5 en el sistema operativo. Normalmente este framework viene incluido en las última versiones de Windows, y en caso contrario se instala junto a las actualizaciones normales del sistema.
+	\item El software ofrecerá una interfaz gráfica de usuario (GUI) auto explicativa y acorde a los estándares habituales de uso bajo el S.O. Windows, de forma que el usuario pueda introducir los datos de manera intuitiva. 
+	\item El tiempo de respuesta de la aplicación después de cualquier acción del usuario no debe ser superior a 1 segundo. En caso de que algún proceso requiera más tiempo, una barra de progreso debe ser mostrada al usuario con el tiempo de espera restante, actualizado en tiempo real.
+	\item El servidor de aplicaciones Internet Information Server (IIS), debe ser configurado en el entorno a ejecutar el software si se quiere tener acceso a la funcionalidad de la aplicación mediante la API REST. Esta funcionalidad es opcional y solo necesaria si se quiere ofrecer un interfaz a terceros a través de la web.
+\end{itemize}
+
+\section{Resumen}
+En el presente capítulo hemos detallado la funcionalidad que queremos implementar en nuestro software.
+
+Hemos definido el aspecto que tendrá la interfaz gráfica de usuario, proveyendo una serie de prototipos para esta.
+
+Hemos definido también los contratos para la interfaz REST de forma que cualquier cliente pueda hacer uso del sistema, si lo configuramos para ello.
+
+Hemos listado los requisitos funcionales para toda la funcionalidad, de forma que tenemos una definición formal de toda la funcionalidad ofrecida. 
+
+Por último hemos definido los requisitos no funcionales que deberá cumplir el sistema. 
+
+En el próximo capítulo explicaremos el diseño técnico propuesto para implementar la funcionalidad explicada. 

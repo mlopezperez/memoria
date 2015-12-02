@@ -1,6 +1,6 @@
-\chapter{Agregación de información lingüísitica}
+\chapter{Agregación de información lingüística}
 \section{Introducción}
-Hasta ahora hemos visto la importancia de la información lingüística en el proceso de valoración de empresas, hemos introducido la computación con palabras y el modelo matemático de 2-tuplas que nos permite expresar formalmente dicha información. En el presente capítulo veremos cómo tener en cuenta dicha información lingüística, obteniendo un valor representativo que podamos usar en los calculos para la valoración de empresas.
+Hasta ahora hemos visto la importancia de la información lingüística en el proceso de valoración de empresas, hemos introducido la computación con palabras y el modelo matemático de 2-tuplas que nos permite expresar formalmente dicha información. En el presente capítulo veremos cómo tener en cuenta dicha información lingüística, obteniendo un valor representativo que podamos usar en los cálculos para la valoración de empresas.
 
 Introduciremos dos métodos para este fin. Primero introduciremos el operador de mayoría lingüística $LAMA$, que será el principal objeto de estudio de este trabajo al aplicarlo al proceso de valoración de empresas. Después introduciremos el método de \emph{los expertones}, cuyo impacto en la valoración de empresas ya ha sido estudiado en trabajos anteriores, como por ejemplo los llevados a cabo por Cristina Mendaña Cuervo y otros\cite{TuplasMenda}, y que usaremos en el presente trabajo con fines comparativos.
 
@@ -82,7 +82,7 @@ Diferentes operadores de mayoría han sido definidos en la literatura. Así, para 
 
 \subsection{Operadores de mayoría lingüísticos aditivos. El operador $LAMA$}
 
-El operador $LAMA$, acrónimo de \emph{Linguistic Aggregation of Majority Additive} o \emph{Agregación linguistica de mayoría aditiva} es presentado en el artículo \emph{LAMA: A linguistic aggregation of Majority Additive Operator}\cite{PelaezLAMA} de J.I. Peláez y J.M. Doña, y es un operador de mayoría para entornos lingüísticos con un espacio de etiquetas $S$, que se define como una media aritmética de medias aritméticas, de forma que el resultado final es una media aritmética ponderada.
+El operador $LAMA$, acrónimo de \emph{Linguistic Aggregation of Majority Additive} o \emph{Agregación lingüística de mayoría aditiva} es presentado en el artículo \emph{LAMA: A linguistic aggregation of Majority Additive Operator}\cite{PelaezLAMA} de J.I. Peláez y J.M. Doña, y es un operador de mayoría para entornos lingüísticos con un espacio de etiquetas $S$, que se define como una media aritmética de medias aritméticas, de forma que el resultado final es una media aritmética ponderada.
 
 \begin{defi}
 \label{def:lama}
@@ -190,14 +190,14 @@ Sean $(p_{i},\alpha_{1})$ y $(p_{j},\alpha_{2})$ dos 2-tuplas, cada una represen
 
 Definidos por Kaufmann\cite{expertonesKaufmann}, el método de los expertones permite agregar la opinión de varios expertos a partir de valoraciones dadas por ellos, llevando una estadística de todos los valores posibles, que dependerá de la escala usada. Esta estadística se somete a un proceso de estandarización de acuerdo con el número de opiniones disponible. Concretamente, la función complementaria de probabilidad acumulada es lo que llamamos expertón. 
 
-Aplicado al modelo de 2-tuplas, lo que haremos será recoger las opiniones de los distintos expertos, normalizadas a un único conjunto de etiquetas, y a partir de la frecuencia absoluta de cada etiqueta, calcularemos su funcion de probabilidad acumulada complementaria.
+Aplicado al modelo de 2-tuplas, lo que haremos será recoger las opiniones de los distintos expertos, normalizadas a un único conjunto de etiquetas, y a partir de la frecuencia absoluta de cada etiqueta, calcularemos su función de probabilidad acumulada complementaria.
 
 No es objetivo de este trabajo presentar la teoría completa sobre los expertones, por lo que simplemente ilustraremos su uso con un ejemplo práctico para ajustar un intervalo sobre un expertizaje expresado con el modelo de 2-tuplas. 
 
 \begin{ejem}
-Consideremos el intervalo $[0'04, 0'05]$ de posibles tipos de interes inicial para la valoración de una empresa.
+Consideremos el intervalo $[0'04, 0'05]$ de posibles tipos de interés inicial para la valoración de una empresa.
 
-Para alcanzar un consenso sobre la validez de dicha información, se pide a diez expertos que den su opinion, usando distintos conjuntos de etiquetas semánticas. Tomando como conjunto de referencia el conjunto $S_{9}$, obtenemos las opiniones reflejadas en la tabla \ref{tab:opinionExpertones}
+Para alcanzar un consenso sobre la validez de dicha información, se pide a diez expertos que den su opinión, usando distintos conjuntos de etiquetas semánticas. Tomando como conjunto de referencia el conjunto $S_{9}$, obtenemos las opiniones reflejadas en la tabla \ref{tab:opinionExpertones}
 \begin{table}[!htb]
 	\centering
 		\begin{tabular}{c c}
@@ -216,7 +216,7 @@ Para alcanzar un consenso sobre la validez de dicha información, se pide a diez 
 			$e_{10}$	&	$(S_{0}^{9},0) - (S_{1}^{9}, 0)$	\\
 			\bottomrule			
 		\end{tabular}
-	\caption{Opinion de los expertos}
+	\caption{Opinión de los expertos}
 	\label{tab:opinionExpertones}
 \end{table}
 
