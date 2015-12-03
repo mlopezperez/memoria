@@ -1,5 +1,4 @@
 \documentclass[a4paper]{memoir}
-% pre'ambulo
 
 \usepackage[latin1]{inputenc}
 \usepackage[spanish,activeacute]{babel}
@@ -11,34 +10,37 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 
+% Define spanish headers for definitions and examples 
 \newtheorem{ejem}{Ejemplo}[chapter]
 \newtheorem{defi}{Definición}[chapter]
 
-% Make a pagestyle called 'myplain', if 'plain' has already been redefined
+% Define style to have numbers in footer
 \makeevenhead{headings}{}{}{\slshape\leftmark}
 \makeoddhead{headings}{\slshape\rightmark}{}{}
 \makeevenfoot{headings}{}{\thepage}{} 
 \makeoddfoot{headings}{}{\thepage}{}
 
-
+% Define 1.5 line space
 \renewcommand{\baselinestretch}{1.5}
 
+% Title
 \title{Valoración de empresas utilizando computación con palabras}
 \author{Manuel López Pérez}
 
 \begin{document}
-%\pagestyle{plain}
+
+% Define decimal separator
 \spanishdecimal{,}
+
+% define name for tables
 \def\tablename{Tabla}
+
+% Define paragraph separation
 \setlength{\parskip}{1.5ex plus 0.5ex minus 0.2ex}
 
 % cuerpo del documento
 
-%\maketitle
-%\newpage
-%Aqui va la primera página formato UMA
-%\newpage
-
+% Páginas formato universidad
 \input{Titulo}
 \input{Tribunal}
 \newpage
