@@ -11,9 +11,9 @@ En el presente capítulo fusionaremos todas las herramientas vistas hasta ahora, 
 \section{Metodología}
 En el capítulo 2 hemos visto las expresiones matemáticas para la valoración de empresas utilizando tanto el método del \textit{cashflow} como el método mixto de análisis operativo. 
 
-En ambos métodos procederems de la misma manera: para cada estimación que llevemos a cabo, los expertos consultados expresarán sus valoraciones dentro de sus propios dominios de expresión. Después, mediante el modelo lingüístico de 2-tuplas normalizaremos todas las valoraciones a un único dominio, en el cual añadiremos la información a cada intervalo numérico a ser considerado utilizando el operador $LAMA$. Por último estandarizaremos los resultados obtenidos de acuerdo con el dominio unificado que hayamos elegido inicialmente.
+En ambos métodos procederemos de la misma manera: para cada estimación que llevemos a cabo, los expertos consultados expresarán sus valoraciones dentro de sus propios dominios de expresión. Después, mediante el modelo lingüístico de 2-tuplas normalizaremos todas las valoraciones a un único dominio, en el cual añadiremos la información a cada intervalo numérico a ser considerado utilizando el operador $LAMA$. Por último estandarizaremos los resultados obtenidos de acuerdo con el dominio unificado que hayamos elegido inicialmente.
 
-En este punto, para estimaro los intereses, los beneficios futuros o la estimación de cashflow, aplicaremos la siguiente expresión a cada intervalo:
+En este punto, para estimar los intereses, los beneficios futuros o la estimación de cashflow, aplicaremos la siguiente expresión a cada intervalo:
 
 	\[
 	[\left[limite\ inferior\right] + \left(limite\ sup - limite\ inf\right)\cdot\left[L_{1}^{N}, L_{2}^{N}\right]
@@ -40,7 +40,7 @@ En el ejemplo práctico que proponemos, se ha establecido un periodo de análisis 
 	\left[0.04, 0.05\right],\ \left[0.045, 0.06\right],\ \left[0.05, 0.06\right]
 \]
 
-Con el objetivo de alcanzar un consenso para la validez de la información, es posible consultar a varios expertos de forma que validen su conformidad con cada uno de los valores inciales. La información requerida, de acuerdo con con las consideraciones expuestas en los anteriors capítulos, debe ser expresadsa en términos familiares a cada uno de los expertos consultados. Por tanto, se han definido tres conjuntos lingüísticos distintos, con la siguiente semántica:
+Con el objetivo de alcanzar un consenso para la validez de la información, es posible consultar a varios expertos de forma que validen su conformidad con cada uno de los valores iniciales. La información requerida, de acuerdo con con las consideraciones expuestas en los anteriores capítulos, debe ser expresadas en términos familiares a cada uno de los expertos consultados. Por tanto, se han definido tres conjuntos lingüísticos distintos, con la siguiente semántica:
 
 Conjunto 1: 
 \begin{equation*}
@@ -111,7 +111,7 @@ De este modo, una vez consultado un conjunto de 10 expertos, obtenemos las valor
 	\label{tab:expertizajeDiferentesDominios}
 \end{table}
 
-A continuación será necesario proceder a la estandarización de los valores establecidos por los expertos. Para estoe s necesario determinar un conjunto de términos lingüísticos que será usado como base para unificar la información. En este caso, dado que la mayoría de expertos ha utilizado el dominio $S_{9}$, este será el elegido, aunque será posible utilizar cualquier otro. 
+A continuación será necesario proceder a la estandarización de los valores establecidos por los expertos. Para esto es necesario determinar un conjunto de términos lingüísticos que será usado como base para unificar la información. En este caso, dado que la mayoría de expertos ha utilizado el dominio $S_{9}$, este será el elegido, aunque será posible utilizar cualquier otro. 
 
 Aplicando la ecuación \ref{eq:transformarJerarquia}, pasamos todos los valores al dominio $S_{9}$ obteniendo las valoraciones reflejadas en las tablas \ref{tab:expertizajeEstandar1}, \ref{tab:expertizajeEstandar2} y \ref{tab:expertizajeEstandar3}. 
 
@@ -208,7 +208,7 @@ Con la información representada en 2-tuplas lingüísticas y unificadas en el mism
 	\label{tab:cardinalidadesEtiquetasEstandar}
 \end{table}
 
-Con estas cardinalades podemos calcular los pesos de cada etiqueta, tal y como se define en \ref{def:lamae}.
+Con estas cardinalidades podemos calcular los pesos de cada etiqueta, tal y como se define en \ref{def:lamae}.
 
 Para el extremo del intervalo $[0,04]$:
 \begin{equation*}
@@ -523,7 +523,7 @@ Por lo que aplicando la definición \ref{eq:analisisMixtoSimplificado}.
 		V_e = \frac{3000(+)[10743, 13317]}{1(+)[0.1407, 0.1481]} = [12047, 14212]
 \]
 
-El resultado previo permite asegurar que el beneficio nunca será más bajo de $12047$ ni sobrepasará las $14212$ unidades monetarias. La amplitud del intervalo debe ser objeto de negociación entre las partes, aunque si se considera que una incertidumbre de base más baja es necesaria, entonces sería posible recurrir a una nueva evaluación hasta que la incertidumbre se reduzca lo suficiente para permitir la negociación entre compradores y vendedores.
+El resultado previo permite asegurar que el valor nunca será más bajo de $12047$ ni sobrepasará las $14212$ unidades monetarias. La amplitud del intervalo debe ser objeto de negociación entre las partes, aunque si se considera que una incertidumbre de base más baja es necesaria, entonces sería posible recurrir a una nueva evaluación hasta que la incertidumbre se reduzca lo suficiente para permitir la negociación entre compradores y vendedores.
 
 \section{Comparativa del método}
 Para comparar la efectividad del proceso, se ha decidido utilizar la metodología de los expertones, tal y como se ha presentado en el capítulo 4, utilizando exactamente los mismos datos y expertizajes presentados hasta ahora.
@@ -561,12 +561,11 @@ Hemos visto hasta ahora como agregar información lingüística a un proceso de val
 
 Esta misma metodología mostrada se puede aplicar fácilmente al método de valoración con flujos descontados (o método del \emph{cashflow}). 
 
-Dada la similitud del proceso y para evitar redundancias, consistente en recabar el expertizaje correspondiente, estandarizar los valores a un único domino de expresión y ajustar los intervalos tanto para el cashflow esperado como para las tasas de ajuste WACC, para finalmente aplicar la expresión matemática \ref{eq:cashflow} presentada en el capítulo 2, no incluiremos un ejemplo de aplicación con dicho método de valoración en el presente trabajo, pudiendo encontrarse un ejemplo de dicha aplicación en el artículo \emph{Toma de Decisión Fuzzy en Entornos Empresariales: El Concepto de Mayoría}\cite{cashflowBolsa}
-
+Dada la similitud del proceso y para evitar redundancias, consistente en recabar el expertizaje correspondiente, estandarizar los valores a un único domino de expresión y ajustar los intervalos tanto para el cashflow esperado como para las tasas de ajuste WACC, para finalmente aplicar la expresión matemática \ref{eq:cashflow} presentada en el capítulo 2. No incluiremos un ejemplo de aplicación con dicho método de valoración en el presente trabajo, pudiendo encontrarse un ejemplo de dicha aplicación en el artículo \emph{Toma de Decisión Fuzzy en Entornos Empresariales: El Concepto de Mayoría}\cite{cashflowBolsa}
 
 \section{Resumen}
-En el presente capítulo hemos estudiado un ejemplo de como aplicar el concepto de mayoría lingüística al proceso de valoración de una empresa utilizando el operador $LAMA$ y el método de los expertones. Así mismo hemos estudiado brevemente la diferencia de resultados entre ambos métodos y hemos hecho una breve introducción a como usar la misma metodología con el método de valoración del \emph{cashflow}.
+En el presente capítulo hemos estudiado un ejemplo de cómo aplicar el concepto de mayoría lingüística al proceso de valoración de una empresa utilizando el operador $LAMA$ y el método de los expertones. Así mismo hemos estudiado brevemente la diferencia de resultados entre ambos métodos y hemos hecho una breve introducción a como usar la misma metodología con el método de valoración del \emph{cashflow}.
 
-Con este capítulo damos por terminada la segunda parte de este trabajo, en la que hemos introducido los conceptos teóricos a implementar en la segunda parte. 
+Con este capítulo damos por terminada la segunda parte de este trabajo, en la que hemos introducido los conceptos teóricos necesarios y que implementaremos en la tercera parte. 
 
-En la tercera parte del trabajo veremos como, aplicando los principios de la ingeniería del software, diseñar una aplicación informática que haga uso de estos conceptos teóricos y que facilite la introducción de datos, tanto numéricos como cualitativos, facilitando al usuario una herramienta rápida y eficaz que le permita comparar los resultados obtenidos en el proceso de valoración, con y sin información cualitativa.
+En dicha tercera parte del trabajo veremos como, aplicando los principios de la ingeniería del software, diseñar una aplicación informática que haga uso de estos conceptos teóricos y que facilite la introducción de datos, tanto numéricos como cualitativos, facilitando al usuario una herramienta rápida y eficaz que le permita comparar los resultados obtenidos en el proceso de valoración, con y sin información cualitativa.
