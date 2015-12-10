@@ -7,7 +7,7 @@ Veremos en primer lugar una introducción a la lógica difusa y al concepto de eti
 
 Estudiaremos después el modelo de 2-tuplas para la representación de la información lingüística e introduciremos las operaciones sobre las tuplas. 
 
-Por último veremos las distintas formas de agregar la información lingüística representada en 2-tuplas a un proceso de decisión. Presentaremos primero el método de los expertones y a continuación el operador $LAMA$ de mayoría lingüística.
+Por último veremos el concepto de jerarquía lingüística, que nos permitirá representar utilizar distintos dominios de expresión para representar información. 
 
 \section{Lógica difusa y computación con palabras}
 
@@ -67,8 +67,7 @@ Se define la función de pertenencia triangular $A:X\rightarrow\left[0,1\right]$ 
 			\end {cases}
 	\end{equation}
 	\label{def:pertenenciaTriangular}
-\end{defi} 
-
+\end{defi}
 	
 \subsection{Computación con palabras}
 
@@ -87,7 +86,7 @@ Una \emph{etiqueta lingüística} es un nombre a un conjunto borroso. Es decir, es
 \label{def:etiquetaLinguistica}
 \end{defi}
 
-Según se usen conjuntos de etiquetas con mayor o menor granularidad (número de etiquetas), se estarán definiendo escalas de mayor o menor precisión para la representación de la información. Estas funciones son transparentes a los expertos, ya que éstos emiten sus juicios en lenguaje natural haciendo uso de dichas etiquetas, siendo dentro del sistema de decisión donde se realiza la traslación de estas opiniones a al escala determinada para el problema.
+Según se usen conjuntos de etiquetas con mayor o menor granularidad (número de etiquetas), se estarán definiendo escalas de mayor o menor precisión para la representación de la información. Estas funciones son "`cajas negras"' para los expertos, ya que éstos emiten sus juicios en lenguaje natural haciendo uso de dichas etiquetas, siendo dentro del sistema de decisión donde se realiza la traslación de estas opiniones a al escala determinada para el problema.
 
 En la figura \ref{fig:Etiquetas1} se muestran tres escalas distintas que nos permiten dar tres grados de precisión al lenguaje natural.
 
@@ -141,7 +140,7 @@ En este proyecto utilizaremos etiquetas con pertenencia triangular (Figura \ref{
 \end{table}
 
 La traducción simbólica de un término lingüístico $p_{i}\in\left\{ p_{0}, p_{1}, \ldots, p_{g}\right\}$ es un valor numérico perteneciente al intervalo $\left[-0.5, 0.5\right]$ que representa la \emph{diferencia de información} entre un cálculo de la información $\beta$ evaluado en $\left[0,g\right]$, obtenido después de una operación de agregación simbólica (que actúa sobre el índice de las etiquetas), y el valor más cercano en $\left\{0,\ldots,g\right\}$ que indica el índice del término lingüístico más cercano en $P\left(p_{i}\right)$.
-%\newpage
+
 A partir de este concepto, Herrera y Martínez\cite{tuplasHerrera} desarrollan un modelo de representación de información lingüística por medio de 2-tuplas $\left(p_{i}, \alpha_{i}\right), p_{i}\in P \text{ y } \alpha_{i} \in \left[-0.5,0.5\right]$, donde $p_{i}$ representa la etiqueta lingüística central de la información, y $\alpha_{i}$ es un valor numérico que representa el desplazamiento del resultado original $\beta$ 	al índice de la etiqueta lingüística más cercana en el conjunto de términos, es decir, la Traducción Simbólica.
 
 Este modelo de representación lingüística define un conjunto de funciones para hacer transformaciones entre términos lingüísticos, 2-tuplas y valores numéricos.
@@ -187,10 +186,6 @@ Sea $P=\left\{p_{0}, p_{1},\ldots,p_{g}\right\}$ un conjunto de términos lingüís
 \end{defi}
 
 De acuerdo con lo anterior, la representación mediante 2-tuplas lingüísticas presenta ventajas sustantivas respecto a otras metodologías, debido a las posibilidades que ofrece para el tratamiento de información suministrada en distintos dominios de expresión, es decir, para operar con información lingüística multigranular sin pérdida de información.
-
-\subsection{Operaciones con 2-tuplas}
-
-Meter aquí los operadores $\oplus$ y $\otimes$
 
 \section{Jerarquías lingüísticas}
 El modelo de 2-tuplas parte de contextos lingüísticos con diferentes granularidades, denominados jerarquías lingüísticas, las cuales cumplen una serie de reglas y condiciones que permiten unificar la información en un único domino de expresión sin pérdida de información. Las jerarquías lingüísticas están compuestas por un conjunto de niveles, donde cada nivel es un conjunto de términos lingüísticos con distinta granularidad al resto de niveles de su jerarquía. Cada nivel de una jerarquía se puede escribir como: $$L(t,n(t))$$ donde $t$ es el número que indica el nivel de la jerarquía y $n(t)$ la granularidad del conjunto lingüístico del nivel $t$.
