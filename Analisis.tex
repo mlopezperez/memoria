@@ -1,11 +1,11 @@
 \chapter{Análisis funcional}	
 
 \section{Introducción}
-En el presente capitulo presentamos en detalle el análisis de negocio para la implementación de la aplicación.
+En el presente capítulo presentamos en detalle el análisis de negocio para la implementación de la aplicación.
 
 Ofreceremos primero una descripción funcional del sistema, incluyendo una descripción de la interfaz de usuario, así como las distintas características que el software deberá implementar.
 
-A partir de esta descripción funcional, redactaremos una serie de requisitos funcionales que describirán en profundidad el comportamiento del sistema. Estos requisitos servirán como casos de prueba a la hora de asegurar la calidad del sistema. 
+A partir de esta descripción funcional, redactaremos una serie de casos de uso del sistema, indicando sus pre-condiciones, post-condiciones y flujos de acción.
 
 Por último, describiremos una serie de requisitos no funcionales, incluyendo características sobre rendimiento, hardware y sistema operativo a utilizar y otras consideraciones.
 
@@ -29,10 +29,11 @@ Con las siguientes premisas:
 	\item Los dos métodos de agregación lingüística van ligados. Es decir, una vez añadamos la información lingüística al conjunto de datos de entrada, esta será agregada usando ambos operadores.
 	\item Los resultados serán mostrados de forma gráfica para que el usuario pueda distinguir y comparar visualmente las diferencias entre ellos.
 	\item Los resultados serán actualizados en tiempo real cada vez que un dato de entrada cambia. 	
+	\item El usuario podrá definir sus propias jerarquías lingüísticas, pudiendo personalizar el número de niveles así como las etiquetas que componen cada nivel. Para cada etiqueta, el usuario podrá definir el término lingüístico asociado así como sus valores de pertenencia. 
 \end{itemize}
 
 \section{Prototipo de la interfaz de usuario}
-La interfaz de usuario constará de una ventana principal con diferentes pestañas en las que el usuario podrá definir los diferentes parámetros de entrada para los distintos métodos de valoración anteriormente mencionados.
+La interfaz de usuario constará de una ventana principal con diferentes pestañas y menús en las que el usuario podrá definir los diferentes parámetros de entrada para los distintos métodos de valoración anteriormente mencionados.
 
 Mostraremos a continuación una serie de "`mocks"' o prototipos del aspecto que tendrá la aplicación. Aunque en la implementación final intentaremos ceñirnos lo más posible a estos prototipos, podrá haber diferencias en la posición de los controles, siendo los prototipos presentados simplemente una referencia de cara a ilustrar la funcionalidad de la aplicación.  
 
@@ -47,7 +48,7 @@ La primera pestaña de la aplicación mostrará la vista de definición de jerarquía
 \end{figure}
 
 \begin{itemize}
-	\item Por defecto la aplicación incluirá una jerarquía con 3 niveles de cardinalidad 5, 7 y 9 respectivamente.
+	\item Por defecto la aplicación incluirá una jerarquía por defecto con la que trabajar.
 	\item Los niveles incluidos por defecto traerán definida una lista de términos en lenguaje natural asociados y fácilmente comprensibles, de forma que el usuario pueda usarlos por defecto sin tener que definir nuevos términos si es necesario. Ej: "`Muy Poco"', "`Poco"', "`Medio"', "`Mucho"', "`Muchísimo"'.
 	\item Tras cada cambio, se verificará que los distintos niveles están bien definidos y el orden de la jerarquía es el correcto. En caso de que haya algún error se mostrará un mensaje de advertencia en la parte inferior de la ventana, tal y como se muestra en la figura \ref{fig:mockUiJerarquiaWarning}
 \end{itemize}
@@ -157,7 +158,7 @@ Si al crear o editar el intervalo, hacemos click en el botón "`Expertizaje"', po
 
 En cada linea podremos definir el conjunto de términos a utilizar para expresar la opinión, y con un control deslizante podremos definir el término a utilizar. Con el botón de "`Añadir"' podremos añadir una nueva linea para agregar una nueva opinión. Así mismo podremos seleccionar y borrar las opiniones que ya no sean necesarias.
 
-Dado que los posibles valores a introducir en esta ventana vienen predefinidos, no hay posibilidad de que el usuario introduzca datos erroneos en cada opinión. Aun así, el sistema comprobará que los expertizajes definidos para ambos extremos del intervalo tienen el mismo número de opiniones. En caso de no ser así, se mostrará una advertencia y no se permitirá aceptar los valores hasta que los datos sean correctos, pudiendo descartarlos usando la opción "`Cancelar"' (figura \ref{fig:mockUiDefineExpertiseWarning}).
+Dado que los posibles valores a introducir en esta ventana vienen predefinidos, no hay posibilidad de que el usuario introduzca datos erróneos en cada opinión. Aun así, el sistema comprobará que los expertizajes definidos para ambos extremos del intervalo tienen el mismo número de opiniones. En caso de no ser así, se mostrará una advertencia y no se permitirá aceptar los valores hasta que los datos sean correctos, pudiendo descartarlos usando la opción "`Cancelar"' (figura \ref{fig:mockUiDefineExpertiseWarning}).
 
 \begin{figure}[htbp]
 	\centering
@@ -176,23 +177,237 @@ Una vez tenemos los suficientes datos para computar el valor de una empresa por 
 	\label{fig:mockUiResultados}
 \end{figure}
 
-Esta vista cumple los siguientes puntos:
+\section{Casos de uso}
+A partir de la descripción funcional, podemos extraer los casos de uso reflejados en el siguiente diagrama (fig \ref{fig:useCases}).
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/UI_UseCases.png}
+	\caption{Diagrama de casos de uso.}
+	\label{fig:useCases}
+\end{figure}
+
+\subsection{Casos de uso para definición de jerarquía lingüística}
+\subsubsection{Editar Jerarquía}
 \begin{itemize}
-	\item Se mostrarán tantos resultados como sea posible con los datos de entrada. Por ejemplo, si solo se han introducido datos para el método del cashflow, no se mostrará ningun resultado para el método de análisis mixto.
-	\item Si para uno de los dos métodos no se ha introducido información cualitativa, solo se mostrará el resultado de la valoración según la fórmula matemática habitual, sin ninguna agregación lingüistica.
-	\item Si para alguno de los métodos se introduce información cualitativa, se mostrarán los resultados obtenidos tanto por el método de agregación $LAMA$ como por el método de los expertones.
+	\item \textbf{Id:} CU1
+	\item \textbf{Nombre:} Editar jerarquía
+	\item \textbf{Resumen:} El usuario puede editar la jerarquía lingüística por defecto.
+	\item \textbf{CU Relacionados:} CU2, CU3, CU4, CU5
+	\item \textbf{Precondiciones:} N/A
+	\item \textbf{Postcondiciones:} La nueva jerarquía lingüística se guarda en la aplicación y está disponible al definir expertizajes.
+	\item \textbf{Flujo normal:} 
+		\begin {enumerate}
+			\item El usuario define nuevos niveles según CU2
+			\item El usuario define nuevas etiquetas según CU3
+			\item El usuario guarda los cambios usando el botón "`Aceptar"'
+		\end {enumerate}
+	\item \textbf{Flujo alternativo:} 
+		\begin {enumerate}
+			\item El usuario descarta los cambios usando el botón "`Cancelar"'.
+		\end{enumerate}
 \end{itemize}
 
-\section{Interfaz REST}
-Con vistas a ser utilizado por distintos clientes, el sistema proveerá una API con arquitectura REST accesible vía web. 
+\subsubsection{Definir Nivel}
+\begin{itemize}
+	\item \textbf{Id:} CU2
+	\item \textbf{Nombre:} Definir nivel de jerarquía
+	\item \textbf{Resumen:} El usuario puede definir un nuevo nivel en una jerarquía lingüística.
+	\item \textbf{CU Relacionados:} CU1, CU3, CU4
+	\item \textbf{Precondiciones:} El usuario accede a la ventana de definición de jerarquías lingüísticas.
+	\item \textbf{Postcondiciones:} El nuevo nivel está disponible en la jerarquía al definir expertizajes.
+	\item \textbf{Flujo normal:} 
+		\begin {enumerate}
+			\item El usuario introduce el nombre del nuevo nivel en el cuadro de texto apropiado
+			\item El usuario añade el nuevo nivel con el botón añadir.
+			\item El usuario define nuevas etiquetas según CU3
+			\item El usuario guarda los cambios usando el botón "`Aceptar"'
+		\end {enumerate}
+	\item \textbf{Flujo alternativo:} 
+		\begin {enumerate}
+			\item El usuario descarta los cambios usando el botón "`Cancelar"'.
+		\end{enumerate}
+\end{itemize}
 
-(Explicar brevemente REST y citar fuente)
+\subsubsection{Editar Nivel}
+\begin{itemize}
+	\item \textbf{Id:} CU3
+	\item \textbf{Nombre:} Editar nivel de jerarquía
+	\item \textbf{Resumen:} El usuario puede editar un nivel existente en una jerarquía lingüística.
+	\item \textbf{CU Relacionados:} CU1, CU4, CU5
+	\item \textbf{Precondiciones:} El usuario accede a la ventana de definición de jerarquías lingüísticas.
+	\item \textbf{Postcondiciones:} Los cambios en el nivel están reflejados en la jerarquía al definir expertizajes.
+	\item \textbf{Flujo normal:} 
+		\begin {enumerate}
+			\item El usuario selecciona el nivel a editar en la lista y pulsa el botón "`Editar"'.
+			\item El usuario cambia el nombre del nivel y pulsa el botón "`Guardar"'.
+			\item El usuario define nuevas etiquetas o cambia las existentes según CU4 y CU5.
+			\item El usuario guarda los cambios usando el botón "`Aceptar"'
+		\end {enumerate}
+	\item \textbf{Flujo alternativo:} 
+		\begin {enumerate}
+			\item El usuario descarta los cambios usando el botón "`Cancelar"'.
+		\end{enumerate}
+\end{itemize}
 
-\subsection{Contrato para valoración de empresas sin información cualitativa}
-A definir más adelante
+\subsubsection{Definir Nueva Etiqueta}
+\begin{itemize}
+	\item \textbf{Id:} CU4
+	\item \textbf{Nombre:} Definir etiqueta lingüística
+	\item \textbf{Resumen:} El usuario puede definir una nueva etiqueta en un nivel de una jerarquía lingüística.
+	\item \textbf{CU Relacionados:} CU2, CU3
+	\item \textbf{Precondiciones:} 
+		\begin {enumerate}
+			\item El usuario accede a la ventana de definición de jerarquía
+			\item El usuario selecciona el nivel donde quiere añadir la etiqueta en la lista de niveles.
+		\end {enumerate}
+	\item \textbf{Postcondiciones:} La nueva etiqueta está disponible en la jerarquía al definir expertizajes.
+	\item \textbf{Flujo normal:} 
+		\begin {enumerate}
+			\item El usuario introduce el nombre de la nueva etiqueta en el cuadro de texto
+			\item El usuario añade la etiqueta  con el botón añadir.
+			\item El usuario selecciona la etiqueta en la lista.
+			\item El usuario accede a la ventana de valores de la etiqueta usando el botón "`Valores"'
+			\item El usuario introduce los valores para el máximo, medio y mínimo en la ventana de valores.
+			\item El usuario guarda los valores usando el botón "`Aceptar"' en la ventana de valores. 
+			\item El usuario guarda los cambios en la jerarquía usando el botón "`Aceptar"'.
+		\end {enumerate}
+	\item \textbf{Flujo alternativo:} 
+		\begin {enumerate}
+			\item El usuario descarta los cambios en los valores de la etiqueta usando el botón "`Cancelar"' en la ventana de valores.
+			\item El usuario descarta los cambios en la jerarquía usando el botón "`Cancelar"' en la ventana de jerarquías. 
+		\end{enumerate}
+\end{itemize}
 
-\subsection{Contrato para valoración de empresas con información cualitativa}
-A definir más adelante
+\subsubsection{Editar Etiqueta}
+\begin{itemize}
+	\item \textbf{Id:} CU5
+	\item \textbf{Nombre:} Editar una etiqueta lingüística
+	\item \textbf{Resumen:} El usuario puede editar una etiqueta ya existente en una jerarquía.
+	\item \textbf{CU Relacionados:} CU2, CU3
+	\item \textbf{Precondiciones:} 
+		\begin {enumerate}
+			\item El usuario accede a la ventana de definición de jerarquía
+			\item El usuario selecciona el nivel donde se encuentra la etiqueta en la lista de niveles.
+		\end {enumerate}
+	\item \textbf{Postcondiciones:} El nuevo nivel está disponible en la jerarquía al definir expertizajes.
+	\item \textbf{Flujo normal:} 
+		\begin {enumerate}
+			\item El usuario selecciona la etiqueta a editar y pulsa el botón editar.
+			\item El usuario cambia el nombre de la nueva etiqueta en el cuadro de texto.
+			\item El usuario accede a la ventana de valores de la etiqueta usando el botón "`Valores"'
+			\item El usuario cambia los valores para el máximo, medio y mínimo en la ventana de valores.
+			\item El usuario guarda los valores usando el botón "`Aceptar"' en la ventana de valores. 
+			\item El usuario guarda los cambios en la jerarquía usando el botón "`Aceptar"'.
+		\end {enumerate}
+	\item \textbf{Flujo alternativo:} 
+		\begin {enumerate}
+			\item El usuario descarta los cambios en los valores de la etiqueta usando el botón "`Cancelar"' en la ventana de valores.
+			\item El usuario descarta los cambios en la jerarquía usando el botón "`Cancelar"' en la ventana de jerarquías. 
+		\end{enumerate}
+\end{itemize}
+
+\subsection{Casos de uso para valoración}
+
+\subsubsection{Valoración por cashflow}
+\begin{itemize}
+	\item \textbf{Id:} CU6
+	\item \textbf{Nombre:} Valoración por cashflow
+	\item \textbf{Resumen:} El usuario obtiene la valoración de una empresa usando el método del cashflow.
+	\item \textbf{CU Relacionados:} CU8
+	\item \textbf{Precondiciones:} 
+		\begin {enumerate}
+			\item El usuario accede a la pestaña de valoración por cashflow.
+		\end {enumerate}
+	\item \textbf{Postcondiciones:}
+	\begin {enumerate}
+			\item La vista de resultados se actualiza con los resultados de la valoración por cashflow.
+			\item Un mensaje de error aparece en la pantalla si los datos de entrada son erróneos.
+		\end {enumerate}
+	\item \textbf{Flujo normal:} 
+		\begin {enumerate}
+			\item El usuario introduce los intervalos de cashflow esperados según CU8.
+			\item El usuario introduce los intervalos de tasa de ajuste (WACC) esperados según CU8.
+			\item Los resultados usando agregación por LAMA, agregación por expertones y sin agregación aparecen en la vista de resultados.	
+		\end {enumerate}
+	\item \textbf{Flujo alternativo:} N/A
+\end{itemize}
+
+\subsubsection{Valoración por análisis mixto}
+\begin{itemize}
+	\item \textbf{Id:} CU7
+	\item \textbf{Nombre:} Valoración por análisis mixto
+	\item \textbf{Resumen:} El usuario obtiene la valoración de una empresa usando el método del análisis mixto.
+	\item \textbf{CU Relacionados:} CU8
+	\item \textbf{Precondiciones:} 
+		\begin {enumerate}
+			\item El usuario accede a la pestaña de valoración por cashflow.
+		\end {enumerate}
+	\item \textbf{Postcondiciones:}
+	\begin {enumerate}
+			\item La vista de resultados se actualiza con los resultados de la valoración por análisis mixto.
+			\item Un mensaje de error aparece en la pantalla si los datos de entrada son erróneos.
+		\end {enumerate}
+	\item \textbf{Flujo normal:} 
+		\begin {enumerate}
+			\item El usuario introduce los intervalos de beneficios esperados según CU8.
+			\item El usuario introduce los intervalos de interés esperados según CU8.
+			\item El usuario introduce el valor del valor sustancial en la caja de texto indicada.
+			\item Los resultados usando agregación por LAMA, agregación por expertones y sin agregación aparecen en la vista de resultados.	
+		\end {enumerate}
+	\item \textbf{Flujo alternativo:} N/A
+\end{itemize}
+
+\subsubsection{Definir datos de entrada}
+\begin{itemize}
+	\item \textbf{Id:} CU8
+	\item \textbf{Nombre:} Definir datos de entrada
+	\item \textbf{Resumen:} El usuario introduce un intervalo de datos y su correspondiente expertizaje como dato de entrada.
+	\item \textbf{CU Relacionados:} CU6, CU7, CU9
+	\item \textbf{Precondiciones:} 
+		\begin {enumerate}
+			\item El usuario accede a la pestaña de valoración por cashflow o a la pestaña de valoración por análisis mixto.
+			\item El usuario pulsa el botón "`Añadir"' bajo cualquier lista de datos.
+		\end {enumerate}
+	\item \textbf{Postcondiciones:}
+	\begin {enumerate}
+			\item La vista de resultados se actualiza con los nuevos resultados.
+			\item Un mensaje de error aparece en la pantalla si los datos de entrada son erróneos.
+		\end {enumerate}
+	\item \textbf{Flujo normal:} 
+		\begin {enumerate}
+			\item La ventana de definición de intervalo aparece.
+			\item El usuario introduce los valores inferior y superior del intervalo en los cuadros de texto.
+			\item El usuario introduce el expertizaje según CU9.
+			\item El usuario guarda los datos pulsando el botón "`Aceptar"'.			
+		\end {enumerate}
+	\item \textbf{Flujo alternativo:} El usuario cancela los cambios con el botón "`Cancelar"'.
+\end{itemize}
+
+\subsubsection{Definir expertizaje de intervalo}
+\begin{itemize}
+	\item \textbf{Id:} CU8
+	\item \textbf{Nombre:} Definir expertizaje de intervalo
+	\item \textbf{Resumen:} El usuario introduce varias opiniones de expertos para un intervalo usando una jerarquía lingüística.
+	\item \textbf{CU Relacionados:} CU7
+	\item \textbf{Precondiciones:} 
+		\begin {enumerate}
+			\item El usuario está añadiendo o editando un intervalo de datos.
+			\item El usuario pulsa el botón "`Expertizaje"'.
+		\end {enumerate}
+	\item \textbf{Postcondiciones:}
+	\begin {enumerate}
+			\item El usuario vuelve a la vista de definición de intervalo.			
+		\end {enumerate}
+	\item \textbf{Flujo normal:} 
+		\begin {enumerate}
+			\item La ventana de definición de expertizaje aparece.
+			\item El usuario selecciona el conjunto de términos a usar con el control desplegable.
+			\item El usuario introduce las opiniones para los extremos inferior y superior del intervalo usando los controles deslizantes.			
+			\item El usuario guarda los datos pulsando el botón "`Aceptar"'.			
+		\end {enumerate}
+	\item \textbf{Flujo alternativo:} El usuario cancela los cambios con el botón "`Cancelar"'.
+\end{itemize}
 
 \section{Requisitos no funcionales}
 Definimos los siguiente requisitos no funcionales que deberá cumplir nuestro software:
@@ -202,17 +417,14 @@ Definimos los siguiente requisitos no funcionales que deberá cumplir nuestro sof
 	\item El software requerirá la presencia del Framework Microsoft .NET versión 4.5 en el sistema operativo. Normalmente este framework viene incluido en las última versiones de Windows, y en caso contrario se instala junto a las actualizaciones normales del sistema.
 	\item El software ofrecerá una interfaz gráfica de usuario (GUI) auto explicativa y acorde a los estándares habituales de uso bajo el S.O. Windows, de forma que el usuario pueda introducir los datos de manera intuitiva. 
 	\item El tiempo de respuesta de la aplicación después de cualquier acción del usuario no debe ser superior a 1 segundo. En caso de que algún proceso requiera más tiempo, una barra de progreso debe ser mostrada al usuario con el tiempo de espera restante, actualizado en tiempo real.
-	\item El servidor de aplicaciones Internet Information Server (IIS), debe ser configurado en el entorno a ejecutar el software si se quiere tener acceso a la funcionalidad de la aplicación mediante la API REST. Esta funcionalidad es opcional y solo necesaria si se quiere ofrecer un interfaz a terceros a través de la web.
+	\item La aplicación debe ser desarrollada utilizando tecnología Microsoft .NET v4.5, con Windows Presentation Foundation como framework para desarrollar la interfaz gráfica. 
+	\item El diseño de la aplicación debe cumplir los principios de SOLID.	
 \end{itemize}
 
 \section{Resumen}
-En el presente capítulo hemos detallado la funcionalidad que queremos implementar en nuestro software.
+En el presente capítulo descrito la funcionalidad que queremos implementar en nuestro software, proveyendo una serie de prototipos orientativos para la interfaz de usuario.
 
-Hemos definido el aspecto que tendrá la interfaz gráfica de usuario, proveyendo una serie de prototipos para esta.
-
-Hemos definido también los contratos para la interfaz REST de forma que cualquier cliente pueda hacer uso del sistema, si lo configuramos para ello.
-
-Hemos listado los requisitos funcionales para toda la funcionalidad, de forma que tenemos una definición formal de toda la funcionalidad ofrecida. 
+A partir de la descripción funcional, hemos concretado una serie de casos de uso del sistema. 
 
 Por último hemos definido los requisitos no funcionales que deberá cumplir el sistema. 
 
