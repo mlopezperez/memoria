@@ -1,2 +1,195 @@
 \chapter{Diseño técnico}
-\section{Introduccion}
+\section{Introducción}
+En el presente capítulo presentaremos la solución técnica que proponemos para implementar la aplicación que permita al usuario ejecutar casos de valoración de empresas usando computación con palabras. 
+
+En primer introduciremos brevemente los principios de arquitectura del software que aplicaremos en el diseño.
+
+Después presentaremos los distintos diagramas con los que modelamos el sistema, incluyendo el diagrama y la descripción de los distintos paquetes, así como los distintos modelos de clases utilizados en cada paquete y los diagramas de flujo y secuencia que describen las interacciones entre estos.
+
+\section{Principios de diseño}
+
+El sistema se ha diseñado usando el enfoque de diseño guiado por el dominio, más conocido por su nombre en inglés "`Domain Driven Design"' o simplemente DDD.
+
+Las premisas del diseño guiado por el dominio son las siguientes:
+\begin{itemize}
+	\item Poner el foco primario del proyecto en el núcleo y la lógica del dominio.
+	\item Basar los diseños complejos en un modelo del dominio.
+	\item Iniciar una colaboración creativa entre técnicos y expertos del dominio para interactuar lo más cercanamente posible a los conceptos fundamentales del problema.
+\end{itemize}
+
+Para aplicaciones desarrolladas con este enfoque bajo el framework .NET de Microsoft, se recomienda la arquitectura en N-Capas, cuyo diagrama se muestra en la figura \ref{fig:nLayerDDD}.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/n-layer-ddd.jpg}
+	\caption{Arquitectura DDD en N capas}
+	\label{fig:nLayerDDD}
+\end{figure}
+
+Los componentes principales de esta arquitectura son:
+\begin{itemize}
+	\item Una capa de presentación o UI. En nuestro proyecto esta capa será la implementación de la UI.
+	\item Una capa de aplicación, con servicios de aplicación que orquestarán los procesos a realizar.
+	\item Una capa de dominio, que incluye todas las entidades de dominio necesarias para modelar nuestro sistema, así como los servicios necesarios para manejar la información dentro de estas entidades.
+	\item Una capa de infraestructura, que implementa los repositorios para persistencia de datos. 
+	\item Una capa de servicios transversales para proveer de funcionalidad genérica a todas las demás. Esta capa suele contener servicios como el \emph{log} de la aplicación, o funciones de seguridad. 
+\end{itemize}
+
+\subsubsection{Principios SOLID}
+
+Además de adherirnos al diseño de N-Capas, durante el diseño y la implementación hemos de tener en cuenta los denominados principios SOLID, que constituyen un conjunto de buenas prácticas dentro de la ingeniería el software. 
+
+Estos principios son 5, formando la primera letra de cada uno de ellos el acrónimo "`SOLID"'.
+\begin{itemize}
+\item \textbf{S - Single Responsibility}: Destinar cada clase a una finalidad sencilla y concreta.
+\item \textbf{O - Open/Closed}: Nuestras clases deben estar abiertas para extenderse, pero cerradas para la modificación. Esto es, nuestro diseño debe permitir que cualquier futura ampliación se haga a partir de herencia o extensiones de las clases existentes, sin necesidad de modificarlas.
+\item \textbf{L - Liskov substition}: Todas las clases derivadas deben crearse de tal forma que también puedan ser tratadas como la propia clase base. 
+\item \textbf{I - Interface segregation}: Es preferible tener muchos interfaces que definan pocos métodos cada uno, a tener pocos interfaces con muchas operaciones.
+\item \textbf{D - Dependency inversion}: Para facilitar tener clases desacopladas, las clases deben depender de abstracciones y no de implementaciones concretas. 
+\end{itemize}
+
+\section{Arquitectura de la aplicación}
+Ahora presentaremos la arquitectura de la aplicación tanto a nivel físico como lógico.
+
+\subsection{Arquitectura física}
+El sistema se compone de una aplicación de escritorio para sistema Windows que debe funcionar de forma autónoma. Dado que no hay persistencia de datos, no se requiere ningún servidor externo, por lo que la arquitectura física se reduce a un sistema PC con sistema Windows.
+
+\subsection{Arquitectura lógica}
+La arquitectura lógica de nuestra aplicación será una versión simplificada de la arquitectura en N-capas para DDD mostrada en la imagen \ref{fig:nLayerDDD}.
+
+Se compondrá de los siguientes paquetes o \emph{assemblies}, si usamos la terminología del framework .NET:
+
+\begin{itemize}
+	\item \textbf{BizVal.App} \\
+	Paquete que contiene la UI como aplicación ejecutable.
+	\item \textbf{BizVal} \\
+	Paquete que contiene el modelo de la aplicación. Contiene los contratos públicos de los servicios y todas las entidades de dominio.
+	\item \textbf{BizVal.Services}
+	Paquete que contiene las implementaciones de los servicios de aplicación.
+	\item \textbf{BizVal.Framework}
+	Paquete de servicios transversales, proveyendo, por ejemplo, el servicio de inyección de dependencias.
+\end{itemize}
+
+Podemos observar las relaciones entre paquetes en el diagrama \ref{fig:umlPackages}.
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{Imagenes/UmlPackages.png}
+	\caption{Paquetes de la aplicación}
+	\label{fig:umlPackages}
+\end{figure}
+
+\section{Modelado del sistema}
+A continuación presentaremos los distintos diagramas UML en los que describimos como hemos modelado el sistema a nivel clase, así como las distintas interacciones.
+
+\subsection{Modelo de dominio}
+A continuación presentamos el diagrama que modela el dominio de la aplicación.
+
+\subsubsection{Modelo de 2-Tuplas}
+En la figura \ref{fig:uml2TuplasModel} podemos ver como se han modelado las etiquetas y las jerarquías lingüísticas. 
+
+\begin{itemize}	
+	\item \textbf{Label}  \\
+	Clase que modela una etiqueta lingüística, incluyendo su término ligado y los valores de la función de pertenencia triangular. 
+	\item \textbf{LabelSet}\\
+	Conjunto de etiquetas lingüísticas. Implementa también las operaciones del modelo de 2-tuplas inherentes a los conjuntos de etiquetas.
+	\item \textbf{Hierarchy} \\
+	Jerarquía lingüística, conteniendo distintos conjuntos de etiquetas. 
+	\item \textbf{TwoTuple} \\
+	Modela una 2-tupla lingüística, incluyendo la etiqueta y la traslación lingüística.	
+\end{itemize}
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1\textwidth]{Imagenes/Uml2TuplasModel.png}
+	\caption{Modelo de 2-tuplas}
+	\label{fig:uml2TuplasModel}
+\end{figure}
+
+\subsubsection{Modelado del expertizaje}
+
+El siguiente diagrama de clases muestra el modelado de los expertizajes.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1\textwidth]{Imagenes/UmlExpertiseModel.png}
+	\caption{Clases para expertizaje}
+	\label{fig:umlExpertiseModel}
+\end{figure}
+
+El modelo contiene las siguientes clases:
+\begin{itemize}	
+	\item \textbf{Interval} \\
+	Modela un intervalo con su extremo superior e inferior. Así mismo en esta clase definiremos operadores de suma, resta, etc. para facilitar la operación con intervalos.
+	\item \textbf{Expertise} \\
+	Modela un expertizaje, definido como una serie de opiniones expresadas con 2-tuplas lingüísticas.
+	\item \textbf{Opinión} \\
+	Pareja de 2-tuplas para expresar una opinión sobre un intervalo. La primera corresponde a la opinión sobre el extremo inferior del intervalo, y la segunda corresponde al extremo superior.	
+\end{itemize}
+
+\subsection{Servicios de aplicación}
+
+En la capa de servicios de aplicación hemos definido cuatro interfaces para los 4 servicios principales.
+ 
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1\textwidth]{Imagenes/UmlServices.png}
+	\caption{Servicios de aplicación}
+	\label{fig:umlServiciosAplicacion}
+\end{figure}
+
+Podemos ver los siguientes servicios:
+\begin{itemize}	
+	\item \textbf{ICompanyValuator} \\
+	Interfaz que define las operaciones de valoración de empresas. Esto es, el método del Cashflow y el método de análisis mixto.
+	\item \textbf{ILamaAggregator}  \\
+	Interfaz que define la operación de agregación usando el operador LAMA. A partir de un expertizaje sobre un intervalo, nos devuelve un intervalo ajustado con la información lingüística del expertizaje.
+	\item \textbf{IExpertoneAggregator}\\
+	Interfaz que define la operación de agregación usando el método de los expertones. A partir de un expertizaje sobre un intervalo, nos devuelve un intervalo ajustado con la información lingüística del expertizaje.
+	\item \textbf{ICompanyValuatorCw} \\
+	Interfaz que define las operaciones que aúnan valoración de empresas con agregación lingüística. Como vemos en el diagrama, hace uso de todos los interfaces anteriores.
+		\item \textbf{IHierarchyManager} \\
+	Interfaz que define las operaciones para cargar y guardar la jerarquía lingüística con la que definir los expertizajes. 
+\end{itemize}
+
+Todas las interfaces van ligadas a sus respectivas implementaciones.
+
+Para mostrar como interactúan dichos servicios, podemos poner como ejemplo el diagrama de secuencia \ref{fig:umlServiciosSequence} que muestra las interacciones al ejecutar la operación de valoración por Cashflow usando agregación por expertones. En el diagrama vemos como un cliente, en nuestro caso la UI, desencadena la interacción entre servicios. Vemos también como se ejecuta la llamada a la interfaz de valoración sin agregación para obtener los resultados comparativos.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1\textwidth]{Imagenes/UmlServicesSequence.png}
+	\caption{Secuencia de valoración con Cashflow + Expertones}
+	\label{fig:umlServiciosSequence}
+\end{figure}
+
+Hemos omitido en esta memoria el resto de clases auxiliares necesarias durante la implementación, puesto que no aportan información relevante sobre el diseño. 
+
+\section{Implementación}
+A continuación detallamos algunos aspectos de la implementación:
+
+\subsection{Test Driven Development}
+Para implementar el modelo propuesto se ha usado la técnica TDD \emph{(Test Driven Development)}, consistente en escribir los test unitarios antes que el código productivo. De esta forma es más fácil enfocarse en los casos extremos y se incrementa la cobertura de test del código.
+
+La técnica del TDD consta de tres pasos que se han de repetir en ciclo:
+\begin{itemize}
+	\item Se escribe un caso de test que no pase.
+	\item Se escribe solo la cantidad de código productivo necesario para que el test pase.
+	\item Se refactoriza el código escrito hasta el momento si es necesario.
+\end{itemize}
+
+\subsection{Patrón Model-View-ViewModel para la UI}
+En la implementación de la UI se ha utilizado el framework Caliburn.Micro\cite{caliburnMicro} para implementar el patrón Model-View-ViewModel recomendado por Microsoft para las aplicaciones en Windows Presentation Foundation.
+
+\section{Resumen}
+En el presente capítulo hemos visto la propuesta de diseño técnico para implementar la aplicación objetivo de este proyecto.
+
+Hemos introducido los principios de arquitectura que se han usado durante el diseño, y se ha presentado la arquitectura a alto nivel. Después hemos mostrado las partes más importantes del modelo de dominio y de la capa de servicios con sus correspondientes diagramas de clase.
+
+Con el presente capítulo damos por terminada la tercera parte de esta memoria en la que hemos presentado el análisis funcional y el diseño técnico del sistema a implementar. En la próxima sección veremos las conclusiones del proyecto y las posibles ampliaciones.
+
+
+
+
+
+
+
