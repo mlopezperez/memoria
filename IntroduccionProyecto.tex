@@ -1,7 +1,6 @@
 \chapter{Introducción}
 
 \section{Antecedentes}
-
 La búsqueda del valor de una empresa es un problema común que se ha convertido en un pilar básico en finanzas. De hecho, el objetivo financiero de cualquier empresa no es otro que maximizar dicho valor. Esta circunstancia ha convertido la valoración de empresas en un desafío para cualquier analista o agente. La metodología que facilita la obtención de dicho valor surge de la evolución de la teoría financiera, siendo su idea fundamental que el valor de los activos es la actualización de los flujos financieros que es capaz de generar en el futuro.
 
 El valor busca su apoyo en un fundamento lógico o matemático lo más riguroso posible. Busca la objetividad, la neutralidad y la independencia frente a las partes, las fuertes relaciones en el mercado, e incluso la propia situación del mercado. Sin embargo, la necesidad de predecir escenarios futuros en los cuales se va a desarrollar la actividad de la misma, amén de otras circunstancias, genera la imposibilidad de determinar un único valor, lo que nos limita a establecer un rango u horquilla de valores posibles, dentro de los cuales se encontrará el valor más probable de la empresa. El valor definitivo vendrá por consenso y/o negociación entre las partes interesadas. En consecuencia, será la amplitud de la horquilla de valores posibles la que finalmente caracterice el informe de valoración previo a la decisión.
@@ -11,35 +10,23 @@ Por otra parte, la computación con palabras es un sistema de computación que ofr
 Usando esta herramienta queremos dar un salto de calidad en la mejora de la información disponible para el inversor, dado que si con la metodología propuesta logramos cerrar la horquilla de valores posibles, acercaremos las posturas de las partes interesadas. Si lo conseguimos, habremos aumentado la posibilidad de acuerdo en cerrar la operación en un precio de equilibrio consensuado o mínimamente negociado. De esta forma habremos colaborado al aumento de la liquidez y eficiencia del mercado.
 
 \section{Objetivos del proyecto}
-
-El objetivo principal es la implementación algorítmica de dos métodos de valoración de empresas usando computación con palabras. Por un lado, el denominado \emph{Método de flujos descontados (Discounted Cash-flow) con operadores OWA}\cite{Cashflow1} y por otro el \emph{Método de Análisis Mixto o Método operativo con operadores OWA}\cite{Expertones1}. Estos métodos hacen uso de computación con palabras a través del concepto de \emph{Mayoría Lingüística} y el operador $LAMA$, que es uno de los denominados \emph{operadores de agregación OWA (Ordered Weight Averaging)}.
-
-Además, con el fin de comparar los resultados, se implementará también la agregación de información lingüística al proceso de valoración usando el método de los expertones\cite{TuplasMenda}.
-
-Así mismo, se implementará una interfaz de usuario para la ejecución de casos de ejemplo con ambos métodos, facilitando la entrada de datos de forma sencilla e intuitiva, y que muestre los resultados obtenidos de forma comparativa, clara y concisa a cualquier usuario. 
+El objetivo principal de este proyecto es el desarrollo e implementación de una plataforma de valoración de empresas usando métodos basados en computación con palabras. En concreto la plataforma implementará dos métodos: el \emph{Método de flujos descontados (Discounted Cash-flow)}; y  un segundo método denominado \emph{Método de Análisis Mixto}. En ambos métodos se realizará una agregación de información cualitativa mediante computación con palabras, utilizando el operador $LAMA$ y el método de los expertones.
 
 \section{Estructura de la memoria}
+La memoria ha sido estructurada en 8 capítulos.
 
-Para la presentación del proyecto estructuraremos la presente memoria en 4 partes, constando de 8 capítulos y dos apéndices, siendo la primera parte este capítulo de introducción y objetivos.
+En el primero, que ya ha sido mostrado, se realiza la introducción y se muestran los objetivos del proyecto.
 
-En la segunda parte de la memoria introduciremos todos los conceptos previos que necesitaremos para implementar nuestro proyecto.
+En el capítulo dos trataremos de forma más extensa la problemática de la valoración de empresas, incidiendo en la importancia de la inclusión de información cualitativa en el proceso de valoración. Así mismo presentaremos los métodos de valoración de empresas más utilizados, los cuales queremos mejorar utilizando información lingüística.
 
-\begin{itemize}
-	\item En el capítulo dos trataremos de forma más extensa la problemática de la valoración de empresas, incidiendo en la importancia de la inclusión de información cualitativa en el proceso de valoración. Así mismo presentaremos los métodos de valoración de empresas más utilizados, los cuales queremos mejorar utilizando información lingüística.
-	\item En el tercer capítulo introduciremos los conceptos básicos para la computación con palabras. Presentaremos los conceptos de lógica difusa y conjunto difuso, que son la base para la matemática sobre la que se basa el paradigma de la computación con palabras, e introduciremos los conceptos de etiqueta lingüística y el modelo de 2-tuplas para la representación de la información lingüística. 
-	\item En el cuarto capítulo introduciremos los distintos métodos de agregación de información lingüística. Hablaremos del concepto de \emph{mayoría lingüística}, que nos permite obtener un valor representativo a partir de distintos términos lingüísticos en lenguaje natural, y presentaremos el operador $LAMA$. También haremos un breve repaso al método de los expertones basado en 2-tuplas, que es otro método para obtener valores representativos a partir de información lingüística.
-	\item En el quinto capítulo unificaremos los conceptos de computación con palabras y de valoración de empresas. Veremos de forma práctica como aplicar información lingüística al proceso de valoración de una empresa, ajustando los datos de valoración acorde a las opiniones de diversos expertos, expresadas estas en lenguaje natural mediante un conjunto de etiquetas lingüísticas.
-\end{itemize}
+En el tercer capítulo introduciremos los conceptos básicos para la computación con palabras. Presentaremos los conceptos de lógica difusa y conjunto difuso, que son la base para la matemática sobre la que se basa el paradigma de la computación con palabras, e introduciremos los conceptos de etiqueta lingüística y el modelo de 2-tuplas para la representación de la información lingüística. 
 
+En el cuarto capítulo introduciremos los distintos métodos de agregación de información lingüística. Hablaremos del concepto de \emph{mayoría lingüística}, que nos permite obtener un valor representativo a partir de distintos términos lingüísticos en lenguaje natural, y presentaremos el operador $LAMA$. También haremos un breve repaso al método de los expertones basado en 2-tuplas, que es otro método para obtener valores representativos a partir de información lingüística.
 
+En el quinto capítulo unificaremos los conceptos de computación con palabras y de valoración de empresas. Veremos de forma práctica como aplicar información lingüística al proceso de valoración de una empresa, ajustando los datos de valoración acorde a las opiniones de diversos expertos, expresadas estas en lenguaje natural mediante un conjunto de etiquetas lingüísticas.
 
-En la tercera parte de la memoria estudiaremos como implementar en un sistema de información la aplicación que es el objetivo de este proyecto.
+En el sexto capítulo realizaremos un análisis funcional de la aplicación. Si bien el análisis del negocio para la aplicación ya fue descrito en profundidad en la segunda parte de la memoria, en este capítulo nos centraremos en acotar y describir la funcionalidad que nuestra aplicación implementará, siempre desde el punto de vista de la ingeniería del software y enfocando el análisis a los requerimientos del usuario final de la aplicación
 
-\begin{itemize}
-	\item En el sexto capítulo realizaremos un análisis funcional de la aplicación. Si bien el análisis del negocio para la aplicación ya fue descrito en profundidad en la segunda parte de la memoria, en este capítulo nos centraremos en acotar y describir la funcionalidad que nuestra aplicación implementará, siempre desde el punto de vista de la ingeniería del software y enfocando el análisis a los requerimientos del usuario final de la aplicación
-	\item En el séptimo capitulo presentaremos el diseño técnico propuesto para la implementación de la aplicación, presentando formalmente los esquemas UML que describirán la implementación. 
-\end{itemize}
+En el séptimo capitulo presentaremos el diseño técnico propuesto para la implementación de la aplicación, presentando formalmente los esquemas UML que describirán la implementación. 
 
-La última parte constará de un capítulo de conclusiones, en el que además sugeriremos futuros trabajos a realizar, ya sean mejoras sobre la implementación de los métodos de valoración como posibles mejoras o ampliaciones de la funcionalidad de la interfaz de usuario.
-
-Para finalizar se incluirá la bibliografía utilizada para la realización del proyecto.
+Finalmente se muestran las conclusiones y se sugieren futuros trabajos.

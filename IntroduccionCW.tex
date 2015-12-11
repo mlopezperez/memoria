@@ -57,7 +57,6 @@ Entre las funciones más usadas se encuentran la triangular, la trapezoidal, la g
 Sea $a$ el límite inferior de un conjunto, sea $b$ su límite superior, y sea $m$ su valor modal, tal que $a<m<b$.
 Se define la función de pertenencia triangular $A:X\rightarrow\left[0,1\right]$ como:
 	\begin{equation}
-	\label{eq:pertenenciaTriangular}
 		A(x) = 
 			\begin{cases}
 				0 & si \ x\leq a \\
@@ -65,6 +64,7 @@ Se define la función de pertenencia triangular $A:X\rightarrow\left[0,1\right]$ 
 				\frac{\left(b-x\right)}{\left(b-m\right)} & si \ x\in \left(m,b\right) \\
 				0 & si \ x \geq b
 			\end {cases}
+			\label{eq:pertenenciaTriangular}
 	\end{equation}
 	\label{def:pertenenciaTriangular}
 \end{defi}
@@ -242,5 +242,3 @@ Después hemos introducido el modelo de 2-tuplas para computación con palabras, q
 Por último hemos mostrado una manera de trasladar información lingüística de un dominio a otro, lo que nos permitirá trabajar con información estandarizada en el mismo dominio.
 
 En el próximo capítulo introduciremos los conceptos de \emph{agregación} y \emph{mayoría lingüística}, de forma que, usando el modelo de 2-tuplas mostrado en éste capítulo, podamos recabar una serie de valores de información cuantitativa y obtener un único valor representativo de todos ellos.
-
-
