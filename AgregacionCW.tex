@@ -57,8 +57,8 @@ La  cuantificación individual consiste en indicar el grado con que cada miembro 
 \begin{figure}[ht]
 	\centering
 		\includegraphics[scale=0.6]{Imagenes/CuantificadorIndividual.png}
-	\label{fig:cuantificadorIndividual}
 	\caption{Representación gráfica del corte del cuantificador con la semántica de cuantificación individual}
+		\label{fig:cuantificadorIndividual}
 \end{figure}
 
 Pero desde un punto de vista social existen problemas de toma de decisión en grupo donde se debe cumplir la premisa, que todos los grupos de opiniones estén representados por al menos un representante. Como muestra la figura \ref{fig:cuantificadorIndividual} esta premisa no siempre se cumple con la cuantificación individual ya que existen grupos de opinión que son eliminados del proceso de decisión. Para solucionar este problema se propone la cuantificación en grupo, la cual siempre garantiza dicha premisa. La figura \ref{fig:cuantificadorGrupo} muestra un ejemplo de aplicación de la cuantificación en grupo sobre un conjunto de valores a agregar. Los valores por encima de la línea no son considerados en la agregación.
@@ -66,16 +66,16 @@ Pero desde un punto de vista social existen problemas de toma de decisión en gru
 \begin{figure}[ht]
 	\centering
 		\includegraphics[scale=0.6]{Imagenes/CuantificadorGrupo.png}
-		\label{fig:cuantificadorGrupo}
 		\caption{Representación gráfica del corte del cuantificador con la semántica de cuantificación en grupo}
+		\label{fig:cuantificadorGrupo}
 \end{figure}
 
 La aplicación de los procesos de mayoría fuzzy permite dar mayor representatividad a los resultados en los procesos de decisión, permitiendo modelar conceptos como muchos, pocos, algunos, etc. En la figura \ref{fig:dominios} se muestra el dominio de los procesos clásicos, los procesos de mayoría  y los procesos de mayoría fuzzy. Para ello se ha considerado un ejemplo con 7 valores que han sido representados mediante elipses. 
 \begin{figure}[ht]
 	\centering
 			\includegraphics{Imagenes/Dominios.png}
-		\label{fig:dominios}
 	\caption{Dominio de los procesos de decisión tradicionales, de mayoría, y de mayoría \emph{fuzzy}}
+	\label{fig:dominios}
 \end{figure}
 
 Diferentes operadores de mayoría han sido definidos en la literatura. Así, para representar el concepto de mayoría en entornos aditivos, destaca el operador $MA-OWA$, o para mayoría cuantificada operadores como $IOWA$ y $QMA-OWA$. A continuación se va a presentar de manera formal el operador $LAMA$, que será utilizado posteriormente para agregar la información lingüística al proceso de valoración de empresas. 
@@ -85,7 +85,6 @@ Diferentes operadores de mayoría han sido definidos en la literatura. Así, para 
 El operador $LAMA$, acrónimo de \emph{Linguistic Aggregation of Majority Additive} o \emph{Agregación lingüística de mayoría aditiva} es presentado en el artículo \emph{LAMA: A linguistic aggregation of Majority Additive Operator}\cite{PelaezLAMA} de J.I. Peláez y J.M. Doña, y es un operador de mayoría para entornos lingüísticos con un espacio de etiquetas $S$, que se define como una media aritmética de medias aritméticas, de forma que el resultado final es una media aritmética ponderada.
 
 \begin{defi}
-\label{def:lama}
 Sean las etiquetas $p_{1}, p_{2}, \ldots, p_{n} \in  P$ tales que $t > 0$ y sea $\delta_{1},\delta_{2},\ldots,\delta_{n} \in N$ las frecuencias o cardinalidad de las etiquetas, donde $\delta_{i}\leq\delta_{i+1}$ para todo $1\leq i \leq n-1 $. El operador $LAMA$ es la etiqueta $p_{m}$ dada por:
 \begin{gather*}
 p_{m} = LAMA((p_{1},\delta_{1}),(p_{2},\delta_{2}),\ldots,(p_{n},\delta_{n}))	\\
@@ -111,13 +110,13 @@ con
 		\end{cases}
 	\end{align*}
 y donde $\oplus$ es la suma de etiquetas y $\otimes$ es el producto de una etiqueta por un real positivo.
+\label{def:lama}
 \end{defi}
 
 \subsection{El operador $LAMA$ utilizando representación con 2-tuplas}
 Podemos definir el operador $LAMA^{e}$ como una extensión del operador $LAMA$ para operar con información lingüística representada mediante el modelo de 2-tuplas expuesto.
 
 \begin{defi}
-\label{def:lamae}
 Sean $(p_{1}, \alpha_{1}),\ (p_{2},\alpha_{2}),\ldots,\ (p_{n}, \alpha_{n})$ las 2-tuplas a ser agregadas, y sean$ \delta_{1},\ \delta_{2},\ldots\ \delta_{n} \in N$ la frecuencia o cardinalidad de dichas 2-tuplas, donde $\delta_{i} \leq \delta_{i+1}$ para todo $1 \leq i \leq n-1$. El operador $LAMA^{e}$ es la 2-tupla $(p_{m},\alpha_{m})$ dada por:
 
 \begin{equation}
@@ -165,6 +164,7 @@ y
 		\end{cases}	
 \label{eq:thetaForWeights}
 \end{equation}	
+\label{def:lamae}
 \end{defi}
 
 
@@ -174,7 +174,6 @@ El valor de la cardinalidad de cada 2-tupla puede calcularse usando dos metodolo
 	\item Usando como cardinalidad el número de 2-tuplas que representan información similar. 
 \end{enumerate}
 \begin{defi}
-\label{def:comparacion2tupla}
 Sean $(p_{i},\alpha_{1})$ y $(p_{j},\alpha_{2})$ dos 2-tuplas, cada una representando una cantidad de información, entonces, si $i=j$, entonces:
 \begin{itemize}
 	\item Si $\alpha_{1} = \alpha_{2}$, entonces ambas tuplas representan la misma información
@@ -184,6 +183,7 @@ Sean $(p_{i},\alpha_{1})$ y $(p_{j},\alpha_{2})$ dos 2-tuplas, cada una represen
 		\item Si $\alpha_{1} > \alpha_{2}$, entonces $(p_{i},\alpha_{1})$ es mayor que $(p_{j},\alpha_{2})$
 	\end{itemize}
 \end{itemize}   
+\label{def:comparacion2tupla}
 \end{defi}
 
 \section{Método de los expertones}
@@ -299,14 +299,14 @@ De esta forma obtenemos el $R^{+}$-Experton para el ejemplo en la tabla \ref{tab
 \end{table}
 
 Finalmente obtenemos el intervalo ajustado, calculando la esperanza matemática del $R^{+}$-expertón. Esto es, sumando todos los valores del expertón en cada extremo del intervalo (excepto el nivel 0), y dividiendo entre el número de elementos.
-	
-	\[
-	\begin{gathered}
+
+\begin{equation*}
+\begin{gathered}
 	i_{inicial} = \left[0,04, 0.05\right] \\
 	i_{ajustado} = \left[0.04610, 0.04720\right]
-	\end{gathered}
-\]
-
+\end{gathered}
+\label{eq:resultados}
+\end{equation*}
 \end{ejem}
 
 \section{Resumen}

@@ -80,10 +80,10 @@ Conjunto 3:
 		&\ S_{4}^{9}\left(Medio\right),
 		S_{3}^{9}\left(LigeramenteBajo\right),
 		S_{2}^{9}\left(Bajo\right),
-		S_{1}^{9}\left(MuyBajo\right),
-		S_{0}^{9}\left(CasiNulo\right)		
+		S_{1}^{9}\left(MuyBajo\right),\\
+		&\ S_{0}^{9}\left(CasiNulo\right)		
 	\}
-	\end{split}	
+	\end{split}
 	\label{eq:set3}
 \end{equation*}
 
@@ -306,6 +306,7 @@ Que una vez estandarizado al conjunto de términos $S_9$ y expresado con notación
 
 \begin{table}[!htb]
 \centering	
+\resizebox{\columnwidth}{!}{%
 	\begin{tabular}{c | c  | c | c}
 		\toprule
 		Compradores	& $[4000, 6000]$ & $[3000, 6000]$ & $[2000, 5000]$ \\ 
@@ -324,7 +325,8 @@ Que una vez estandarizado al conjunto de términos $S_9$ y expresado con notación
 		$e_4$	&	$(S_4^9, 0) - (S_6^9, 0)$			& $(S_2^9, 0) - (S_4^9, 0)$			& $(S_2^9, 0) - (S_6^9, 0)$	\\
 		$e_4$	&	$(S_5^9, 0) - (S_6^9, 0)$			& $(S_7^9, 0) - (S_8^9, 0)$			& $(S_6^9, 0) - (S_7^9, 0)$	\\		
 		\bottomrule
-	\end{tabular}
+	\end{tabular}%
+	}
 	\caption{Expertizaje de beneficios futuros estandizado}
 	\label{tab:expertizajeBeneficiosEstandar}
 \end{table}
