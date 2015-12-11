@@ -1,4 +1,4 @@
-\chapter{Diseño técnico}
+\chapter{Diseño e Implementación}
 \section{Introducción}
 En el presente capítulo presentaremos la solución técnica que proponemos para implementar la aplicación que permita al usuario ejecutar casos de valoración de empresas usando computación con palabras. 
 
@@ -165,7 +165,6 @@ Para mostrar como interactúan dichos servicios, podemos poner como ejemplo el di
 Hemos omitido en esta memoria el resto de clases auxiliares necesarias durante la implementación, puesto que no aportan información relevante sobre el diseño. 
 
 \section{Implementación}
-A continuación detallamos algunos aspectos de la implementación:
 
 \subsection{Test Driven Development}
 Para implementar el modelo propuesto se ha usado la técnica TDD \emph{(Test Driven Development)}, consistente en escribir los test unitarios antes que el código productivo. De esta forma es más fácil enfocarse en los casos extremos y se incrementa la cobertura de test del código.
@@ -177,8 +176,16 @@ La técnica del TDD consta de tres pasos que se han de repetir en ciclo:
 	\item Se refactoriza el código escrito hasta el momento si es necesario.
 \end{itemize}
 
-\subsection{Patrón Model-View-ViewModel para la UI}
+\subsection{Entorno de desarrollo}
+Para redactar la documentación se ha utilizado lenguaje \LaTeX, a partir de la distribución \textbf{MikTex}, con el IDE \textbf{TeXnicCenter}.
+
+El diseño de los mocks de la UI se hecho utilizando la aplicación \textbf{Balsamic MockUps}.
+
 En la implementación de la UI se ha utilizado el framework Caliburn.Micro\cite{caliburnMicro} para implementar el patrón Model-View-ViewModel recomendado por Microsoft para las aplicaciones en Windows Presentation Foundation.
+
+Para el diseño de esquemas UML se ha utilizado \textbf{Enterprise Architect v12 Trial Version}.
+
+Para el desarrollo del código se ha utilizado \textbf{Visual Studio 2013 - Community Edition}.
 
 \section{Resumen}
 En el presente capítulo hemos visto la propuesta de diseño técnico para implementar la aplicación objetivo de este proyecto.
@@ -186,10 +193,3 @@ En el presente capítulo hemos visto la propuesta de diseño técnico para implemen
 Hemos introducido los principios de arquitectura que se han usado durante el diseño, y se ha presentado la arquitectura a alto nivel. Después hemos mostrado las partes más importantes del modelo de dominio y de la capa de servicios con sus correspondientes diagramas de clase.
 
 Con el presente capítulo damos por terminada la tercera parte de esta memoria en la que hemos presentado el análisis funcional y el diseño técnico del sistema a implementar. En la próxima sección veremos las conclusiones del proyecto y las posibles ampliaciones.
-
-
-
-
-
-
-

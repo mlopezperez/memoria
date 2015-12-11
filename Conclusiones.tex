@@ -1,3 +1,30 @@
 \chapter{Conclusiones}
-\section{Conclusiones}
+
+\section{Conclusiones sobre computación con palabras}
+
+En el aspecto teórico de la valoración de empresas utilizando computación con palabras:
+\begin{itemize}
+	
+	\item La aportación de información cualitativa al proceso de valoración de empresas puede reducir drásticamente la amplitud del intervalo de posibles valores, facilitando la negociación entre partes.
+	\item La manera de agregar dicha información lingüística influye decisivamente en la reducción de dicha amplitud, siendo diferentes las amplitudes obtenidas si agregamos utilizando el operador a si utilizamos otros métodos como el de los expertones.
+\end{itemize}
+
+\section{Conclusiones sobre la ejecución del software}
+A nivel de diseño e implementación de la aplicación:
+\begin{itemize}
+	\item De cara al usuario, es tan importante diseñar una UI intuitiva y fácil de utilizar, como una arquitectura sólida y fácilmente ampliable para el backend. 
+	\item La aplicación de técnicas comprobadas de diseño e implementación, como DDD y TDD facilitan el diseño y la implementación y minimizan los errores cometidos y la presencia de bugs. 		
+\end{itemize}
+
 \section{Futuras ampliaciones y mejoras}
+Dado que la aplicación está pensada como demostración en un entornos educativo, no está preparada para ser utilizada como herramienta de valoración vinculante en un proceso de valoración real de empresas, si bien puede servir como base para desarrollar una herramienta que sí lo sea.
+
+Por tanto se proponen las siguientes mejoras a realizar en iteraciones futuras:
+
+\begin{enumerate}
+	\item Encapsular las interfaces principales de la capa de servicio valoración de empresas y ajustes de intervalos usando LAMA y expertones en una API REST accesible vía internet usando el protocolo HTTP, de forma que pueda ser desplegada como un microservicio y consumida por cualquier cliente web. 
+	\item Añadir nuevas metodologías de valoración de empresas, tanto en los interfaces de backend como en la UI, de forma que se pueda comprobar si el ajuste con información lingüística es igualmente efectivo con métodos de valoración menos habituales.
+	\item Mejorar la interfaz de usuario para la definición de jerarquías, añadiendo un generador automático de jerarquías y etiquetas, de forma que el usuario pueda abstraerse totalmente de los conceptos de etiqueta lingüística y los valores de estas.
+	\item Añadir una visualización gráfica a los resultados de la valoración por los distintos métodos, de forma que el usuario pueda comparar visualmente la mejora en los intervalos cuando se utiliza información lingüística.
+	\item Una vez definida la interfaz REST del punto 1, ejecutar un lote de pruebas con distintos casos extremos para comprobar el efecto de la agregación lingüística en dichos casos. Por ejemplo, comprobar la evolución de la amplitud del intervalo de valores conforme aumentamos el número de opiniones, o comprobar el efecto si las opiniones siguen una distribución aleatoria. 
+\end{enumerate}
