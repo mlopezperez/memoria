@@ -1,30 +1,38 @@
 \chapter{Conclusiones}
 
+Durante el presente proyecto hemos tenido la oportunidad de exponer los principios de la computación con palabras así como de la valoración de empresas, y hemos unido ambos conceptos, para intentar mejorar el proceso de valoración de una empresa. 
+
 \section{Conclusiones sobre computación con palabras}
 
-En el aspecto teórico de la valoración de empresas utilizando computación con palabras:
-\begin{itemize}
-	
+En el aspecto teórico de la valoración de empresas utilizando computación con palabras, podemos obtener las siguiente conclusiones:
+\begin{itemize}	
+	\item El proceso de valoración de una empresa está sujeto a muchas variables díficiles de expresar numéricamente, debido al entorno de incertidumbre en que se produce.
+	\item La computación con palabras, basada en la lógica difusa, nos permite añadir información no cualitativa, en lenguaje natural, a dicho proceso de valoración.
+	\item El modelo de 2-tuplas nos aporta un modelo fácilmente computable para manejar etiquetas lingüísticas sin pérdida de información.
 	\item La aportación de información cualitativa al proceso de valoración de empresas puede reducir drásticamente la amplitud del intervalo de posibles valores, facilitando la negociación entre partes.
 	\item La manera de agregar dicha información lingüística influye decisivamente en la reducción de dicha amplitud, siendo diferentes las amplitudes obtenidas si agregamos utilizando el operador a si utilizamos otros métodos como el de los expertones.
+	\item En todas las pruebas realizadas, el operador $LAMA$ consigue intervalos más ajustados que el método de los expertones y que la valoración sin información lingüística.
 \end{itemize}
 
 \section{Conclusiones sobre la ejecución del software}
-A nivel de diseño e implementación de la aplicación:
+
+Del proceso de diseño e implementación de la aplicación, podemos concluir que:
 \begin{itemize}
-	\item De cara al usuario, es tan importante diseñar una UI intuitiva y fácil de utilizar, como una arquitectura sólida y fácilmente ampliable para el backend. 
-	\item La aplicación de técnicas comprobadas de diseño e implementación, como DDD y TDD facilitan el diseño y la implementación y minimizan los errores cometidos y la presencia de bugs. 		
+	\item Durante el proceso de diseño de prototipos de la UI, fue necesario crear y descartar varios diseños para las ventanas de definición de jerarquías lingüísiticas, así como de la ventana de introducción de expertizajes, por no tener un nivel de usabilidad lo suficientemente intuitivo. De esto podemos concluir que, de cara al usuario, es tan importante diseñar una UI intuitiva y fácil de utilizar, como una arquitectura sólida y fácilmente ampliable para el backend. 
+		\item Es de vital importancia la definición previa de requisitos funcionales y casos de uso, de forma que los límites de la implementación queden bien acotados.
+		\item La aplicación de técnicas comprobadas de diseño e implementación, como DDD y TDD facilitan el diseño y la implementación y minimizan los errores cometidos y la presencia de bugs. El hecho de tener una batería de test unitarios funcional y representativa permite desarrollar iterativa, añadiendo cada vez nuevas funcionalidades, con la tranquilidad de que la funcionalidad existente no se verá afectada.
+		\item Aún teniendo una batería de tests suficientemente ámplia, siempre son necesarios test de integración, tanto a nivel de API como de UI para garantizar el correcto funcionamiento de la aplicación. Debido a la falta de tiempo, para el presente proyecto dichos tests se han realizado de manera manual a partir de los casos de uso definidos.
 \end{itemize}
 
 \section{Futuras ampliaciones y mejoras}
-Dado que la aplicación está pensada como demostración en un entornos educativo, no está preparada para ser utilizada como herramienta de valoración vinculante en un proceso de valoración real de empresas, si bien puede servir como base para desarrollar una herramienta que sí lo sea.
+Dado que la aplicación está pensada como demostración en un entorno académico, no está preparada para ser utilizada como herramienta de valoración vinculante en un proceso de valoración real de empresas, si bien puede servir como base para desarrollar una herramienta que sí lo sea.
 
 Por tanto se proponen las siguientes mejoras a realizar en iteraciones futuras:
 
 \begin{enumerate}
-	\item Encapsular las interfaces principales de la capa de servicio valoración de empresas y ajustes de intervalos usando LAMA y expertones en una API REST accesible vía internet usando el protocolo HTTP, de forma que pueda ser desplegada como un microservicio y consumida por cualquier cliente web. 
-	\item Añadir nuevas metodologías de valoración de empresas, tanto en los interfaces de backend como en la UI, de forma que se pueda comprobar si el ajuste con información lingüística es igualmente efectivo con métodos de valoración menos habituales.
 	\item Mejorar la interfaz de usuario para la definición de jerarquías, añadiendo un generador automático de jerarquías y etiquetas, de forma que el usuario pueda abstraerse totalmente de los conceptos de etiqueta lingüística y los valores de estas.
 	\item Añadir una visualización gráfica a los resultados de la valoración por los distintos métodos, de forma que el usuario pueda comparar visualmente la mejora en los intervalos cuando se utiliza información lingüística.
+	\item Encapsular las interfaces principales de la capa de servicio valoración de empresas y ajustes de intervalos usando LAMA y expertones en una API REST accesible vía internet usando el protocolo HTTP, de forma que pueda ser desplegada como un microservicio y consumida por cualquier cliente web. 
+	\item Añadir nuevas metodologías de valoración de empresas, tanto en los interfaces de backend como en la UI, de forma que se pueda comprobar si el ajuste con información lingüística es igualmente efectivo con métodos de valoración menos habituales.	
 	\item Una vez definida la interfaz REST del punto 1, ejecutar un lote de pruebas con distintos casos extremos para comprobar el efecto de la agregación lingüística en dichos casos. Por ejemplo, comprobar la evolución de la amplitud del intervalo de valores conforme aumentamos el número de opiniones, o comprobar el efecto si las opiniones siguen una distribución aleatoria. 
 \end{enumerate}
