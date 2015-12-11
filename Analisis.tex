@@ -88,7 +88,7 @@ Para cada término, debemos definir los valores mínimo, medio y máximo correspond
 
 Una vez guardados los cambios, podremos utilizar la jerarquía para definir expertizajes en cualquiera de los dos métodos de valoración a utilizar.
 
-\subsection{Definición de valores para la valoración}
+\subsection{Definición de parámetros de valoración}
 Para realizar la valoración de una empresa utilizando el método del cashflow o de análisis mixto, tendremos que introducir los distintos intervalos de valoración, y sus correspondientes expertizajes.
 
 Tanto en la vista de datos para el método del cashflow como para el método del análisis mixto, tendremos sendas tablas en las que podremos definir los intervalos para los distintos datos necesarios. Estos son:
@@ -146,48 +146,40 @@ Cuando queramos añadir o editar un intervalo, haciendo uso de los botones "`Añad
 	\label{fig:mockUiDefineInterval}
 \end{figure}
 
-Si al intentar aceptar el intervalo no se cumple que valor del límite inferior es menor que el valor del límite superior, una advertencia se mostrará al usuario y no se podrán aceptar los valores hasta que se hayan corregido (figura \ref{fig:mockUiDefineIntervalWarning}).
-
-\begin{figure}[htbp]
-	\centering
-		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiDefineIntervalWarning.png}
-	\caption{Advertencia de intervalo incorrecto}
-	\label{fig:mockUiDefineIntervalWarning}
-\end{figure}
+Si al intentar aceptar el intervalo no se cumple que valor del límite inferior es menor que el valor del límite superior, el botón de aceptar aparecerá desactivado hasta que dicha circunstancia se corrija.
 
 \subsection{Definición de los expertizajes}
-Si al crear o editar el intervalo, hacemos click en el botón "`Expertizaje"', podremos definir el expertizaje de cada extremo del intervalo. Se mostrará una nueva ventana (figura \ref{fig:mockUiDefineExpertise}) con dos pestañas, una para cada extremo del intervalo, en la que podremos añadir una nueva linea por cada opinión.
+Si al crear o editar el intervalo, hacemos click en el botón "`Expertizaje"', podremos definir el expertizaje de cada extremo del intervalo. Se mostrará una nueva ventana (figura \ref{fig:mockUiDefineExpertise}) con controles para definir una opinión para cada extremo del intervalo, en la que podremos añadir una nueva linea por cada opinión.
 
 \begin{figure}[htbp]
 	\centering
-		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiDefineExpertise.png}
+		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiExpertise.png}
 	\caption{Ventana de definición de expertizaje}
 	\label{fig:mockUiDefineExpertise}
 \end{figure}
 
 En cada linea podremos definir el conjunto de términos a utilizar para expresar la opinión, y con un control deslizante podremos definir el término a utilizar. Con el botón de "`Añadir"' podremos añadir una nueva linea para agregar una nueva opinión. Así mismo podremos seleccionar y borrar las opiniones que ya no sean necesarias.
 
-Dado que los posibles valores a introducir en esta ventana vienen predefinidos, no hay posibilidad de que el usuario introduzca datos erróneos en cada opinión. Aun así, el sistema comprobará que los expertizajes definidos para ambos extremos del intervalo tienen el mismo número de opiniones. En caso de no ser así, se mostrará una advertencia y no se permitirá aceptar los valores hasta que los datos sean correctos, pudiendo descartarlos usando la opción "`Cancelar"' (figura \ref{fig:mockUiDefineExpertiseWarning}).
-
-\begin{figure}[htbp]
-	\centering
-		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiDefineExpertiseWarning.png}
-	\caption{Advertencia de expertizaje incorrecto}
-	\label{fig:mockUiDefineExpertiseWarning}
-\end{figure}
+Dado que los posibles valores a introducir en esta ventana vienen predefinidos, no hay posibilidad de que el usuario introduzca datos erróneos en cada opinión. 
 
 \subsection{Vista de resultados}
-Una vez tenemos los suficientes datos para computar el valor de una empresa por cualquiera de los dos métodos, en la pestaña de resultados se ofrecerá una gráfica que muestre de forma comparativa los resultados obtenidos con todos los métodos computables con los datos de entrada (figura \ref{fig:mockUiResultados}).
+Una vez tenemos los suficientes datos para computar el valor de una empresa por cualquiera de los dos métodos, en la pestaña de resultados se ofrecerán de forma comparativa los resultados obtenidos con todos los métodos computables con los datos de entrada.
 
-\begin{figure}[htbp]
-	\centering
-		\includegraphics[width=0.80\textwidth]{Imagenes/mockUiResultados.png}
-	\caption{Vista de resultados}
-	\label{fig:mockUiResultados}
-\end{figure}
+La mejor manera de mostrar estos datos se decidirá durante la fase de implementación, siendo preferible una visualización gráfica si es técnicamente factible. 
 
 \section{Casos de uso}
-A partir de la descripción funcional, podemos extraer los casos de uso reflejados en el siguiente diagrama (fig \ref{fig:useCases}).
+A partir de la descripción funcional, podemos extraer los casos de uso del sistema y las relaciones entre estos. 
+
+Hay tres casos de uso principales:
+\begin{itemize}
+	\item Valorar una empresa utilizando el método del Cashflow con información lingüística.
+	\item Valorar una empresa utilizando el método del análisis mixto con información lingüística.
+	\item Definir una jerarquía lingüística.
+\end{itemize}  
+
+Estos casos de uso contienen casos de uso específicos como son el definir niveles o etiquetas, y el definir datos de entrada y expertizajes. 
+
+Podemos ver el diagrama de casos de uso en la figura \ref{fig:useCases}.
 
 \begin{figure}[htbp]
 	\centering
@@ -195,6 +187,8 @@ A partir de la descripción funcional, podemos extraer los casos de uso reflejado
 	\caption{Diagrama de casos de uso.}
 	\label{fig:useCases}
 \end{figure}
+
+A continuación, describiremos formalmente estos casos de uso. 
 
 \subsection{Casos de uso para definición de jerarquía lingüística}
 \subsubsection{Editar Jerarquía}

@@ -107,7 +107,7 @@ En la figura \ref{fig:uml2TuplasModel} podemos ver como se han modelado las etiq
 
 \subsubsection{Modelado del expertizaje}
 
-El siguiente diagrama de clases muestra el modelado de los expertizajes.
+El diagrama de clases de la figura \ref{fig:umlExpertiseModel} muestra el modelado de los expertizajes.
 
 \begin{figure}[htbp]
 	\centering
@@ -126,18 +126,34 @@ El modelo contiene las siguientes clases:
 	Pareja de 2-tuplas para expresar una opinión sobre un intervalo. La primera corresponde a la opinión sobre el extremo inferior del intervalo, y la segunda corresponde al extremo superior.	
 \end{itemize}
 
+\subsubsection{Modelado del Expertón}
+Para modelar los expertones hemos partido de las clases del modelado del expertizaje y hemos añadido clases auxiliares para manejar las cardinalidades, ordenadas por 2-tuplas. Podemos ver dicho diagrama de clases en la figura \ref{fig:umlExpertoneModel}.
+
+\begin{itemize}	
+	\item \textbf{CardinalityList} \\
+	Clase genérica que modela una lista de cardinalidades para un intervalo según la clave del tipo T, que debe implementar una relación de orden. Para cada clave almacenaremos la cardinalidad de dicha clave para los extremos inferior y superior del intervalo.
+	\item \textbf{Cardinality} \\
+	Agrupa dos propiedades para registrar la cardinalidad inferior y superior de cada elemento del intervalo.
+	\item \textbf{TwoTupleCardinalities} \\
+	Implementación de \textbf{CardinalityList} para el tipo \textbf{TwoTuple}, incluyendo una operación que facilita el añadir opiniones de dicho tipo. 	
+	\item \textbf{ExpertoneItem} \\
+	Modela cada uno de los niveles del expertón.
+	\item \textbf{Expertone} \\
+	Modela el expertón, incluendo operaciones para calcular el R-expertón y la esperanza matemática.	
+\end{itemize}
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1\textwidth]{Imagenes/umlExpertonesModel.png}
+	\caption{Modelado del expertón}
+	\label{fig:umlExpertoneModel}
+\end{figure}
+
+
 \subsection{Servicios de aplicación}
 
 En la capa de servicios de aplicación hemos definido cuatro interfaces para los 4 servicios principales.
  
-\begin{figure}[htbp]
-	\centering
-		\includegraphics[width=1\textwidth]{Imagenes/UmlServices.png}
-	\caption{Servicios de aplicación}
-	\label{fig:umlServiciosAplicacion}
-\end{figure}
-
-Podemos ver los siguientes servicios:
 \begin{itemize}	
 	\item \textbf{ICompanyValuator} \\
 	Interfaz que define las operaciones de valoración de empresas. Esto es, el método del Cashflow y el método de análisis mixto.
@@ -151,7 +167,16 @@ Podemos ver los siguientes servicios:
 	Interfaz que define las operaciones para cargar y guardar la jerarquía lingüística con la que definir los expertizajes. 
 \end{itemize}
 
-Todas las interfaces van ligadas a sus respectivas implementaciones.
+Este diagrama de clases queda reflejado en la imagen \ref{fig:umlServiciosAplicacion}.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1\textwidth]{Imagenes/UmlServices.png}
+	\caption{Servicios de aplicación}
+	\label{fig:umlServiciosAplicacion}
+\end{figure}
+
+Como vemos en dicho diagrama, todas las interfaces van ligadas a sus respectivas implementaciones.
 
 Para mostrar como interactúan dichos servicios, podemos poner como ejemplo el diagrama de secuencia \ref{fig:umlServiciosSequence} que muestra las interacciones al ejecutar la operación de valoración por Cashflow usando agregación por expertones. En el diagrama vemos como un cliente, en nuestro caso la UI, desencadena la interacción entre servicios. Vemos también como se ejecuta la llamada a la interfaz de valoración sin agregación para obtener los resultados comparativos.
 
@@ -162,7 +187,7 @@ Para mostrar como interactúan dichos servicios, podemos poner como ejemplo el di
 	\label{fig:umlServiciosSequence}
 \end{figure}
 
-Hemos omitido en esta memoria el resto de clases auxiliares necesarias durante la implementación, puesto que no aportan información relevante sobre el diseño. 
+El modelo de clases consta además de todas las clases auxiliares que han sido necesarias durante la implementación, incluyendo todas las clases para implementar el patrón Model-View-ViewModel en la capa de UI, y distintas clases auxiliares para cumplir el principio de responsabilidad única en las capas de lógica de negocio. No hemos incluido dichas clases en esta memoria dado que no aportan información relevante sobre el modelado del sistema. 
 
 \section{Implementación}
 
